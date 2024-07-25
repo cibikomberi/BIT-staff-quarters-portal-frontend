@@ -1,0 +1,18 @@
+
+.inn-list md-list{
+    width: 300px;
+    border-radius: 20px;
+    border: 1px solid black;
+    margin: 10px;
+}
+.inn-list h3,h5{
+    /* align-self: center; */
+    margin-bottom: 5px;
+    margin-top: 5px;
+    padding-left: 20px;
+}
+.inn-list:hover{
+    scale:1.01;
+}
+
+  

@@ -1,0 +1,14 @@
+@keyframes nav-show {
+  0% {
+      --navWidth : 225px;
+  }50%{
+      --navWidth : 0px;
+
+      .nav{
+          opacity: 0;
+          font-size: large;
+      }  
+  }100%{
+      --navWidth : 225px;
+  }
+}

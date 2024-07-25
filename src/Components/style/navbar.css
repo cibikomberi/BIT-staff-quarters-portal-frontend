@@ -1,0 +1,27 @@
+.nav{
+    display: inline-block;
+    height: calc(100vh - 64px);
+    width: var(--navWidth);
+    transition: all 1.5s;
+}
+
+.nav-items{
+    text-decoration: none;
+    /* font-size: large; */
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    overflow: hidden;
+    margin: 2px;
+    padding: 10px;
+    border-radius: 25px;
+}
+
+.nav-items:hover{
+    background-color: #0b57d014;
+}
+.nav-items.active{
+    background-color: #c2e7ff;
+    font-weight: bold;
+}
