@@ -14,13 +14,13 @@ const User = () => {
             <Header/>
             <Navbar/>
             <div className="content">
-            <Routes>
-                <Route exact path="/home" element={<UserFront/>}></Route>
-                <Route exact path="/compliants" element={<Complaints/>}></Route>
-                <Route exact path="/compliants/new" element={<NewComplaint/>}></Route>
-                <Route exact path="/innmates" element={<Innmates/>}></Route>
-                <Route exact path="/innmates/edit" element={<InnmatesEdit/>}></Route>
-            </Routes>
+                <Routes>
+                    <Route exact path="/home" element={<UserFront/>}></Route>
+                    <Route exact path="/compliants" element={<Complaints/>}></Route>
+                    <Route exact path="/compliants/new" element={<NewComplaint/>}></Route>
+                    <Route exact path="/innmates" element={<Innmates/>}></Route>
+                    <Route exact path="/innmates/edit" element={<InnmatesEdit/>}></Route>
+                </Routes>
             </div>
         </>
      );
