@@ -40,7 +40,7 @@ html{
 }
 .fab {
   position:fixed;
-  bottom: 15px; /* Distance from the bottom */
-  right: 45px; /* Distance from the right */
-  cursor: pointer; /* Makes it look clickable */
+  bottom: 15px;
+  right: 45px;
+  cursor: pointer;
 }

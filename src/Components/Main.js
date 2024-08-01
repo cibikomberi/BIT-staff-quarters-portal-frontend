@@ -1,13 +1,12 @@
 import './style/main.css'
 import logo from "../images/1407443626926816.jpeg";
-import { useState } from "react";
 import { NavLink, Link } from "react-router-dom";
 
 const Main = (props) => {
 
-    const [name, setName] = useState("Cibi Vishnu");
-    const [desig, setDesig] = useState("Student");
-    const [dept, setDept] = useState("ECE");
+    const name = "Cibi Vishnu";
+    const desig="Student";
+    const dept = "ECE";
     let titl = "BIT Staff Quarters";
 
     return (
@@ -31,7 +30,7 @@ const Main = (props) => {
                     Profile
                 </div>
                 <form slot="content" id="form-id" className="formId" method="dialog">
-                    <img src={logo}></img>
+                    <img src={logo} alt="profile pic"></img>
                     <md-list>
                         <md-list-item>
                             <div slot="headline">Name:</div>
@@ -59,6 +58,7 @@ const Main = (props) => {
                 <NavLink className='nav-items' to='/user/home'>Home</NavLink>
                 <NavLink className='nav-items' to='/user/compliants'>Compliant Registration</NavLink>
                 <NavLink className='nav-items' to='/user/innmates'>Innmates</NavLink>
+                <NavLink className='nav-items' to='/user/guest'>Guest</NavLink>
             </nav>
             <main className="content">
                 {props.content}
