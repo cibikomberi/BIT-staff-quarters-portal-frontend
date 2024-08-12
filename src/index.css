@@ -30,7 +30,7 @@ html{
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: flex-end;
+  align-items: center;
 }
 .input-field{
   width: 85%;

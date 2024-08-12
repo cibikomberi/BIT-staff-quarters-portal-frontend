@@ -1,6 +1,6 @@
 import './style/main.css'
 import logo from "../images/1407443626926816.jpeg";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, Outlet, useLocation } from "react-router-dom";
 
 const Main = (props) => {
 
@@ -8,12 +8,15 @@ const Main = (props) => {
     const desig="Student";
     const dept = "ECE";
     let titl = "BIT Staff Quarters";
+     
 
+    const location = useLocation();
+    const currentLocation = location.pathname.split('/')[1];
     return (
         <div className='main'>
             <input type="checkbox" id="nav-toggle"></input>
             <header className="header-main">
-                <label for="nav-toggle" style={{marginLeft: "25px"}}>
+                <label htmlFor="nav-toggle" style={{marginLeft: "25px"}}>
                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#555555"><path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z" /></svg>
                 </label>
                 <h3>{titl}</h3>
@@ -47,21 +50,28 @@ const Main = (props) => {
                     </md-list>
                 </form>
                 <div slot="actions">
-                    <Link to={"/editProfile"}>
+                    <Link to="editProfile">
                         <md-text-button>Edit my profile</md-text-button>
                     </Link>
                     <md-filled-button form="form-id">OK</md-filled-button>
                 </div>
             </md-dialog>
 
-            <nav>
-                <NavLink className='nav-items' to='/user/home'>Home</NavLink>
-                <NavLink className='nav-items' to='/user/compliants'>Compliant Registration</NavLink>
-                <NavLink className='nav-items' to='/user/innmates'>Innmates</NavLink>
-                <NavLink className='nav-items' to='/user/guest'>Guest</NavLink>
-            </nav>
+            {(currentLocation === "user") &&<nav>
+                <NavLink className='nav-items' to='home'>Home</NavLink>
+                <NavLink className='nav-items' to='compliants'>Compliant Registration</NavLink>
+                <NavLink className='nav-items' to='innmates'>Innmates</NavLink>
+                <NavLink className='nav-items' to='guest'>Guest</NavLink>
+            </nav>}
+
+            {(currentLocation === "admin") &&<nav>
+                <NavLink className='nav-items' to='home'>Home</NavLink>
+                {/* <NavLink className='nav-items' to='compliants'>Compliant Registration</NavLink> */}
+                {/* <NavLink className='nav-items' to='innmates'>Innmates</NavLink> */}
+                {/* <NavLink className='nav-items' to='guest'>Guest</NavLink> */}
+            </nav>}
             <main className="content">
-                {props.content}
+                <Outlet/>
             </main>
         </div>
     );

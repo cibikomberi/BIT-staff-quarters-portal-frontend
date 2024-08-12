@@ -18,10 +18,10 @@ const UserFront = () => {
                         flexWrap: "wrap",
                         justifyContent: "center",
                         }}>
-            <Link to="/user/compliants"><CardLayout head="Complaint registration" img={complaint}/></Link>
-            <Link to="/user/innmates"><CardLayout head="Innmate Details" img={innmate}/></Link>
-            <Link to="/user/guest"><CardLayout head="Guest Check-in Check-out" img={checkin}/></Link>
-            <Link to="/user/innmates/checkout"><CardLayout head="Innmate Check-in Check-out" img={checkin}/></Link>
+            <Link to="../compliants"><CardLayout head="Complaint registration" img={complaint}/></Link>
+            <Link to="../innmates"><CardLayout head="Innmate Details" img={innmate}/></Link>
+            <Link to="../guest"><CardLayout head="Guest Check-in Check-out" img={checkin}/></Link>
+            <Link to="../innmates/checkout"><CardLayout head="Innmate Check-in Check-out" img={checkin}/></Link>
                 
             </div>
 
