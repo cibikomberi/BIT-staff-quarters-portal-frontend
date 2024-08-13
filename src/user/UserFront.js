@@ -1,6 +1,4 @@
-
 import './style/user-front.css'
-
 
 import CardLayout from '../Components/CardLayout'
 import checkin from "../images/checkin.jpg"

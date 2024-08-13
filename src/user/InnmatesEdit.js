@@ -20,7 +20,7 @@ const Innmates = () => {
                 <div className='main-area'>
                     <div>
                         <md-outlined-text-field id="innmatesCount" type="number" inputmode label="No. of innmates" min='1' max='10' class="input-field" onChange={handleMessageChange}></md-outlined-text-field>
-                        <md-filled-button class="login-button" onClick={(e)=>{
+                        <md-filled-button class="button-primary" onClick={(e)=>{
                             // e.preventDefault();
                             innmatesCount = document.getElementById("innmatesCount").value;
                             setCount(innmatesCount)

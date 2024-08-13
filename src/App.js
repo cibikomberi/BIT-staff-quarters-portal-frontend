@@ -1,5 +1,6 @@
 import "@material/web/textfield/outlined-text-field";
 import "@material/web/button/filled-button";
+import "@material/web/button/elevated-button";
 import "@material/web/button/text-button";
 import "@material/web/icon/icon";
 import "@material/web/iconbutton/filled-icon-button";
@@ -26,6 +27,10 @@ import InnmatesCheckout from "./user/InnmatesCheckout";
 import Guest from "./user/Guest";
 import GuestNew from "./user/GuestNew";
 import EditProfile from "./user/EditProfile";
+import AdminFront from "./admin/AdminFront";
+import UsersList from "./admin/UsersList";
+import ViewUser from "./admin/ViewUser";
+import ViewCompliant from "./user/ViewCompliant";
 
 const router = createBrowserRouter(
 	createRoutesFromElements(
@@ -33,9 +38,12 @@ const router = createBrowserRouter(
 			<Route exact path="/" element={<Login />}></Route>
 			<Route path="/user" element={<Main />}>
 				<Route path="home" element={<UserFront />} />
-				<Route path="compliants" element={<Complaints />}></Route>
+				<Route path="compliants">
+					<Route index element={<Complaints />}></Route>
+					<Route path="new" element={<NewComplaint />}></Route>
+					<Route path=":id/view" element={<ViewCompliant />}></Route>
+				</Route>
 				<Route path="editProfile" element={<EditProfile />}></Route>
-				<Route path="compliants/new" element={<NewComplaint />}></Route>
 				<Route path="innmates" element={<Innmates />}></Route>
 				<Route path="innmates/edit" element={<InnmatesEdit />}></Route>
 				<Route path="innmates/checkout" element={<InnmatesCheckout />}></Route>
@@ -43,7 +51,14 @@ const router = createBrowserRouter(
 				<Route path="guest/new" element={<GuestNew />}></Route>
 			</Route>
 			<Route path="/admin" element={<Main />}>
-				<Route path="home" element={<UserFront />} />
+				<Route path="home" element={<AdminFront />} />
+				<Route path="users">
+					<Route index element={<UsersList />} />
+					<Route path=":userId">
+						<Route path="view" element={<ViewUser />}/>
+						<Route path="edit" element={<EditProfile />}/>
+					</Route>
+				</Route>
 			</Route>
 
 		</Route>

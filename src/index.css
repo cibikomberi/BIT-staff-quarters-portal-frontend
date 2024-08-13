@@ -31,6 +31,8 @@ html{
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  --md-filled-button-container-color: #c2e7ff;
+  --md-filled-icon-button-container-color: #c2e7ff;
 }
 .input-field{
   width: 85%;
@@ -43,4 +45,29 @@ html{
   bottom: 15px;
   right: 45px;
   cursor: pointer;
+}
+
+.fl{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.img-view{
+  width: 500px;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  margin: 25px
+}
+
+.key-text{
+  display: flex;
+  font-size: 32px;
+  font-weight: 300;
+  padding: 5px;
+  padding-right: 30px;
+  margin: 0px;
+}
+.value-text{
+  font-size: 28px;
+  margin: 0px;
 }

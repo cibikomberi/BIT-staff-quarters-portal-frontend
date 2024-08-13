@@ -50,8 +50,8 @@ const Main = (props) => {
                     </md-list>
                 </form>
                 <div slot="actions">
-                    <Link to="editProfile">
-                        <md-text-button>Edit my profile</md-text-button>
+                    <Link to="editProfile" form="form-id1">
+                        <md-text-button form="form-id1">Edit my profile</md-text-button>
                     </Link>
                     <md-filled-button form="form-id">OK</md-filled-button>
                 </div>
@@ -66,7 +66,8 @@ const Main = (props) => {
 
             {(currentLocation === "admin") &&<nav>
                 <NavLink className='nav-items' to='home'>Home</NavLink>
-                {/* <NavLink className='nav-items' to='compliants'>Compliant Registration</NavLink> */}
+                <NavLink className='nav-items' to='users'>Users</NavLink>
+                <NavLink className='nav-items' to='compliants'>Compliants</NavLink>
                 {/* <NavLink className='nav-items' to='innmates'>Innmates</NavLink> */}
                 {/* <NavLink className='nav-items' to='guest'>Guest</NavLink> */}
             </nav>}

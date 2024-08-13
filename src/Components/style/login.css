@@ -39,7 +39,8 @@
     height:20px;
     width: 50px;
 }
-.login-button{
+.button-primary{
+    --md-filled-button-container-color: #6442d6;
     margin-left: 15px;
 }
 .text-fiell{

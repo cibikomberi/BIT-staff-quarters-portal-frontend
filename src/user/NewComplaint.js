@@ -8,6 +8,7 @@ const NewComplaint = () => {
 
     return ( 
             <div className='main-area' >
+
             <md-outlined-select label="Category" class="input-field">
                 <md-select-option value="Plumbing">
                     <div slot="headline">Plumbing</div>
@@ -49,7 +50,7 @@ const NewComplaint = () => {
             </md-outlined-text-field>
 
 
-            <md-filled-button class="login-button">Submit</md-filled-button>
+            <md-filled-button class="button-primary">Submit</md-filled-button>
         </div>
      );
 }
