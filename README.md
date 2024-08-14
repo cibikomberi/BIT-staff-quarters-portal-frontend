@@ -75,9 +75,8 @@ Welcome to the Staff Quarters Portal! This application facilitates the managemen
 
 ## Contact
 
-For any queries or support, please contact [support@staffquartersportal.com](mailto:support@staffquartersportal.com).
+For any queries or support, please contact [cibivishnukomberi@gmail.com](mailto:cibivishnukomberi@gmail.com).
 
 ---
 
 *Thank you for using the Staff Quarters Portal!*
-```

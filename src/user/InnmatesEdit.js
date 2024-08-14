@@ -5,8 +5,7 @@ const Innmates = () => {
     let innmatesCount;
     let fields = [];
     const [field, setField] = useState(fields);
-    const [message, setMessage] = useState('');
-    const [count,setCount] = useState(1);
+
     const handleMessageChange = event => {
         // 👇️ access textarea value
         setMessage(event.target.value);
