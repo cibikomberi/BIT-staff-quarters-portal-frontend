@@ -1,6 +1,6 @@
 import './style/user-list.css'
 
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const UsersList = () => {
 
@@ -18,7 +18,7 @@ const UsersList = () => {
 
     return ( 
         <div className='main-area' style={{flexDirection:'row',alignItems: "flex-end"}}>
-            <input className="search-field" placeholder="Search here"></input>
+            <input className="search-field" placeholder="Search here" />
 
             <table className='user-list'>
                 <thead>

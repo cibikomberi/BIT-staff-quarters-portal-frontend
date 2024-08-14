@@ -71,3 +71,7 @@ html{
   font-size: 28px;
   margin: 0px;
 }
+.button-primary{
+  --md-filled-button-container-color: #6442d6;
+  margin-left: 15px;
+}

@@ -1,18 +1,14 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Guest = () => {
 
     let compliants = [
-        {id:101,name:"Plumbing",from:"17-05-2024",to:"24-06-2024"}
-        ,{id:102,name:"Plumbing",from:"17-05-2024",to:"24-06-2024"}
-        ,{id:103,name:"Plumbing",from:"17-05-2024",to:"24-06-2024"}
-        ,{id:104,name:"Plumbing",from:"17-05-2024",to:"24-06-2024"}
+        {id:101,name:"Plumbing",from:"17-05-2024",to:"24-06-2024",place:"coimbatore"}
+        ,{id:102,name:"Plumbing",from:"17-05-2024",to:"24-06-2024",place:"coimbatore"}
+        ,{id:103,name:"Plumbing",from:"17-05-2024",to:"24-06-2024",place:"coimbatore"}
+        ,{id:104,name:"Plumbing",from:"17-05-2024",to:"24-06-2024",place:"coimbatore"}
 
     ]
-    const navigate = useNavigate();
-    function viewUser(id){
-        navigate(`${id}/view`)
-    }
 
     return ( 
         <>
@@ -23,16 +19,18 @@ const Guest = () => {
                     <th>Guest Name</th>
                     <th>Staying From</th>
                     <th>Stay Upto</th>
+                    <th>Place</th>
                 </tr>
                 </thead>
                 <tbody>
                 {compliants.map((e,i)=>{
                     return(
-                    <tr key={e.id} onClick={() => viewUser(e.id)}>
+                    <tr key={e.id}>
                         <td>{i + 1}</td>
                         <td>{e.name}</td>
                         <td>{e.from}</td>
                         <td>{e.to}</td>
+                        <td>{e.place}</td>
                     </tr>
                 )})}
                 </tbody>

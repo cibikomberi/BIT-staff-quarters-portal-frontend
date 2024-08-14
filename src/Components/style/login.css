@@ -39,10 +39,6 @@
     height:20px;
     width: 50px;
 }
-.button-primary{
-    --md-filled-button-container-color: #6442d6;
-    margin-left: 15px;
-}
 .text-fiell{
     /* height: 75px; */
     width: 85%;

@@ -1,15 +1,19 @@
 import './style/compliants.css'
 
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 
 const Complaints = () => {
 
+    const location = useLocation();
+    
+    const showIssuer = location.pathname.split('/')[1] === "admin";
     let compliants = [
-        {id:101,category:"Plumbing",title:"Water Leakage",qNo:"510",description:"Water leaking from taps"}
-        ,{id:102,category:"Plumbing",title:"Water Leakage",qNo:"510",description:"Water leaking from taps"}
-        ,{id:103,category:"Plumbing",title:"Water Leakage",qNo:"510",description:"Water leaking from taps"}
-        ,{id:104,category:"Plumbing",title:"Water Leakage",qNo:"510",description:"Water leaking from taps"}
+        {id:101,category:"Plumbing",title:"Water Leakage",qNo:"510",description:"Water leaking from taps",issuer:"hufr",assignedTo:"iojpgrf"}
+        ,{id:102,category:"Plumbing",title:"Water Leakage",qNo:"510",description:"Water leaking from taps",issuer:"hufr",assignedTo:"iojpgrf"}
+        ,{id:103,category:"Plumbing",title:"Water Leakage",qNo:"510",description:"Water leaking from taps",issuer:"hufr",assignedTo:"iojpgrf"}
+        ,{id:104,category:"Plumbing",title:"Water Leakage",qNo:"510",description:"Water leaking from taps",issuer:"hufr",assignedTo:"iojpgrf"}
+
 
     ]
     const navigate = useNavigate();
@@ -22,9 +26,11 @@ const Complaints = () => {
                 <thead>
                 <tr>
                     <th>S. NO</th>
-                    <th>Compliant Id</th>
                     <th>Category</th>
+                    <th>Compliant Id</th>
                     <th>Compliant Title</th>
+                    { showIssuer && <th>Raised By</th>}
+                    <th>Assigned To</th>
                     <th>Quarters No.</th>
                 </tr>
                 </thead>
@@ -33,9 +39,11 @@ const Complaints = () => {
                     return(
                     <tr key={e.id} onClick={() => viewUser(e.id)}>
                         <td>{i + 1}</td>
-                        <td>{e.id}</td>
                         <td>{e.category}</td>
+                        <td>{e.id}</td>
                         <td>{e.title}</td>
+                        { showIssuer && <td>{e.issuer}</td>}
+                        <td>{e.assignedTo}</td>
                         <td>{e.qNo}</td>
                     </tr>
                 )})}

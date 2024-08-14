@@ -68,8 +68,8 @@ const Main = (props) => {
                 <NavLink className='nav-items' to='home'>Home</NavLink>
                 <NavLink className='nav-items' to='users'>Users</NavLink>
                 <NavLink className='nav-items' to='compliants'>Compliants</NavLink>
-                {/* <NavLink className='nav-items' to='innmates'>Innmates</NavLink> */}
-                {/* <NavLink className='nav-items' to='guest'>Guest</NavLink> */}
+                <NavLink className='nav-items' to='innmates'>Innmates</NavLink>
+                <NavLink className='nav-items' to='guest'>Guest</NavLink>
             </nav>}
             <main className="content">
                 <Outlet/>

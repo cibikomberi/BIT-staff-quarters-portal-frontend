@@ -10,8 +10,10 @@
     margin-top: 5px;
     padding-left: 20px;
 }
-.inn-list:hover{
-    scale:1.01;
+md-list:hover{
+    /* scale:1.01; */
+    box-shadow:  0 4px 8px 0 rgba(0, 0, 0, 0.3);
+    transition: box-shadow .1s;
 }
 
   

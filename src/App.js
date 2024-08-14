@@ -1,4 +1,5 @@
 import "@material/web/textfield/outlined-text-field";
+import "@material/web/checkbox/checkbox";
 import "@material/web/button/filled-button";
 import "@material/web/button/elevated-button";
 import "@material/web/button/text-button";
@@ -44,33 +45,45 @@ const router = createBrowserRouter(
 					<Route path=":id/view" element={<ViewCompliant />}></Route>
 				</Route>
 				<Route path="editProfile" element={<EditProfile />}></Route>
-				<Route path="innmates" element={<Innmates />}></Route>
-				<Route path="innmates/edit" element={<InnmatesEdit />}></Route>
-				<Route path="innmates/checkout" element={<InnmatesCheckout />}></Route>
-				<Route path="guest" element={<Guest />}></Route>
-				<Route path="guest/new" element={<GuestNew />}></Route>
+				<Route path="innmates">
+					<Route index element={<Innmates />}></Route>
+					<Route path="edit" element={<InnmatesEdit />}></Route>
+					<Route path="checkout" element={<InnmatesCheckout />}></Route>
+				</Route>
+				<Route path="guest">
+					<Route index element={<Guest />} />
+					<Route path="new" element={<GuestNew />} />
+				</Route>
 			</Route>
 			<Route path="/admin" element={<Main />}>
 				<Route path="home" element={<AdminFront />} />
 				<Route path="users">
 					<Route index element={<UsersList />} />
 					<Route path=":userId">
-						<Route path="view" element={<ViewUser />}/>
-						<Route path="edit" element={<EditProfile />}/>
+						<Route path="view" element={<ViewUser />} />
+						<Route path="edit" element={<EditProfile />} />
 					</Route>
 				</Route>
+				<Route path="compliants">
+					<Route index element={<Complaints />} />
+					<Route path=":id/view" element={<ViewCompliant />} />
+				</Route>
+				<Route path="innmates">
+					<Route index element={<Innmates />}></Route>
+					<Route path="edit" element={<InnmatesEdit />}></Route>
+					<Route path="checkout" element={<InnmatesCheckout />}></Route>
+				</Route>
+				<Route path="guest">
+					<Route index element={<Guest />} />
+					<Route path="new" element={<GuestNew />} />
+				</Route>
 			</Route>
-
 		</Route>
 	)
 )
 
 function App() {
-	return (
-		<>
-			<RouterProvider router={router} />
-		</>
-	);
+	return (<RouterProvider router={router} />);
 }
 
 export default App;

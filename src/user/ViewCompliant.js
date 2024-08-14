@@ -10,6 +10,8 @@ const ViewCompliant = () => {
             <p className="value-text">{id}</p>
             <p className="key-text">Compliant Status</p>
             <p className="value-text">{compliants.status}</p>
+            <p className="key-text">Compliant Status</p>
+            <p className="value-text">{compliants.status}</p>
             <p className="key-text">Category</p>
             <p className="value-text">{compliants.category}</p>
             <p className="key-text">Compliant Title</p>
