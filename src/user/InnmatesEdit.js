@@ -11,6 +11,8 @@ const Innmates = () => {
         // 👇️ access textarea value
         setMessage(event.target.value);
         console.log(event.target.value);
+        console.log(message);
+        console.log(count);
       };
     // useEffect(()=>{
     //     console.log("effect called");
