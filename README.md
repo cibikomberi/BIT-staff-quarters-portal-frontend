@@ -1,70 +1,83 @@
-# Getting Started with Create React App
+# Staff Quarters Portal
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Welcome to the Staff Quarters Portal! This application facilitates the management of guest and inmate check-ins/checkouts, as well as tracks complaints efficiently.
 
-## Available Scripts
+## Table of Contents
 
-In the project directory, you can run:
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+  - [Check-In Page](#check-in-page)
+  - [Check-Out Page](#check-out-page)
+  - [Complaint Tracking Page](#complaint-tracking-page)
+- [Contact](#contact)
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Features
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **Guest and Inmate Management**: Seamlessly check-in and check-out guests and inmates.
+- **Complaint Tracking**: Log, track, and resolve complaints with ease.
+- **User-Friendly Interface**: Intuitive design ensures easy navigation and operation.
+- **Secure Data Handling**: Ensures the privacy and security of all data entries.
 
-### `npm test`
+## Installation
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. **Clone the Repository**
 
-### `npm run build`
+   ```bash
+   git clone https://github.com/cibikomberi/bit-staff-quarters-frontend.git
+   ```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+2. **Navigate to the Directory**
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+   ```bash
+   bit-staff-quarters-frontend
+   ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+3. **Install Dependencies**
 
-### `npm run eject`
+   ```bash
+   npm install
+   ```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+4. **Start the Application**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+   ```bash
+   npm start
+   ```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+   The application should now be running at `http://localhost:3000`.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Usage
 
-## Learn More
+### Check-In Page
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- Navigate to the **Check-In** section from the dashboard.
+- Fill in the required details for the guest or inmate.
+- Click **Submit** to complete the check-in process.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Check-Out Page
 
-### Code Splitting
+- Go to the **Check-Out** section.
+- Search for the guest or inmate using their ID or name.
+- Confirm the details and proceed with the check-out.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Complaint Tracking Page
 
-### Analyzing the Bundle Size
+- Access the **Complaints** section.
+- To **Log a Complaint**:
+  - Click on **New Complaint**.
+  - Enter the complaint details and submit.
+- To **Track a Complaint**:
+  - Search using the complaint ID or associated user.
+  - View the status and any updates related to the complaint.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Contact
 
-### Making a Progressive Web App
+For any queries or support, please contact [support@staffquartersportal.com](mailto:support@staffquartersportal.com).
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+---
 
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+*Thank you for using the Staff Quarters Portal!*
+```
