@@ -1,23 +1,20 @@
 import './style/compliants.css'
 
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLoaderData, useLocation, useNavigate } from 'react-router-dom';
 
 
 const Complaints = () => {
 
     const location = useLocation();
+
+    const compliants = useLoaderData();
+    console.log(compliants);
+    
     
     const showIssuer = location.pathname.split('/')[1] === "admin";
-    let compliants = [
-        {id:101,category:"Plumbing",title:"Water Leakage",qNo:"510",description:"Water leaking from taps",issuer:"hufr",assignedTo:"iojpgrf"}
-        ,{id:102,category:"Plumbing",title:"Water Leakage",qNo:"510",description:"Water leaking from taps",issuer:"hufr",assignedTo:"iojpgrf"}
-        ,{id:103,category:"Plumbing",title:"Water Leakage",qNo:"510",description:"Water leaking from taps",issuer:"hufr",assignedTo:"iojpgrf"}
-        ,{id:104,category:"Plumbing",title:"Water Leakage",qNo:"510",description:"Water leaking from taps",issuer:"hufr",assignedTo:"iojpgrf"}
 
-
-    ]
     const navigate = useNavigate();
-    function viewUser(id){
+    function viewCompliant(id){
         navigate(`${id}/view`)
     }
     return ( 
@@ -31,20 +28,20 @@ const Complaints = () => {
                     <th>Compliant Title</th>
                     { showIssuer && <th>Raised By</th>}
                     <th>Assigned To</th>
-                    <th>Quarters No.</th>
+                    <th>Status</th>
                 </tr>
                 </thead>
                 <tbody>
                 {compliants.map((e,i)=>{
                     return(
-                    <tr key={e.id} onClick={() => viewUser(e.id)}>
+                    <tr key={e.compliantId} onClick={() => viewCompliant(e.compliantId)}>
                         <td>{i + 1}</td>
                         <td>{e.category}</td>
-                        <td>{e.id}</td>
+                        <td>{e.compliantId}</td>
                         <td>{e.title}</td>
-                        { showIssuer && <td>{e.issuer}</td>}
+                        { showIssuer && <td>{e.issuedBy}</td>}
                         <td>{e.assignedTo}</td>
-                        <td>{e.qNo}</td>
+                        <td>{e.status}</td>
                     </tr>
                 )})}
                 </tbody>
@@ -57,4 +54,9 @@ const Complaints = () => {
     </> );
 }
  
+export const compliantsLoaderUser = async() => {
+     const res = await fetch('http://localhost:8050/compliants')
+     return res.json();
+}
+
 export default Complaints;

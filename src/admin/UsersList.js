@@ -1,15 +1,12 @@
 import './style/user-list.css'
 
-import { useNavigate } from 'react-router-dom';
+import { useLoaderData, useNavigate } from 'react-router-dom';
 
 const UsersList = () => {
 
-    let innmatesList = [
-        {name:"CIBI VISHNU A C" , qNo:"Father",id:1,facultyId:5,desig:"Professor"}
-        ,{name:"CIBI VISHNU A C" , qNo:"Father",id:2,facultyId:5,desig:"Professor"}
-        ,{name:"CIBI VISHNU A C" , qNo:"Father",id:3,facultyId:5,desig:"Professor"}
-        ,{name:"CIBI VISHNU A C" , qNo:"Father",id:4,facultyId:5,desig:"Professor"}
-    ]
+    let data = useLoaderData();
+    console.log(data);
+    
     const navigate = useNavigate();
     function viewUser(id){
         console.log("clicked "+id);
@@ -31,14 +28,14 @@ const UsersList = () => {
                 </tr>
                 </thead>
                 <tbody>
-                {innmatesList.map((e)=>{
+                {data.map((e,i)=>{
                     return(
                     <tr key={e.id} onClick={() => viewUser(e.id)}>
-                        <td>{e.id}</td>
+                        <td>{i+1}</td>
                         <td>{e.name}</td>
-                        <td>{e.facultyId}</td>
-                        <td>{e.desig}</td>
-                        <td>{e.qNo}</td>
+                        <td>{e.id}</td>
+                        <td>{e.designation}</td>
+                        <td>{e.quartersNo}</td>
                     </tr>
                 )})}
                 </tbody>
@@ -47,4 +44,10 @@ const UsersList = () => {
      );
 }
  
+
+export const facultyListLoader = async() => {
+    const res = await fetch('http://localhost:8050/faculty');
+    return res.json();
+}
+
 export default UsersList;

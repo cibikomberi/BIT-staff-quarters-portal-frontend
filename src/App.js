@@ -21,17 +21,17 @@ import Login from "./Components/Login";
 import Main from "./Components/Main";
 import UserFront from "./user/UserFront";
 import NewComplaint from "./user/NewComplaint";
-import Complaints from "./user/Complaints";
-import Innmates from "./user/Innmates";
+import Complaints, { compliantsLoaderUser } from "./user/Complaints";
+import Innmates, { innmatesLoader } from "./user/Innmates";
 import InnmatesEdit from "./user/InnmatesEdit";
 import InnmatesCheckout from "./user/InnmatesCheckout";
-import Guest from "./user/Guest";
+import Guest, { guestLoader } from "./user/Guest";
 import GuestNew from "./user/GuestNew";
 import EditProfile from "./user/EditProfile";
 import AdminFront from "./admin/AdminFront";
-import UsersList from "./admin/UsersList";
-import ViewUser from "./admin/ViewUser";
-import ViewCompliant from "./user/ViewCompliant";
+import UsersList, { facultyListLoader } from "./admin/UsersList";
+import ViewUser, { facultyDetailLoader } from "./admin/ViewUser";
+import ViewCompliant, { getCompliantById } from "./user/ViewCompliant";
 
 const router = createBrowserRouter(
 	createRoutesFromElements(
@@ -40,41 +40,41 @@ const router = createBrowserRouter(
 			<Route path="/user" element={<Main />}>
 				<Route path="home" element={<UserFront />} />
 				<Route path="compliants">
-					<Route index element={<Complaints />}></Route>
+					<Route index element={<Complaints />} loader={compliantsLoaderUser}></Route>
 					<Route path="new" element={<NewComplaint />}></Route>
-					<Route path=":id/view" element={<ViewCompliant />}></Route>
+					<Route path=":id/view" element={<ViewCompliant />} loader={(a) =>getCompliantById(a.params.id)}></Route>
 				</Route>
 				<Route path="editProfile" element={<EditProfile />}></Route>
 				<Route path="innmates">
-					<Route index element={<Innmates />}></Route>
+					<Route index element={<Innmates />} loader={innmatesLoader}></Route>
 					<Route path="edit" element={<InnmatesEdit />}></Route>
 					<Route path="checkout" element={<InnmatesCheckout />}></Route>
 				</Route>
 				<Route path="guest">
-					<Route index element={<Guest />} />
+					<Route index element={<Guest />} loader={guestLoader}/>
 					<Route path="new" element={<GuestNew />} />
 				</Route>
 			</Route>
 			<Route path="/admin" element={<Main />}>
 				<Route path="home" element={<AdminFront />} />
 				<Route path="users">
-					<Route index element={<UsersList />} />
+					<Route index element={<UsersList />} loader={facultyListLoader}/>
 					<Route path=":userId">
-						<Route path="view" element={<ViewUser />} />
+						<Route path="view" element={<ViewUser />} loader={(a) => facultyDetailLoader(a.params.userId)}/>
 						<Route path="edit" element={<EditProfile />} />
 					</Route>
 				</Route>
 				<Route path="compliants">
-					<Route index element={<Complaints />} />
-					<Route path=":id/view" element={<ViewCompliant />} />
+					<Route index element={<Complaints />}  loader={compliantsLoaderUser}/>
+					<Route path=":id/view" element={<ViewCompliant />}  loader={(a) =>getCompliantById(a.params.id)}/>
 				</Route>
 				<Route path="innmates">
-					<Route index element={<Innmates />}></Route>
+					<Route index element={<Innmates />}  loader={innmatesLoader}></Route>
 					<Route path="edit" element={<InnmatesEdit />}></Route>
 					<Route path="checkout" element={<InnmatesCheckout />}></Route>
 				</Route>
 				<Route path="guest">
-					<Route index element={<Guest />} />
+					<Route index element={<Guest />}  loader={guestLoader}/>
 					<Route path="new" element={<GuestNew />} />
 				</Route>
 			</Route>

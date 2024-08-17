@@ -1,15 +1,13 @@
 import "./style/immnate.css"
-import { Link } from 'react-router-dom';
+import { Link, useLoaderData, useLocation } from 'react-router-dom';
 
 const Innmates = () => {
-    let innmatesList = [{ name: "CIBI VISHNU A C", relation: "Father", age: 19, bloodGroup: "O+ve", aadhar: 755488061973, isWorking: true, id: 1 }
-        , { name: "CIBI VISHNU A C", relation: "Father", age: 19, bloodGroup: "O+ve", aadhar: 755488061973, isWorking: true, id: 1 }
-        , { name: "CIBI VISHNU A C", relation: "Father", age: 19, bloodGroup: "O+ve", aadhar: 755488061973, isWorking: true, id: 1 }
-        , { name: "CIBI VISHNU A C", relation: "Father", age: 19, bloodGroup: "O+ve", aadhar: 755488061973, isWorking: true, id: 1 }
-        , { name: "CIBI VISHNU A C", relation: "Father", age: 19, bloodGroup: "O+ve", aadhar: 755488061973, isWorking: true, id: 1 }
-        , { name: "CIBI VISHNU A C", relation: "Father", age: 19, bloodGroup: "O+ve", aadhar: 755488061973, isWorking: true, id: 1 }
-        , { name: "CIBI VISHNU A C", relation: "Father", age: 19, bloodGroup: "O+ve", aadhar: 755488061973, isWorking: true, id: 1 }
-    ]
+
+    const innmatesList = useLoaderData();
+    console.log(innmatesList);
+    
+    const location = useLocation();
+    const currentLocation = location.pathname.split('/')[1];
     return (
         <div className='main-area' style={{ flexDirection: 'row', position: "relative" }}>
             <input className="search-field" placeholder="Search here" />
@@ -19,6 +17,11 @@ const Innmates = () => {
                     <md-list >
                         <h3>{e.name}</h3>
                         <h5>{e.relation}</h5>
+                        {(currentLocation === "admin") && 
+                        <md-list-item>
+                            <div slot="headline">Faculty:</div>
+                            <div slot="end"></div>
+                        </md-list-item>}
                         <md-list-item>
                             <div slot="headline">Age:</div>
                             <div slot="end">{e.age}</div>
@@ -50,6 +53,11 @@ const Innmates = () => {
             </Link>
         </div>
     );
+}
+
+export const innmatesLoader = async() =>{
+    const res = await fetch('http://localhost:8050/innmates')
+    return res.json();
 }
 
 export default Innmates;

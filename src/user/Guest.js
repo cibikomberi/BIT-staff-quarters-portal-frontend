@@ -1,15 +1,10 @@
-import { Link } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 
 const Guest = () => {
 
-    let compliants = [
-        {id:101,name:"Plumbing",from:"17-05-2024",to:"24-06-2024",place:"coimbatore"}
-        ,{id:102,name:"Plumbing",from:"17-05-2024",to:"24-06-2024",place:"coimbatore"}
-        ,{id:103,name:"Plumbing",from:"17-05-2024",to:"24-06-2024",place:"coimbatore"}
-        ,{id:104,name:"Plumbing",from:"17-05-2024",to:"24-06-2024",place:"coimbatore"}
-
-    ]
-
+    let compliants = useLoaderData();
+    console.log(compliants);
+    
     return ( 
         <>
         <table className='user-list'>
@@ -28,8 +23,8 @@ const Guest = () => {
                     <tr key={e.id}>
                         <td>{i + 1}</td>
                         <td>{e.name}</td>
-                        <td>{e.from}</td>
-                        <td>{e.to}</td>
+                        <td>{e.fromDate}</td>
+                        <td>{e.toDate}</td>
                         <td>{e.place}</td>
                     </tr>
                 )})}
@@ -44,4 +39,9 @@ const Guest = () => {
      );
 }
  
+export const guestLoader = async() => {
+    const res = await fetch('http://localhost:8050/guests')
+    return res.json();
+}
+
 export default Guest;
