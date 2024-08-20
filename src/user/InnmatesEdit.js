@@ -1,33 +1,45 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useLoaderData } from "react-router-dom";
 
 const Innmates = () => {
-    const [guestCount, setGuestCount] = useState(3);
+    const data = useLoaderData();
+    console.log(data);
+    const innmatesCount = useRef(null);
+    useEffect(() => {
+        innmatesCount.current.value = data.length;
+        data.map((e,i)=>{
+            document.getElementById(`innmate-name-${i+1}`).value = e.name;
+            document.getElementById(`innmate-relation-${i+1}`).value = e.relation;
+            document.getElementById(`innmate-age-${i+1}`).value = e.age;
+            document.getElementById(`innmate-bg-${i+1}`).value = e.bloodGroup;
+            document.getElementById(`innmate-aadhar-${i+1}`).value = e.aadhar;
+            document.getElementById(`innmate-work-${i+1}`).value = String(e.working);
+            console.log(document.getElementById(`innmate-work-${i+1}`).value)
+        })
+      }, []);
+
+   
+    
+    const [guestCount, setGuestCount] = useState(data.length);
 
     const handleInnmateCount = () => {
         let innmatesCount = document.getElementById("innmatesCount").value;
-        console.log(typeof (count));
-
-        setCount(innmatesCount)
-        setGuestCount(innmatesCount)
-        console.log(guestCount);
-
+        setGuestCount(Number(innmatesCount));
     }
-
-    const [count, setCount] = useState(1);
-
 
     return (
 
         <>
-            <md-outlined-text-field id="innmatesCount" type="number" inputmode label="No. of innmates" min='1' max='10' class="input-field"></md-outlined-text-field>
-            <md-filled-button class="button-primary" onClick={() => handleInnmateCount()}>Submit</md-filled-button>{count}
+            <md-outlined-text-field id="innmatesCount" type="number" inputmode label="No. of innmates" min='1' max='10' class="input-field" ref={innmatesCount}></md-outlined-text-field>
+            <md-filled-button class="button-primary" onClick={() => handleInnmateCount()}>Submit</md-filled-button>
 
             <div className='guest-details'>
-                Guest Details
-                {[...Array(guestCount)].map((e, i) => <div id={i} key={i} >
-                    <h3>Person {i}</h3>
-                    <md-outlined-text-field type="text" label="Name" class="input-field" ></md-outlined-text-field>
-                    <md-outlined-select label="Relation" class="input-field">
+                Innmates Details
+                {[...Array(guestCount)].map((_, i) => 
+                <div id={`innmate-${i+1}`} key={`innmate-${i+1}`} >
+                    <h3>Person {i+1}</h3>
+                    <md-outlined-text-field type="text" label="Name" class="input-field" id={`innmate-name-${i+1}`}></md-outlined-text-field>
+                    <md-outlined-select label="Relation" class="input-field" id={`innmate-relation-${i+1}`}>
                         <md-select-option value="Father">
                             <div slot="headline">Father</div>
                         </md-select-option>
@@ -50,14 +62,14 @@ const Innmates = () => {
                             <div slot="headline">Other</div>
                         </md-select-option>
                     </md-outlined-select>
-                    <md-outlined-text-field type="number" inputmode label="Age" min='1' max='100' class="input-field"></md-outlined-text-field>
-                    <md-outlined-text-field type="text" label="Blood Group" class="input-field" ></md-outlined-text-field>
-                    <md-outlined-text-field type="number" label="Aadhar No." class="input-field" ></md-outlined-text-field>
-                    <md-outlined-select label="Is Working" class="input-field">
-                        <md-select-option value="Yes">
+                    <md-outlined-text-field type="number" inputmode label="Age" min='1' max='100' class="input-field" id={`innmate-age-${i+1}`}></md-outlined-text-field>
+                    <md-outlined-text-field type="text" label="Blood Group" class="input-field" id={`innmate-bg-${i+1}`}></md-outlined-text-field>
+                    <md-outlined-text-field type="number" label="Aadhar No." class="input-field" id={`innmate-aadhar-${i+1}`}></md-outlined-text-field>
+                    <md-outlined-select label="Is Working" class="input-field" id={`innmate-work-${i+1}`}>
+                        <md-select-option value="true">
                             <div slot="headline">Yes</div>
                         </md-select-option>
-                        <md-select-option value="No">
+                        <md-select-option value="false">
                             <div slot="headline">No</div>
                         </md-select-option>
                     </md-outlined-select>

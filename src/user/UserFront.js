@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 
 
 const UserFront = () => {
+    fetch('http://localhost:8080/greet').then((res) => console.log(res))
     return ( 
         
             <div style={{

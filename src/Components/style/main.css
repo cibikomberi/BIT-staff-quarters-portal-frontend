@@ -86,4 +86,9 @@ main{
     border-radius: 25px;
     overflow: auto;
     transition: all 0.5s ;
+    md-list:hover{
+        /* scale:1.01; */
+        box-shadow:  0 4px 8px 0 rgba(0, 0, 0, 0.3);
+        transition: box-shadow .1s;
+    }
 }

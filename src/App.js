@@ -47,8 +47,8 @@ const router = createBrowserRouter(
 				<Route path="editProfile" element={<EditProfile />}></Route>
 				<Route path="innmates">
 					<Route index element={<Innmates />} loader={innmatesLoader}></Route>
-					<Route path="edit" element={<InnmatesEdit />}></Route>
-					<Route path="checkout" element={<InnmatesCheckout />}></Route>
+					<Route path="edit" element={<InnmatesEdit />} loader={innmatesLoader}></Route>
+					<Route path="checkout" element={<InnmatesCheckout />} loader={innmatesLoader}></Route>
 				</Route>
 				<Route path="guest">
 					<Route index element={<Guest />} loader={guestLoader}/>
