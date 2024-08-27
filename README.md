@@ -47,7 +47,7 @@ Welcome to the Staff Quarters Portal! This application facilitates the managemen
    npm start
    ```
 
-   The application should now be running at `http://localhost:3000`.
+   The application should now be running at `http://192.168.31.16:3000`.
 
 ## Usage
 

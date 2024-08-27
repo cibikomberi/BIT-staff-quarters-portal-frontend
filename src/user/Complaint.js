@@ -55,7 +55,7 @@ const Complaints = () => {
 }
  
 export const compliantsLoaderUser = async() => {
-     const res = await fetch('http://localhost:8050/compliants')
+     const res = await fetch('http://192.168.31.16:8050/compliants')
      return res.json();
 }
 

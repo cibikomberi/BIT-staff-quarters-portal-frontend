@@ -6,7 +6,14 @@
     "head head"
     "nav main";
 }
-
+.nav-toggler{
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: -1;
+}
 header{
     grid-area: head;
 }
@@ -52,7 +59,7 @@ header{
 
 nav{
     grid-area: nav;
-    height: calc(100svh - 64px);
+    height: calc(100vh - 64px);
     width: var(--navWidth);
     transition: all .5s;
 }
@@ -81,7 +88,7 @@ main{
     grid-area: main;
     width: calc(100svw - var(--navWidth) - 10px);
     margin: 5px;
-    height: calc(100svh - 84px);
+    height: calc(100vh - 84px);
     background-color: #FFFFFF; 
     border-radius: 25px;
     overflow: auto;
@@ -90,5 +97,40 @@ main{
         /* scale:1.01; */
         box-shadow:  0 4px 8px 0 rgba(0, 0, 0, 0.3);
         transition: box-shadow .1s;
+    }
+}
+
+@media only screen and (max-width: 850px) {
+    :root{
+        --navWidth : 225px;
+    }
+    .main{
+        grid-template-areas: 
+        "head head"
+        "main main";
+    }
+    main{
+        width: calc(100vw - 10px);
+    }
+    nav{
+        --navWidth : 225px;
+        padding-top: 25px;
+        z-index: 100;
+        width: var(--navWidth);
+        background-color: #FFFFFF;
+        height: 100vh;
+        position: fixed;
+        left: 0px;
+        transform: translateX(-225px);
+    }
+    .nav-toggler{
+        z-index: -1;
+    }
+    #nav-toggle:checked ~ nav{
+        --navWidth : 225px;
+        transform: unset;
+    }
+    #nav-toggle:checked ~ .nav-toggler{
+        z-index: 99;
     }
 }

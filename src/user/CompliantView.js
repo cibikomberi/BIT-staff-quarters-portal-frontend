@@ -24,7 +24,7 @@ const ViewCompliant = () => {
 }
 
 export const getCompliantById = async(id) => {    
-    const res = await fetch(`http://localhost:8050/compliant/${id}`)
+    const res = await fetch(`http://192.168.31.16:8050/compliant/${id}`)
     return res.json();
 }
 export default ViewCompliant;

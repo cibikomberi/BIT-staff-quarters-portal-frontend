@@ -46,7 +46,7 @@ const UsersList = () => {
  
 
 export const facultyListLoader = async() => {
-    const res = await fetch('http://localhost:8050/faculty');
+    const res = await fetch('http://192.168.31.16:8050/faculty');
     return res.json();
 }
 

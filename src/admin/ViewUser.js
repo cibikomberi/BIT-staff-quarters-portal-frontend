@@ -1,6 +1,6 @@
 import logo from "../images/1407443626926816.jpeg";
 
-import { Link, useLoaderData, useParams } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import './style/view-user.css'
 const ViewUser = () => {
     const data = useLoaderData();
@@ -45,7 +45,7 @@ const ViewUser = () => {
 }
 
 export const facultyDetailLoader = async(id) => {
-    const res = await fetch(`http://localhost:8050/faculty/${id}`)
+    const res = await fetch(`http://192.168.31.16:8050/faculty/${id}`)
     return res;
 }
 

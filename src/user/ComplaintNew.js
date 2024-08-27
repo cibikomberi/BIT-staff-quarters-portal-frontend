@@ -2,7 +2,6 @@ import '@material/web/select/outlined-select'
 import '@material/web/select/select-option'
 import '@material/web/textfield/outlined-text-field'
 import '@material/web/textfield/internal/outlined-text-field'
-import { Form } from 'react-router-dom'
 
 const NewComplaint = () => {
 
@@ -13,7 +12,7 @@ const NewComplaint = () => {
         let availableTime = document.getElementById('compliant-available-time').value
         let description = document.getElementById('compliant-description').value        
 
-        fetch("http://localhost:8050/compliants",{ method: "POST", 
+        fetch("http://192.168.31.16:8050/compliants",{ method: "POST", 
             headers: {
             "Content-Type": "application/json"},
             body: JSON.stringify({

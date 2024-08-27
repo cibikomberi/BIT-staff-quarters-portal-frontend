@@ -10,6 +10,7 @@ import "@material/web/dialog/dialog";
 import "@material/web/list/list";
 import "@material/web/list/list-item";
 import "@material/web/fab/fab";
+import "@material/web/progress/circular-progress";
 
 import {
 	Route,
@@ -20,18 +21,19 @@ import {
 import Login from "./Components/Login";
 import Main from "./Components/Main";
 import UserFront from "./user/UserFront";
-import NewComplaint from "./user/NewComplaint";
-import Complaints, { compliantsLoaderUser } from "./user/Complaints";
-import Innmates, { innmatesLoader } from "./user/Innmates";
-import InnmatesEdit from "./user/InnmatesEdit";
-import InnmatesCheckout from "./user/InnmatesCheckout";
+import NewComplaint from "./user/ComplaintNew";
+import Complaints, { compliantsLoaderUser } from "./user/Complaint";
+import Innmates, { innmatesLoader } from "./user/Innmate";
+import InnmatesEdit from "./user/InnmateEdit";
+import InnmatesCheckout from "./user/InnmateCheckout";
 import Guest, { guestLoader } from "./user/Guest";
 import GuestNew from "./user/GuestNew";
 import EditProfile from "./user/EditProfile";
 import AdminFront from "./admin/AdminFront";
 import UsersList, { facultyListLoader } from "./admin/UsersList";
 import ViewUser, { facultyDetailLoader } from "./admin/ViewUser";
-import ViewCompliant, { getCompliantById } from "./user/ViewCompliant";
+import ViewCompliant, { getCompliantById } from "./user/CompliantView";
+import InnmateAdd from "./user/InnmateAdd";
 
 const router = createBrowserRouter(
 	createRoutesFromElements(
@@ -48,6 +50,7 @@ const router = createBrowserRouter(
 				<Route path="innmates">
 					<Route index element={<Innmates />} loader={innmatesLoader}></Route>
 					<Route path="edit" element={<InnmatesEdit />} loader={innmatesLoader}></Route>
+					<Route path="add" element={<InnmateAdd />}></Route>
 					<Route path="checkout" element={<InnmatesCheckout />} loader={innmatesLoader}></Route>
 				</Route>
 				<Route path="guest">
@@ -70,8 +73,8 @@ const router = createBrowserRouter(
 				</Route>
 				<Route path="innmates">
 					<Route index element={<Innmates />}  loader={innmatesLoader}></Route>
-					<Route path="edit" element={<InnmatesEdit />}></Route>
-					<Route path="checkout" element={<InnmatesCheckout />}></Route>
+					<Route path="edit" element={<InnmatesEdit />} loader={innmatesLoader}></Route>
+					<Route path="checkout" element={<InnmatesCheckout />} loader={innmatesLoader}></Route>
 				</Route>
 				<Route path="guest">
 					<Route index element={<Guest />}  loader={guestLoader}/>
