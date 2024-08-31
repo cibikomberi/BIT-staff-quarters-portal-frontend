@@ -1,9 +1,7 @@
-import './style/compliants.css'
-
 import { Link, useLoaderData, useLocation, useNavigate } from 'react-router-dom';
 
 
-const Complaints = () => {
+const HandlerCompliantsView = () => {
 
     const location = useLocation();
 
@@ -11,7 +9,7 @@ const Complaints = () => {
     console.log(compliants);
     
     
-    const isAdmin = location.pathname.split('/')[1] === "admin";
+    const showIssuer = location.pathname.split('/')[1] === "admin";
 
     const navigate = useNavigate();
     function viewCompliant(id){
@@ -19,20 +17,16 @@ const Complaints = () => {
     }
     return ( 
     <>
-        { isAdmin && <div className='compliant-summary'>
+        <div className='compliant-summary'>
             <div>
-                <p className="key-text">Compliants Received</p>
+                <p className="key-text">New Compliants</p>
                 <p className="value-text">a</p>
             </div>
             <div>
                 <p className="key-text">Compliants Pending</p>
                 <p className="value-text">a</p>
             </div>
-            <div>
-                <p className="key-text">Compliants Closed</p>
-                <p className="value-text">a</p>
-            </div>
-        </div>}
+        </div>
         <table className='user-list'>
                 <thead>
                 <tr>
@@ -40,8 +34,7 @@ const Complaints = () => {
                     <th>Category</th>
                     <th>Compliant Id</th>
                     <th>Compliant Title</th>
-                    { isAdmin && <th>Raised By</th>}
-                    <th>Assigned To</th>
+                    <th>Raised By</th>
                     <th>Status</th>
                 </tr>
                 </thead>
@@ -53,8 +46,7 @@ const Complaints = () => {
                         <td>{e.category}</td>
                         <td>{e.compliantId}</td>
                         <td>{e.title}</td>
-                        { isAdmin && <td>{e.issuedBy}</td>}
-                        <td>{e.assignedTo}</td>
+                        <td>{e.issuedBy}</td>
                         <td>{e.status}</td>
                     </tr>
                 )})}
@@ -73,4 +65,4 @@ export const compliantsLoaderUser = async() => {
      return res.json();
 }
 
-export default Complaints;
+export default HandlerCompliantsView;

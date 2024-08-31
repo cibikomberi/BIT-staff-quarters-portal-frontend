@@ -40,7 +40,7 @@ const Guest = () => {
 }
  
 export const guestLoader = async() => {
-    const res = await fetch('http://192.168.31.16:8050/guests')
+    const res = await fetch('http://localhost:8050/guests')
     return res.json();
 }
 

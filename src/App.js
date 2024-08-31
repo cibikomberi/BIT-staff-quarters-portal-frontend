@@ -34,6 +34,7 @@ import UsersList, { facultyListLoader } from "./admin/UsersList";
 import ViewUser, { facultyDetailLoader } from "./admin/ViewUser";
 import ViewCompliant, { getCompliantById } from "./user/CompliantView";
 import InnmateAdd from "./user/InnmateAdd";
+import HandlerCompliantsView from "./handlers/HandlerCompliantsView";
 
 const router = createBrowserRouter(
 	createRoutesFromElements(
@@ -80,6 +81,10 @@ const router = createBrowserRouter(
 					<Route index element={<Guest />}  loader={guestLoader}/>
 					<Route path="new" element={<GuestNew />} />
 				</Route>
+			</Route>
+			<Route path="/handler" element={<Main />}>
+				<Route path="compliants" element={<HandlerCompliantsView />} loader={compliantsLoaderUser}></Route>
+				<Route path="past-compliants" element={<Complaints />}  loader={compliantsLoaderUser}></Route>
 			</Route>
 		</Route>
 	)

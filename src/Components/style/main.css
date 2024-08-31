@@ -1,4 +1,5 @@
 .main{
+    /* background-color: aquamarine; */
     display: grid;
     grid-template-columns: auto auto;
     grid-template-rows: auto auto;
@@ -122,8 +123,12 @@ main{
         position: fixed;
         left: 0px;
         transform: translateX(-225px);
+        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+
     }
     .nav-toggler{
+        display: none;
+        background-color: rgba(0, 0, 0, 0.168);
         z-index: -1;
     }
     #nav-toggle:checked ~ nav{
@@ -131,6 +136,7 @@ main{
         transform: unset;
     }
     #nav-toggle:checked ~ .nav-toggler{
+        display: unset;
         z-index: 99;
     }
 }

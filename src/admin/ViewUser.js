@@ -45,7 +45,7 @@ const ViewUser = () => {
 }
 
 export const facultyDetailLoader = async(id) => {
-    const res = await fetch(`http://192.168.31.16:8050/faculty/${id}`)
+    const res = await fetch(`http://localhost:8050/faculty/${id}`)
     return res;
 }
 

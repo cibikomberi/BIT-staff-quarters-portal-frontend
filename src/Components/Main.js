@@ -72,6 +72,12 @@ const Main = (props) => {
                 <NavLink className='nav-items' to='innmates'>Innmates</NavLink>
                 <NavLink className='nav-items' to='guest'>Guest</NavLink>
             </nav>}
+
+            {(currentLocation === "handler") && <nav>
+                <NavLink className='nav-items' to='compliants'>Compliants</NavLink>
+                <NavLink className='nav-items' to='past-compliants'>Past Compliants</NavLink>
+            </nav>}
+
             <main className="content">
                 {navigation.state === "loading" ?
                     <div style={{ height: "100%", width: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>

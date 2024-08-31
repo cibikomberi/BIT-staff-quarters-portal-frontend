@@ -3,7 +3,7 @@ import '@material/web/select/select-option'
 import '@material/web/textfield/outlined-text-field'
 import '@material/web/textfield/internal/outlined-text-field'
 
-const NewComplaint = () => {
+const NewComplaint = () => {    
 
     const handleNewCompliant = () => {
 
@@ -12,7 +12,7 @@ const NewComplaint = () => {
         let availableTime = document.getElementById('compliant-available-time').value
         let description = document.getElementById('compliant-description').value        
 
-        fetch("http://192.168.31.16:8050/compliants",{ method: "POST", 
+        fetch("http://localhost:8050/compliants",{ method: "POST", 
             headers: {
             "Content-Type": "application/json"},
             body: JSON.stringify({
@@ -44,7 +44,7 @@ const NewComplaint = () => {
                     <div slot="headline">Others</div>
                 </md-select-option>
             </md-outlined-select>
-            <md-outlined-text-field type="text" label="Name" class="input-field" id='compliant-title'></md-outlined-text-field>
+            <md-outlined-text-field type="text" label="Title" class="input-field" id='compliant-title'></md-outlined-text-field>
             {/* <md-outlined-text-field type="text" label="Quarters No."   class="input-field" id='compliant-quarters-no'></md-outlined-text-field> */}
             {/* <md-outlined-text-field type="text" label="Mobile No." class="input-field" id=''></md-outlined-text-field> */}
 

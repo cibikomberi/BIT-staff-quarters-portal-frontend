@@ -16,7 +16,7 @@ const Guest = () => {
       fromDate: fromDate,
       toDate: toDate
     }));
-    fetch("http://192.168.31.16:8050/guests",{ method: "POST", 
+    fetch("http://localhost:8050/guests",{ method: "POST", 
         headers: {
         "Content-Type": "application/json"},
         body: JSON.stringify(bcont)

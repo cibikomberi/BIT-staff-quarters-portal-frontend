@@ -1,8 +1,11 @@
+@font-face{
+  font-family: g-sans;
+  src: url(./Components/style/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPjIUvQ.woff2);
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: g-sans;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -62,15 +65,32 @@ html{
   display: flex;
   font-size: 32px;
   font-weight: 300;
-  padding: 5px;
+  padding: 2px;
+  padding-left: 20px;
   padding-right: 30px;
   margin: 0px;
 }
 .value-text{
+  font-weight: 200;
+  padding: 2px;
+  padding-left: 20px;
   font-size: 28px;
   margin: 0px;
 }
 .button-primary{
   --md-filled-button-container-color: #6442d6;
   margin-left: 15px;
+}
+.compliant-summary{
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  align-self: center;
+  margin: 2%;
+  border-radius: 25px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  background-color: #c2e7ff28;
+}
+.compliant-summary div{
+  flex-grow: 1;
 }
