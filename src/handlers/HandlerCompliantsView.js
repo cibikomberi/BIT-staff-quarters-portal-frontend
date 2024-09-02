@@ -61,7 +61,13 @@ const HandlerCompliantsView = () => {
 }
  
 export const compliantsLoaderUser = async() => {
-     const res = await fetch('http://localhost:8050/compliants')
+    const token = localStorage.getItem('token');
+
+    const res = await fetch('http://localhost:8080/compliants',{
+        headers: {
+        'Authorization': `Bearer ${token}`
+    }
+      })
      return res.json();
 }
 

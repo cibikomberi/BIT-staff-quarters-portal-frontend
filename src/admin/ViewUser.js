@@ -45,8 +45,15 @@ const ViewUser = () => {
 }
 
 export const facultyDetailLoader = async(id) => {
-    const res = await fetch(`http://localhost:8050/faculty/${id}`)
-    return res;
+    const token = localStorage.getItem('token');
+
+    const res = await fetch(`http://localhost:8080/faculty/${id}`,{
+        headers: {
+        "Content-Type": "application/json",
+        'Authorization': `Bearer ${token}`
+    }
+      })
+     return res.json();
 }
 
 export default ViewUser;

@@ -46,8 +46,15 @@ const UsersList = () => {
  
 
 export const facultyListLoader = async() => {
-    const res = await fetch('http://localhost:8050/faculty');
-    return res.json();
+    const token = localStorage.getItem('token');
+
+    const res = await fetch("http://localhost:8080/faculty",{
+        headers: {
+        "Content-Type": "application/json",
+        'Authorization': `Bearer ${token}`
+    }
+      })
+     return res.json();
 }
 
 export default UsersList;

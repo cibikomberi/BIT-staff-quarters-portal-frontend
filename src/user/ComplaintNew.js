@@ -5,16 +5,19 @@ import '@material/web/textfield/internal/outlined-text-field'
 
 const NewComplaint = () => {    
 
-    const handleNewCompliant = () => {
+    const handleNewCompliant = async() => {
 
         let category = document.getElementById('category').value
         let title = document.getElementById('compliant-title').value
         let availableTime = document.getElementById('compliant-available-time').value
-        let description = document.getElementById('compliant-description').value        
+        let description = document.getElementById('compliant-description').value 
+               
+        const token = localStorage.getItem('token');
 
-        fetch("http://localhost:8050/compliants",{ method: "POST", 
+        fetch("http://localhost:8080/compliants",{ method: "POST", 
             headers: {
-            "Content-Type": "application/json"},
+            "Content-Type": "application/json",
+            'Authorization': `Bearer ${token}`},
             body: JSON.stringify({
                 "category": category,
                 "title": title,
@@ -22,6 +25,8 @@ const NewComplaint = () => {
                 "issuedBy": "cibi",
             })
           });
+          
+          
     }
 
     return ( 

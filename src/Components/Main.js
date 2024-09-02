@@ -1,9 +1,9 @@
 import './style/main.css'
 import logo from "../images/1407443626926816.jpeg";
 import { NavLink, Link, Outlet, useLocation, useNavigation } from "react-router-dom";
-
+import axios from '../api/axios';
 const Main = (props) => {
-
+    
     const name = "Cibi Vishnu";
     const desig = "Student";
     const dept = "ECE";

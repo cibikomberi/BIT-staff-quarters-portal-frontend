@@ -1,5 +1,5 @@
 import './style/compliants.css'
-
+import axios from '../api/axios';
 import { Link, useLoaderData, useLocation, useNavigate } from 'react-router-dom';
 
 
@@ -69,8 +69,26 @@ const Complaints = () => {
 }
  
 export const compliantsLoaderUser = async() => {
-     const res = await fetch('http://localhost:8050/compliants')
-     return res.json();
+    const token = localStorage.getItem('token');
+    console.log(token);
+    
+
+    // const res = await fetch("http://localhost:8080/compliants",{
+    //     headers: {
+    //     "Content-Type": "application/json",
+    //     'Authorization': `Bearer ${token}`
+    // }
+    //   })
+    //  return res.json();
+
+    const res = await axios.get('/compliants', {
+  headers: {
+    "Content-Type": "application/json",
+    'Authorization': `Bearer ${token}`
+  }
+})
+    return res.data;
+
 }
 
 export default Complaints;

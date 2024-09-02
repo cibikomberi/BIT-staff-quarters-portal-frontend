@@ -18,6 +18,7 @@ import {
 	createRoutesFromElements,
 	RouterProvider,
 } from "react-router-dom";
+import { useState } from "react";
 import Login from "./Components/Login";
 import Main from "./Components/Main";
 import UserFront from "./user/UserFront";
@@ -91,6 +92,9 @@ const router = createBrowserRouter(
 )
 
 function App() {
+	const [username, setUsername] = useState('');
+	const [jwt, setjwt] = useState('');
+	const [role, setRole] = useState('');
 	return (<RouterProvider router={router} />);
 }
 

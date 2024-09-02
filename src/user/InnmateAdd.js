@@ -8,7 +8,7 @@ const InnmateAdd = () => {
         let bloodGroup = document.getElementById(`innmate-bg`).value;
         let aadhar = document.getElementById(`innmate-aadhar`).value;
         let workStatus = document.getElementById(`innmate-work`).value;
-        fetch("http://localhost:8050/innmates",{ method: "POST", 
+        fetch("http://localhost:8080/innmates",{ method: "POST", 
             headers: {
             "Content-Type": "application/json"},
             body: JSON.stringify({

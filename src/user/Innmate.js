@@ -64,8 +64,17 @@ const Innmates = () => {
 }
 
 export const innmatesLoader = async() =>{
-    const res = await fetch('http://localhost:8050/innmates')
+    const token = localStorage.getItem('token');
+
+    const res = await fetch('http://localhost:8080/innmates',{
+        headers: {
+        "Content-Type": "application/json",
+        'Authorization': `Bearer ${token}`
+    }
+      })
+
     return res.json();
 }
+
 
 export default Innmates;
