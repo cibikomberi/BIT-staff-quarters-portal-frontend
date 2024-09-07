@@ -2,35 +2,46 @@ import '@material/web/select/outlined-select'
 import '@material/web/select/select-option'
 import '@material/web/textfield/outlined-text-field'
 import '@material/web/textfield/internal/outlined-text-field'
+import { useNavigate } from 'react-router-dom'
 
-const NewComplaint = () => {    
-
-    const handleNewCompliant = async() => {
-
+const NewComplaint = () => {
+    const navigate = useNavigate();
+    const handleNewCompliant = async () => {
+        document.getElementById('newCompliantSubmit').disabled = true
         let category = document.getElementById('category').value
         let title = document.getElementById('compliant-title').value
         let availableTime = document.getElementById('compliant-available-time').value
-        let description = document.getElementById('compliant-description').value 
-               
-        const token = localStorage.getItem('token');
+        let description = document.getElementById('compliant-description').value
 
-        fetch("http://localhost:8080/compliants",{ method: "POST", 
+        const token = localStorage.getItem('token');
+        const user = localStorage.getItem('username');
+
+        fetch("http://localhost:8080/compliants", {
+            method: "POST",
             headers: {
-            "Content-Type": "application/json",
-            'Authorization': `Bearer ${token}`},
+                "Content-Type": "application/json",
+                'Authorization': `Bearer ${token}`
+            },
             body: JSON.stringify({
                 "category": category,
                 "title": title,
+                "availableTime": availableTime,
                 "description": description,
-                "issuedBy": "cibi",
+                "issuedBy": user,
+                "status": "Initiated",
             })
-          });
-          
-          
+        }).then((res) => {
+            if (res.ok) {
+                navigate(-1);
+                document.getElementById('newCompliantSubmit').disabled = false
+            }
+        }).catch((err) => {
+            console.log(err);
+        });
     }
 
-    return ( 
-            <div className='main-area' >
+    return (
+        <div className='main-area' >
 
             <md-outlined-select label="Category" class="input-field" id='category'>
                 <md-select-option value="Plumbing">
@@ -70,13 +81,13 @@ const NewComplaint = () => {
                 label="Description"
                 rows="3"
                 id='compliant-description'
-                >
+            >
             </md-outlined-text-field>
 
 
-            <md-filled-button class="button-primary" onClick={() => handleNewCompliant()}>Submit</md-filled-button>
+            <md-filled-button class="button-primary" id="newCompliantSubmit" onClick={() => handleNewCompliant()}>Submit</md-filled-button>
         </div>
-     );
+    );
 }
- 
+
 export default NewComplaint;

@@ -1,4 +1,5 @@
 import './style/user-list.css'
+import axios from '../api/axios';
 
 import { useLoaderData, useNavigate } from 'react-router-dom';
 
@@ -48,13 +49,14 @@ const UsersList = () => {
 export const facultyListLoader = async() => {
     const token = localStorage.getItem('token');
 
-    const res = await fetch("http://localhost:8080/faculty",{
+
+      const res = await axios.get('/faculty', {
         headers: {
-        "Content-Type": "application/json",
-        'Authorization': `Bearer ${token}`
-    }
+          "Content-Type": "application/json",
+          'Authorization': `Bearer ${token}`
+        }
       })
-     return res.json();
+    return res.data;
 }
 
 export default UsersList;

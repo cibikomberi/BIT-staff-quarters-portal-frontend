@@ -1,5 +1,6 @@
 import "./style/innmate.css"
-import { Link, useLoaderData, useLocation } from 'react-router-dom';
+import axios from '../api/axios';
+import { Link, useLoaderData, useLocation, redirect } from 'react-router-dom';
 
 const Innmates = () => {
 
@@ -20,7 +21,7 @@ const Innmates = () => {
                         {(currentLocation === "admin") && 
                         <md-list-item>
                             <div slot="headline">Faculty:</div>
-                            <div slot="end"></div>
+                            <div slot="end">{e.username}</div>
                         </md-list-item>}
                         <md-list-item>
                             <div slot="headline">Age:</div>
@@ -36,7 +37,8 @@ const Innmates = () => {
                         </md-list-item>
                         <md-list-item>
                             <div slot="headline">Is Working:</div>
-                            <div slot="end">{e.isWorking && "Yes"}{!e.isWorking && "No"}</div>
+                            <div slot="end">{e.working ? "Yes":  "No"}</div>
+                            {/* <div slot="end">{e.isWorking === true && "Yes"}{e.isWorking === false && "No"}</div> */}
                         </md-list-item>
                     </md-list>
                 </div>
@@ -63,17 +65,44 @@ const Innmates = () => {
     );
 }
 
-export const innmatesLoader = async() =>{
+export const innmatesLoaderUser = async() =>{
+    const token = localStorage.getItem('token');
+    const username = localStorage.getItem('username');
+
+    try {
+        const res = await axios.get(`/innmates/${username}`, {
+            headers: {
+                "Content-Type": "application/json",
+                'Authorization': `Bearer ${token}`
+            }
+        })
+        console.log(res);
+        return res.data;
+    } catch (err) {
+        if (err.status === 401) {
+            return redirect(`/`);
+        }
+        throw new Error(err)
+    }
+}
+export const innmatesLoaderAdmin = async() =>{
     const token = localStorage.getItem('token');
 
-    const res = await fetch('http://localhost:8080/innmates',{
-        headers: {
-        "Content-Type": "application/json",
-        'Authorization': `Bearer ${token}`
+    try {
+        const res = await axios.get(`/innmates`, {
+            headers: {
+                "Content-Type": "application/json",
+                'Authorization': `Bearer ${token}`
+            }
+        })
+        console.log(res);
+        return res.data;
+    } catch (err) {
+        if (err.status === 401) {
+            return redirect(`/`);
+        }
+        throw new Error(err)
     }
-      })
-
-    return res.json();
 }
 
 

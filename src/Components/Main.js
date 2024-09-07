@@ -1,8 +1,10 @@
 import './style/main.css'
 import logo from "../images/1407443626926816.jpeg";
-import { NavLink, Link, Outlet, useLocation, useNavigation } from "react-router-dom";
+import { NavLink, Link, Outlet, useLocation, useNavigation, Navigate } from "react-router-dom";
 import axios from '../api/axios';
 const Main = (props) => {
+    const isAuth = !!localStorage.getItem("token");
+    console.log(localStorage.getItem("token"));
     
     const name = "Cibi Vishnu";
     const desig = "Student";
@@ -12,6 +14,7 @@ const Main = (props) => {
     const navigation = useNavigation();
     const location = useLocation();
     const currentLocation = location.pathname.split('/')[1];
+    if (isAuth) {
     return (
         <div className='main'>
             <input type="checkbox" id="nav-toggle"></input>
@@ -51,8 +54,8 @@ const Main = (props) => {
                     </md-list>
                 </form>
                 <div slot="actions">
-                    <Link to="editProfile" form="form-id1">
-                        <md-text-button form="form-id1">Edit my profile</md-text-button>
+                    <Link to="profile/view" form="form-id1">
+                        <md-text-button form="form-id1">View my profile</md-text-button>
                     </Link>
                     <md-filled-button form="form-id">OK</md-filled-button>
                 </div>
@@ -86,7 +89,9 @@ const Main = (props) => {
                     : <Outlet />}
             </main>
         </div>
-    );
+    );} else {
+        return <Navigate to="/" />;
+      }
 }
 
 export default Main;

@@ -1,26 +1,30 @@
 import './style/guest.css'
+import axios from '../api/axios';
 
 import { useState } from 'react';
 
 const Guest = () => {
   const [guestCount, setGuestCount] = useState(1);
 
-  const handleNewGuest = () => {
+  const handleNewGuest = async() => {
 
     let city = document.getElementById('guest-city').value
     let fromDate = document.getElementById('guest-from-date').value
     let toDate = document.getElementById('guest-to-date').value
+
     let bcont = [...Array(guestCount)].map((_, i) => ({
       name: document.getElementById(`guest-${i + 1}`).value,
       place: city,
       fromDate: fromDate,
       toDate: toDate
     }));
-    fetch("http://localhost:8080/guests",{ method: "POST", 
+
+    const token = localStorage.getItem('token');
+    const res = await axios.post(`/guests`,bcont, {
         headers: {
-        "Content-Type": "application/json"},
-        body: JSON.stringify(bcont)
-    });
+            'Authorization': `Bearer ${token}`
+        }
+    })
 }
   function countInc() {
     if (guestCount < 5) {

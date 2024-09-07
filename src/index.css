@@ -94,3 +94,14 @@ html{
 .compliant-summary div{
   flex-grow: 1;
 }
+table{
+  border-collapse: separate;
+  border-spacing: 0;
+}
+thead {
+  border-bottom: 1px solid #555555;
+  border-collapse: separate;
+  position: sticky;
+  top: 0px;
+  background: white;
+}

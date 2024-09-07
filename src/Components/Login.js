@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 const Login = () => {
     const navigate = useNavigate();
     const handleLogin = async () => {
+        document.getElementById('login-btn').disabled = true
         document.getElementById('username').error = false;
         document.getElementById('pass').error = false;
 
@@ -19,20 +20,24 @@ const Login = () => {
             .then(function (response) {
 
                 console.log(response.status === 200);
-                localStorage.setItem('token', response.data.token);
                 if (response.status === 200 && response.data) {
-                    console.log(response.data);
-                    if (response.data.roles[0] === "ROLE_USER") {
+                    localStorage.setItem('token', response.data.token);
+                    localStorage.setItem('username', response.data.username);
+                    localStorage.setItem('role', response.data.roles);
+                    localStorage.setItem('id', response.data.id);
+                    console.log(response.data.roles[0].authority);
+                    if (response.data.roles[0].authority === "USER") {
                         navigate("/user/home")
-                    } else if (response.data.roles[0] === "ROLE_ADMIN") {
+                    } else if (response.data.roles[0].authority === "ADMIN") {
                         navigate("/admin/home")
-                    } else if (response.data.roles[0] === "ROLE_HANDLER") {
+                    } else if (response.data.roles[0].authority === "HANDLER") {
                         navigate("/handler/home")
                     }
                 } else {
                 }
             })
             .catch(function (error) {
+                document.getElementById('login-btn').disabled = false
                 document.getElementById('username').error = true;
                 document.getElementById('username').errorText = "Please verify your input";
                 document.getElementById('pass').error = true;
@@ -44,6 +49,7 @@ const Login = () => {
     return (
         <div className="login-div">
             <div className='login-main'>
+                {/* <md-linear-progress indeterminate style={{position:"absolute",top:"0",margin:"0",width:"100%"}}></md-linear-progress> */}
                 <div className="login-ins">
                     <h1>Sign in</h1><p> to continue to portal</p>
                 </div>
@@ -51,7 +57,7 @@ const Login = () => {
                     <md-outlined-text-field id='username' type="email" label="Email" placeholder="someone@example.com" class="text-fiell" ></md-outlined-text-field>
                     <md-outlined-text-field id='pass' type="password" label="Password" placeholder="%S5Gghu*$" class="text-fiell"></md-outlined-text-field>
                     <md-text-button class="button-primary">Create Account</md-text-button>
-                    <md-filled-button class="button-primary" onClick={() => handleLogin()}>Sign In</md-filled-button>
+                    <md-filled-button class="button-primary" id='login-btn' onClick={() => handleLogin()}>Sign In</md-filled-button>
 
                 </div>
             </div>

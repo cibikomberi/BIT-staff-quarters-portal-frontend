@@ -11,6 +11,7 @@ import "@material/web/list/list";
 import "@material/web/list/list-item";
 import "@material/web/fab/fab";
 import "@material/web/progress/circular-progress";
+import "@material/web/progress/linear-progress";
 
 import {
 	Route,
@@ -23,8 +24,8 @@ import Login from "./Components/Login";
 import Main from "./Components/Main";
 import UserFront from "./user/UserFront";
 import NewComplaint from "./user/ComplaintNew";
-import Complaints, { compliantsLoaderUser } from "./user/Complaint";
-import Innmates, { innmatesLoader } from "./user/Innmate";
+import Complaints, { compliantsLoaderAdmin, compliantsLoaderUser } from "./user/Complaint";
+import Innmates, { innmatesLoader, innmatesLoaderAdmin, innmatesLoaderUser } from "./user/Innmate";
 import InnmatesEdit from "./user/InnmateEdit";
 import InnmatesCheckout from "./user/InnmateCheckout";
 import Guest, { guestLoader } from "./user/Guest";
@@ -32,35 +33,41 @@ import GuestNew from "./user/GuestNew";
 import EditProfile from "./user/EditProfile";
 import AdminFront from "./admin/AdminFront";
 import UsersList, { facultyListLoader } from "./admin/UsersList";
-import ViewUser, { facultyDetailLoader } from "./admin/ViewUser";
+import ViewUser, { facultyDetailLoader, myDetailsLoader } from "./admin/ViewUser";
 import ViewCompliant, { getCompliantById } from "./user/CompliantView";
 import InnmateAdd from "./user/InnmateAdd";
 import HandlerCompliantsView from "./handlers/HandlerCompliantsView";
+import Error from "./Components/Error";
 
 const router = createBrowserRouter(
 	createRoutesFromElements(
 		<Route>
 			<Route exact path="/" element={<Login />}></Route>
-			<Route path="/user" element={<Main />}>
+			<Route path="/user" element={<Main />} errorElement={<Error />}>
 				<Route path="home" element={<UserFront />} />
 				<Route path="compliants">
 					<Route index element={<Complaints />} loader={compliantsLoaderUser}></Route>
 					<Route path="new" element={<NewComplaint />}></Route>
 					<Route path=":id/view" element={<ViewCompliant />} loader={(a) =>getCompliantById(a.params.id)}></Route>
 				</Route>
-				<Route path="editProfile" element={<EditProfile />}></Route>
+				<Route path="profile">
+					<Route path="view" element={<ViewUser />} loader={myDetailsLoader}></Route>
+					<Route path="edit" element={<EditProfile />} loader={myDetailsLoader}></Route>
+				</Route>
 				<Route path="innmates">
-					<Route index element={<Innmates />} loader={innmatesLoader}></Route>
-					<Route path="edit" element={<InnmatesEdit />} loader={innmatesLoader}></Route>
+					<Route index element={<Innmates />} loader={innmatesLoaderUser}></Route>
+					<Route path="edit" element={<InnmatesEdit />} loader={innmatesLoaderUser}></Route>
 					<Route path="add" element={<InnmateAdd />}></Route>
-					<Route path="checkout" element={<InnmatesCheckout />} loader={innmatesLoader}></Route>
+					<Route path="checkout" element={<InnmatesCheckout />} loader={innmatesLoaderUser}></Route>
 				</Route>
 				<Route path="guest">
 					<Route index element={<Guest />} loader={guestLoader}/>
 					<Route path="new" element={<GuestNew />} />
 				</Route>
 			</Route>
-			<Route path="/admin" element={<Main />}>
+
+
+			<Route path="/admin" element={<Main />} errorElement={<Error />}>
 				<Route path="home" element={<AdminFront />} />
 				<Route path="users">
 					<Route index element={<UsersList />} loader={facultyListLoader}/>
@@ -70,20 +77,20 @@ const router = createBrowserRouter(
 					</Route>
 				</Route>
 				<Route path="compliants">
-					<Route index element={<Complaints />}  loader={compliantsLoaderUser}/>
+					<Route index element={<Complaints />}  loader={compliantsLoaderAdmin}/>
 					<Route path=":id/view" element={<ViewCompliant />}  loader={(a) =>getCompliantById(a.params.id)}/>
 				</Route>
 				<Route path="innmates">
-					<Route index element={<Innmates />}  loader={innmatesLoader}></Route>
-					<Route path="edit" element={<InnmatesEdit />} loader={innmatesLoader}></Route>
-					<Route path="checkout" element={<InnmatesCheckout />} loader={innmatesLoader}></Route>
+					<Route index element={<Innmates />}  loader={innmatesLoaderAdmin}></Route>
+					<Route path="edit" element={<InnmatesEdit />} loader={innmatesLoaderAdmin}></Route>
+					<Route path="checkout" element={<InnmatesCheckout />} loader={innmatesLoaderAdmin}></Route>
 				</Route>
 				<Route path="guest">
 					<Route index element={<Guest />}  loader={guestLoader}/>
 					<Route path="new" element={<GuestNew />} />
 				</Route>
 			</Route>
-			<Route path="/handler" element={<Main />}>
+			<Route path="/handler" element={<Main />} errorElement={<Error />}>
 				<Route path="compliants" element={<HandlerCompliantsView />} loader={compliantsLoaderUser}></Route>
 				<Route path="past-compliants" element={<Complaints />}  loader={compliantsLoaderUser}></Route>
 			</Route>

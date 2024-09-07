@@ -1,9 +1,9 @@
 import { Link, useLoaderData } from 'react-router-dom';
+import axios from '../api/axios';
 
 const Guest = () => {
 
-    let compliants = useLoaderData();
-    console.log(compliants);
+    let guests = useLoaderData();
     
     return ( 
         <>
@@ -18,7 +18,7 @@ const Guest = () => {
                 </tr>
                 </thead>
                 <tbody>
-                {compliants.map((e,i)=>{
+                {guests.map((e,i)=>{
                     return(
                     <tr key={e.id}>
                         <td>{i + 1}</td>
@@ -40,8 +40,13 @@ const Guest = () => {
 }
  
 export const guestLoader = async() => {
-    const res = await fetch('http://localhost:8080/guests')
-    return res.json();
+    const token = localStorage.getItem('token');
+    const res = await axios.get(`/guests`, {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    })
+    return res.data;
 }
 
 export default Guest;

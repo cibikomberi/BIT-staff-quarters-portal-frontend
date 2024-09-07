@@ -23,7 +23,7 @@
 .user-list thead{
     font-size: large;
     height: 52px;
-    border-bottom: 1px solid #555555;
+    
 }
 .user-list tbody tr{
     height: 38px;
