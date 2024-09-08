@@ -1,6 +1,6 @@
 import axios from '../api/axios';
 import './style/login.css'
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Login = () => {
     const navigate = useNavigate();
@@ -19,10 +19,13 @@ const Login = () => {
         
             .then(function (response) {
 
+                console.log(response);
+                
                 console.log(response.status === 200);
                 if (response.status === 200 && response.data) {
                     localStorage.setItem('token', response.data.token);
                     localStorage.setItem('username', response.data.username);
+                    localStorage.setItem('name', response.data.name);
                     localStorage.setItem('role', response.data.roles);
                     localStorage.setItem('id', response.data.id);
                     console.log(response.data.roles[0].authority);
@@ -56,7 +59,7 @@ const Login = () => {
                 <div className="login-log">
                     <md-outlined-text-field id='username' type="email" label="Email" placeholder="someone@example.com" class="text-fiell" ></md-outlined-text-field>
                     <md-outlined-text-field id='pass' type="password" label="Password" placeholder="%S5Gghu*$" class="text-fiell"></md-outlined-text-field>
-                    <md-text-button class="button-primary">Create Account</md-text-button>
+                    <Link to={'/register/1'}><md-text-button class="button-primary">Create Account</md-text-button></Link>
                     <md-filled-button class="button-primary" id='login-btn' onClick={() => handleLogin()}>Sign In</md-filled-button>
 
                 </div>

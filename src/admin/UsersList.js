@@ -22,8 +22,9 @@ const UsersList = () => {
                 <thead>
                 <tr>
                     <th>S. NO</th>
+                    <th>Id</th>
                     <th>Name</th>
-                    <th>Faculty Id</th>
+                    <th>Role</th>
                     <th>Designation</th>
                     <th>Quarters No.</th>
                 </tr>
@@ -33,10 +34,11 @@ const UsersList = () => {
                     return(
                     <tr key={e.id} onClick={() => viewUser(e.id)}>
                         <td>{i+1}</td>
-                        <td>{e.name}</td>
                         <td>{e.id}</td>
-                        <td>{e.designation}</td>
-                        <td>{e.quartersNo}</td>
+                        <td>{e.name}</td>
+                        <td>{e.roles}</td>
+                        <td>{e.details && e.details.designation}</td>
+                        <td>{e.details && e.details.quartersNo}</td>
                     </tr>
                 )})}
                 </tbody>
@@ -46,11 +48,11 @@ const UsersList = () => {
 }
  
 
-export const facultyListLoader = async() => {
+export const usersListLoader = async() => {
     const token = localStorage.getItem('token');
 
 
-      const res = await axios.get('/faculty', {
+      const res = await axios.get('/users', {
         headers: {
           "Content-Type": "application/json",
           'Authorization': `Bearer ${token}`

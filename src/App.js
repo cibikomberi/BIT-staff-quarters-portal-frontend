@@ -32,17 +32,21 @@ import Guest, { guestLoader } from "./user/Guest";
 import GuestNew from "./user/GuestNew";
 import EditProfile from "./user/EditProfile";
 import AdminFront from "./admin/AdminFront";
-import UsersList, { facultyListLoader } from "./admin/UsersList";
-import ViewUser, { facultyDetailLoader, myDetailsLoader } from "./admin/ViewUser";
+import UsersList, { facultyListLoader, usersListLoader } from "./admin/UsersList";
+import ViewUser, { myDetailsLoader, userDetailLoader } from "./admin/ViewUser";
 import ViewCompliant, { getCompliantById } from "./user/CompliantView";
 import InnmateAdd from "./user/InnmateAdd";
 import HandlerCompliantsView from "./handlers/HandlerCompliantsView";
 import Error from "./Components/Error";
+import Register, { newDetailsLoader } from "./Components/Register";
 
 const router = createBrowserRouter(
 	createRoutesFromElements(
 		<Route>
 			<Route exact path="/" element={<Login />}></Route>
+			<Route exact path="/register/1" element={<Register />} loader={newDetailsLoader}></Route>
+			<Route exact path="/register/2" element={<Register />} loader={newDetailsLoader}></Route>
+
 			<Route path="/user" element={<Main />} errorElement={<Error />}>
 				<Route path="home" element={<UserFront />} />
 				<Route path="compliants">
@@ -70,10 +74,10 @@ const router = createBrowserRouter(
 			<Route path="/admin" element={<Main />} errorElement={<Error />}>
 				<Route path="home" element={<AdminFront />} />
 				<Route path="users">
-					<Route index element={<UsersList />} loader={facultyListLoader}/>
+					<Route index element={<UsersList />} loader={usersListLoader}/>
 					<Route path=":userId">
-						<Route path="view" element={<ViewUser />} loader={(a) => facultyDetailLoader(a.params.userId)}/>
-						<Route path="edit" element={<EditProfile />} />
+						<Route path="view" element={<ViewUser />} loader={(a) => userDetailLoader(a.params.userId)}/>
+						<Route path="edit" element={<EditProfile />} loader={(a) => userDetailLoader(a.params.userId)}/>
 					</Route>
 				</Route>
 				<Route path="compliants">

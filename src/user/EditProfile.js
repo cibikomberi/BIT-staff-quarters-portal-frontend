@@ -3,6 +3,8 @@ import axios from '../api/axios';
 import { redirect, useLoaderData, useNavigate } from "react-router-dom";
 const EditProfile = () => {
     const data = useLoaderData();
+    console.log(data);
+    
     const navigate = useNavigate();
     const handleEditProfile = async () => {
         document.getElementById('edit-profile-btn').disabled = true

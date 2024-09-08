@@ -47,7 +47,7 @@ const ViewUser = () => {
 }
 export const myDetailsLoader = async() => {
     const token = localStorage.getItem('token');
-    console.log(token);
+     
     try {
         const res = await axios.get(`/whoami`, {
             headers: {
@@ -65,16 +65,25 @@ export const myDetailsLoader = async() => {
     }
 }
 
-export const facultyDetailLoader = async(id) => {
+export const userDetailLoader = async(id) => {
     const token = localStorage.getItem('token');
-
-    const res = await fetch(`http://localhost:8080/faculty/${id}`,{
-        headers: {
-        "Content-Type": "application/json",
-        'Authorization': `Bearer ${token}`
+     console.log(id);
+     
+    try {
+        const res = await axios.get(`/whoisthis/${id}`, {
+            headers: {
+                "Content-Type": "application/json",
+                'Authorization': `Bearer ${token}`
+            }
+        })
+        console.log(res);
+        return res.data;
+    } catch (err) {
+        if (err.status === 401) {
+            return redirect(`/`);
+        }
+        throw new Error(err)
     }
-      })
-     return res.json();
 }
 
 export default ViewUser;

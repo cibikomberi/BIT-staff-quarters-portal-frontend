@@ -4,16 +4,14 @@ import { NavLink, Link, Outlet, useLocation, useNavigation, Navigate } from "rea
 import axios from '../api/axios';
 const Main = (props) => {
     const isAuth = !!localStorage.getItem("token");
-    console.log(localStorage.getItem("token"));
     
-    const name = "Cibi Vishnu";
-    const desig = "Student";
-    const dept = "ECE";
-    let titl = "BIT Staff Quarters";
+    const username = localStorage.getItem("username");
+    const name = localStorage.getItem("name");
 
     const navigation = useNavigation();
     const location = useLocation();
     const currentLocation = location.pathname.split('/')[1];
+
     if (isAuth) {
     return (
         <div className='main'>
@@ -23,7 +21,7 @@ const Main = (props) => {
                 <label htmlFor="nav-toggle" style={{ marginLeft: "25px" }}>
                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#555555"><path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z" /></svg>
                 </label>
-                <h3>{titl}</h3>
+                <h3>BIT Staff Quarters Portal</h3>
                 <img
                     onClick={() => {
                         document.getElementById("profile-dialog").show();
@@ -40,16 +38,12 @@ const Main = (props) => {
                     <img src={logo} alt="profile pic"></img>
                     <md-list>
                         <md-list-item>
+                            <div slot="headline">Username:</div>
+                            <div slot="end">{username}</div>
+                        </md-list-item>
+                        <md-list-item>
                             <div slot="headline">Name:</div>
                             <div slot="end">{name}</div>
-                        </md-list-item>
-                        <md-list-item>
-                            <div slot="headline">Desig:</div>
-                            <div slot="end">{desig}</div>
-                        </md-list-item>
-                        <md-list-item>
-                            <div slot="headline">Department:</div>
-                            <div slot="end">{dept}</div>
                         </md-list-item>
                     </md-list>
                 </form>
