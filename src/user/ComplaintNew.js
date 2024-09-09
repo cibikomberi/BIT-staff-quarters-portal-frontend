@@ -16,7 +16,7 @@ const NewComplaint = () => {
         const token = localStorage.getItem('token');
         const user = localStorage.getItem('username');
 
-        fetch("http://localhost:8080/compliants", {
+        fetch("http://10.10.66.23:8080/compliants", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

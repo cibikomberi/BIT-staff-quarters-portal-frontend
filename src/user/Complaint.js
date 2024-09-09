@@ -1,34 +1,31 @@
 import './style/compliants.css'
-import axios from '../api/axios';
+import axios from '../api/axios'
 import { Link, useLoaderData, useLocation, useNavigate, redirect } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
-
 const Complaints = () => {
 
+    const navigate = useNavigate();
     const location = useLocation();
-
-    // setCompliants(useLoaderData())
     const com = useLoaderData()
-    const [compliants,setCompliants] = useState(com);
+    const [compliants, setCompliants] = useState(com);
 
     const isAdmin = location.pathname.split('/')[1] === "admin";
 
-    const navigate = useNavigate();
     function viewCompliant(id) {
         navigate(`${id}/view`)
     }
 
-    const [received,setReceived] = useState(0);
-    const [pending,setPending] = useState(0);
-    const [closed,setClosed] = useState(0);
+    const [received, setReceived] = useState(0);
+    const [pending, setPending] = useState(0);
+    const [closed, setClosed] = useState(0);
     useEffect(() => {
         if (isAdmin) {
             const token = localStorage.getItem('token');
             axios.get('/compliants/count', {
                 headers: {
-                  "Content-Type": "application/json",
-                  'Authorization': `Bearer ${token}`
+                    "Content-Type": "application/json",
+                    'Authorization': `Bearer ${token}`
                 }
             }).then((res) => {
                 setReceived(res.data.issued)
@@ -41,14 +38,13 @@ const Complaints = () => {
     const searchCompliant = (e) => {
         const token = localStorage.getItem('token');
         console.log(e.target.value);
-        axios.get(`/compliants/search?param=${e.target.value}`, {
+        axios.get(`/compliants/search?keyword=${e.target.value}`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
         }).then((res) => {
             setCompliants(res.data)
         })
-        
     }
     return (
         <>
@@ -65,7 +61,7 @@ const Complaints = () => {
                     <p className="key-text">Compliants Closed</p>
                     <p className="value-text">{closed}</p>
                 </div>
-                <input className="search-field" placeholder="Search here" onChange={searchCompliant}/>
+                <input className="search-field" placeholder="Search here" onChange={searchCompliant} />
             </div>}
             <table className='user-list'>
                 <thead>
@@ -106,7 +102,7 @@ const Complaints = () => {
 export const compliantsLoaderUser = async () => {
     const token = localStorage.getItem('token');
     const username = localStorage.getItem('username');
-     
+
     try {
         const res = await axios.get(`/compliants/${username}`, {
             headers: {
@@ -125,7 +121,7 @@ export const compliantsLoaderUser = async () => {
 }
 export const compliantsLoaderAdmin = async () => {
     const token = localStorage.getItem('token');
-     
+
     try {
         const res = await axios.get(`/compliants`, {
             headers: {

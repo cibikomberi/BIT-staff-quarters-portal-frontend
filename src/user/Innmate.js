@@ -1,24 +1,37 @@
 import "./style/innmate.css"
-import axios from '../api/axios';
+import axios from '../api/axios'
 import { Link, useLoaderData, useLocation, redirect } from 'react-router-dom';
+import { useState } from "react";
 
 const Innmates = () => {
 
-    const innmatesList = useLoaderData();
-    console.log(innmatesList);
+    const inn = useLoaderData()
+    const [innmates, setInnmates] = useState(inn);
     
     const location = useLocation();
-    const currentLocation = location.pathname.split('/')[1];
+    const isAdmin = location.pathname.split('/')[1] === "admin";
+
+    const searchCompliant = (e) => {
+        const token = localStorage.getItem('token');
+        console.log(e.target.value);
+        axios.get(`/innmates/search?keyword=${e.target.value}`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        }).then((res) => {
+            setInnmates(res.data)
+        })
+    }
     return (
         <div className='main-area' style={{ flexDirection: 'row', position: "relative" }}>
-            <input className="search-field" placeholder="Search here" />
+            {isAdmin && <input className="search-field" placeholder="Search here" onChange={searchCompliant}/>}
 
-            {innmatesList.map((e, i) => (
+            {innmates.map((e, i) => (
                 <div className="inn-list" key={i}>
                     <md-list >
                         <h3>{e.name}</h3>
                         <h5>{e.relation}</h5>
-                        {(currentLocation === "admin") && 
+                        {isAdmin && 
                         <md-list-item>
                             <div slot="headline">Faculty:</div>
                             <div slot="end">{e.username}</div>

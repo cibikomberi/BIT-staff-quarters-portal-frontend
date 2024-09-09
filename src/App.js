@@ -19,20 +19,20 @@ import {
 	createRoutesFromElements,
 	RouterProvider,
 } from "react-router-dom";
-import { useState } from "react";
+// import { useState } from "react";
 import Login from "./Components/Login";
 import Main from "./Components/Main";
 import UserFront from "./user/UserFront";
 import NewComplaint from "./user/ComplaintNew";
 import Complaints, { compliantsLoaderAdmin, compliantsLoaderUser } from "./user/Complaint";
-import Innmates, { innmatesLoader, innmatesLoaderAdmin, innmatesLoaderUser } from "./user/Innmate";
+import Innmates, { innmatesLoaderAdmin, innmatesLoaderUser } from "./user/Innmate";
 import InnmatesEdit from "./user/InnmateEdit";
 import InnmatesCheckout from "./user/InnmateCheckout";
 import Guest, { guestLoader } from "./user/Guest";
 import GuestNew from "./user/GuestNew";
 import EditProfile from "./user/EditProfile";
 import AdminFront from "./admin/AdminFront";
-import UsersList, { facultyListLoader, usersListLoader } from "./admin/UsersList";
+import UsersList, { usersListLoader } from "./admin/UsersList";
 import ViewUser, { myDetailsLoader, userDetailLoader } from "./admin/ViewUser";
 import ViewCompliant, { getCompliantById } from "./user/CompliantView";
 import InnmateAdd from "./user/InnmateAdd";
@@ -103,9 +103,9 @@ const router = createBrowserRouter(
 )
 
 function App() {
-	const [username, setUsername] = useState('');
-	const [jwt, setjwt] = useState('');
-	const [role, setRole] = useState('');
+	// const [username, setUsername] = useState('');
+	// const [jwt, setjwt] = useState('');
+	// const [role, setRole] = useState('');
 	return (<RouterProvider router={router} />);
 }
 

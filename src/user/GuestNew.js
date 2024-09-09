@@ -1,5 +1,5 @@
 import './style/guest.css'
-import axios from '../api/axios';
+import axios from '../api/axios'
 
 import { useState } from 'react';
 

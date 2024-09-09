@@ -1,6 +1,7 @@
 import logo from "../images/1407443626926816.jpeg";
-import axios from '../api/axios';
-import { redirect, useLoaderData, useNavigate } from "react-router-dom";
+import axios from '../api/axios'
+import { useLoaderData, useNavigate } from "react-router-dom";
+
 const EditProfile = () => {
     const data = useLoaderData();
     console.log(data);
@@ -19,15 +20,6 @@ const EditProfile = () => {
         let email = document.getElementById('email').value
         let phone = document.getElementById('phone').value
         let quartersNo = document.getElementById('quartersNo').value
-
-        console.log(name);
-        console.log(aadhar);
-        console.log(address);
-        console.log(name);
-        console.log(name);
-        console.log(name);
-        console.log(name);
-
 
         await axios.put(`/update`, {
             "id": data.id,

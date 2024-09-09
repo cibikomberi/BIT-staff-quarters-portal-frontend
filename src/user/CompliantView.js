@@ -1,5 +1,5 @@
 import { useLoaderData, Link } from "react-router-dom";
-import axios from '../api/axios';
+import axios from '../api/axios'
 
 const ViewCompliant = () => {
     const compliant = useLoaderData();

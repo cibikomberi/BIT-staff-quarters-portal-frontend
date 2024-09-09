@@ -1,5 +1,5 @@
 import './style/user-list.css'
-import axios from '../api/axios';
+import axios from '../api/axios'
 
 import { useLoaderData, useNavigate } from 'react-router-dom';
 

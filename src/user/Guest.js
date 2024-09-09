@@ -1,5 +1,5 @@
 import { Link, useLoaderData } from 'react-router-dom';
-import axios from '../api/axios';
+import axios from '../api/axios'
 
 const Guest = () => {
 
