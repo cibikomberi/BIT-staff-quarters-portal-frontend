@@ -49,12 +49,7 @@ export const myDetailsLoader = async() => {
     const token = localStorage.getItem('token');
      
     try {
-        const res = await axios.get(`/whoami`, {
-            headers: {
-                "Content-Type": "application/json",
-                'Authorization': `Bearer ${token}`
-            }
-        })
+        const res = await axios.get(`/whoami`)
         console.log(res);
         return res.data;
     } catch (err) {
@@ -70,12 +65,7 @@ export const userDetailLoader = async(id) => {
      console.log(id);
      
     try {
-        const res = await axios.get(`/whoisthis/${id}`, {
-            headers: {
-                "Content-Type": "application/json",
-                'Authorization': `Bearer ${token}`
-            }
-        })
+        const res = await axios.get(`/whoisthis/${id}`)
         console.log(res);
         return res.data;
     } catch (err) {

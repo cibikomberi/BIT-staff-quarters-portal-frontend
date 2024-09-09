@@ -20,32 +20,11 @@ const Innmates = () => {
         // })
     });
 
-    //   const handleSubmit = () => {
-
-    //     let city = document.getElementById('guest-city').value
-    //     let fromDate = document.getElementById('guest-from-date').value
-    //     let toDate = document.getElementById('guest-to-date').value
-    //     let bcont = [...Array(guestCount)].map((_, i) => ({
-    //       name: document.getElementById(`guest-${i + 1}`).value,
-    //       place: city,
-    //       fromDate: fromDate,
-    //       toDate: toDate
-    //     }));
-    //     fetch("http://10.10.66.23:8080/guests",{ method: "POST", 
-    //         headers: {
-    //         "Content-Type": "application/json"},
-    //         body: JSON.stringify(bcont)
-    //     });
-    // }
 
     const [guestCount, setGuestCount] = useState(data.length);
 
     axios.put(`/innmates/update`, {
         
-    }, {
-        headers: {
-            'Authorization': `Bearer ${token}`
-        }
     }).then((res => {
         if (res.status === 200) {
             navigate(-1);

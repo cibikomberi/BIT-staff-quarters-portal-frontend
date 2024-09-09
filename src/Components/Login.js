@@ -1,4 +1,4 @@
-import axios from '../api/axios'
+import axios from 'axios'
 import './style/login.css'
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -23,7 +23,11 @@ const Login = () => {
                 
                 console.log(response.status === 200);
                 if (response.status === 200 && response.data) {
-                    localStorage.setItem('token', response.data.token);
+const AUTH_TOKEN = response.data.token;
+
+axios.defaults.headers.common['Authorization'] = `Bearer ${AUTH_TOKEN}`;
+
+                    localStorage.setItem('token', AUTH_TOKEN);
                     localStorage.setItem('username', response.data.username);
                     localStorage.setItem('name', response.data.name);
                     localStorage.setItem('role', response.data.roles);

@@ -22,10 +22,6 @@ const InnmateAdd = () => {
             "bloodGroup": bloodGroup,
             "aadhar": aadhar,
             "working": workStatus
-        }, {
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
         })
     }
 

@@ -14,11 +14,7 @@ const Innmates = () => {
     const searchCompliant = (e) => {
         const token = localStorage.getItem('token');
         console.log(e.target.value);
-        axios.get(`/innmates/search?keyword=${e.target.value}`, {
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        }).then((res) => {
+        axios.get(`/innmates/search?keyword=${e.target.value}`).then((res) => {
             setInnmates(res.data)
         })
     }
@@ -83,12 +79,7 @@ export const innmatesLoaderUser = async() =>{
     const username = localStorage.getItem('username');
 
     try {
-        const res = await axios.get(`/innmates/${username}`, {
-            headers: {
-                "Content-Type": "application/json",
-                'Authorization': `Bearer ${token}`
-            }
-        })
+        const res = await axios.get(`/innmates/${username}`)
         console.log(res);
         return res.data;
     } catch (err) {
@@ -102,12 +93,7 @@ export const innmatesLoaderAdmin = async() =>{
     const token = localStorage.getItem('token');
 
     try {
-        const res = await axios.get(`/innmates`, {
-            headers: {
-                "Content-Type": "application/json",
-                'Authorization': `Bearer ${token}`
-            }
-        })
+        const res = await axios.get(`/innmates`)
         console.log(res);
         return res.data;
     } catch (err) {

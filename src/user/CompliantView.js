@@ -33,11 +33,7 @@ const ViewCompliant = () => {
 
 export const getCompliantById = async (id) => {
     const token = localStorage.getItem('token');
-    const res = await axios.get(`/compliant/${id}`, {
-        headers: {
-            'Authorization': `Bearer ${token}`
-        }
-    })
+    const res = await axios.get(`/compliant/${id}`)
     return res.data;
 
 }

@@ -41,11 +41,7 @@ const Guest = () => {
  
 export const guestLoader = async() => {
     const token = localStorage.getItem('token');
-    const res = await axios.get(`/guests`, {
-        headers: {
-            'Authorization': `Bearer ${token}`
-        }
-    })
+    const res = await axios.get(`/guests`)
     return res.data;
 }
 

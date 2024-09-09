@@ -3,6 +3,7 @@ import '@material/web/select/select-option'
 import '@material/web/textfield/outlined-text-field'
 import '@material/web/textfield/internal/outlined-text-field'
 import { useNavigate } from 'react-router-dom'
+import axios from '../api/axios'
 
 const NewComplaint = () => {
     const navigate = useNavigate();
@@ -16,21 +17,14 @@ const NewComplaint = () => {
         const token = localStorage.getItem('token');
         const user = localStorage.getItem('username');
 
-        fetch("http://10.10.66.23:8080/compliants", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                'Authorization': `Bearer ${token}`
-            },
-            body: JSON.stringify({
+        axios.post("/compliants", {
                 "category": category,
                 "title": title,
                 "availableTime": availableTime,
                 "description": description,
                 "issuedBy": user,
                 "status": "Initiated",
-            })
-        }).then((res) => {
+            }).then((res) => {
             if (res.ok) {
                 navigate(-1);
                 document.getElementById('newCompliantSubmit').disabled = false

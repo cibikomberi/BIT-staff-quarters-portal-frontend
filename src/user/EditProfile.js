@@ -35,10 +35,6 @@ const EditProfile = () => {
                 "phone": phone,
                 "quartersNo": quartersNo,
             }
-        }, {
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
         }).then((res => {
             if (res.status === 200) {
                 navigate(-1);

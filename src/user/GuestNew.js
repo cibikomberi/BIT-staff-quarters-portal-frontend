@@ -20,11 +20,7 @@ const Guest = () => {
     }));
 
     const token = localStorage.getItem('token');
-    const res = await axios.post(`/guests`,bcont, {
-        headers: {
-            'Authorization': `Bearer ${token}`
-        }
-    })
+    const res = await axios.post(`/guests`,bcont)
 }
   function countInc() {
     if (guestCount < 5) {

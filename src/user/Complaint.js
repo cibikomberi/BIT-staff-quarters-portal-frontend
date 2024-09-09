@@ -1,5 +1,5 @@
 import './style/compliants.css'
-import axios from '../api/axios'
+import axios from 'axios'
 import { Link, useLoaderData, useLocation, useNavigate, redirect } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
@@ -22,12 +22,8 @@ const Complaints = () => {
     useEffect(() => {
         if (isAdmin) {
             const token = localStorage.getItem('token');
-            axios.get('/compliants/count', {
-                headers: {
-                    "Content-Type": "application/json",
-                    'Authorization': `Bearer ${token}`
-                }
-            }).then((res) => {
+            axios.get('/compliants/count')
+            .then((res) => {
                 setReceived(res.data.issued)
                 setPending(res.data.pending)
                 setClosed(res.data.resolved)
@@ -38,11 +34,8 @@ const Complaints = () => {
     const searchCompliant = (e) => {
         const token = localStorage.getItem('token');
         console.log(e.target.value);
-        axios.get(`/compliants/search?keyword=${e.target.value}`, {
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        }).then((res) => {
+        axios.get(`/compliants/search?keyword=${e.target.value}`)
+        .then((res) => {
             setCompliants(res.data)
         })
     }
@@ -104,12 +97,7 @@ export const compliantsLoaderUser = async () => {
     const username = localStorage.getItem('username');
 
     try {
-        const res = await axios.get(`/compliants/${username}`, {
-            headers: {
-                "Content-Type": "application/json",
-                'Authorization': `Bearer ${token}`
-            }
-        })
+        const res = await axios.get(`/compliants/${username}`)
         console.log(res);
         return res.data;
     } catch (err) {
@@ -123,12 +111,7 @@ export const compliantsLoaderAdmin = async () => {
     const token = localStorage.getItem('token');
 
     try {
-        const res = await axios.get(`/compliants`, {
-            headers: {
-                "Content-Type": "application/json",
-                'Authorization': `Bearer ${token}`
-            }
-        })
+        const res = await axios.get(`/compliants`)
         console.log(res);
         return res.data;
     } catch (err) {

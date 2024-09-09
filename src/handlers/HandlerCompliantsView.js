@@ -1,4 +1,5 @@
 import { Link, useLoaderData, useLocation, useNavigate } from 'react-router-dom';
+import axios from '../api/axios';
 
 
 const HandlerCompliantsView = () => {
@@ -63,11 +64,7 @@ const HandlerCompliantsView = () => {
 export const compliantsLoaderUser = async() => {
     const token = localStorage.getItem('token');
 
-    const res = await fetch('http://10.10.66.23:8080/compliants',{
-        headers: {
-        'Authorization': `Bearer ${token}`
-    }
-      })
+    const res = await axios.get('/compliants')
      return res.json();
 }
 
