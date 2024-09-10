@@ -1,5 +1,5 @@
 import { useLoaderData, Link } from "react-router-dom";
-import axios from '../api/axios'
+import axios from 'axios'
 
 const ViewCompliant = () => {
     const compliant = useLoaderData();
@@ -32,7 +32,6 @@ const ViewCompliant = () => {
 }
 
 export const getCompliantById = async (id) => {
-    const token = localStorage.getItem('token');
     const res = await axios.get(`/compliant/${id}`)
     return res.data;
 

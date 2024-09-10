@@ -1,20 +1,22 @@
-import axios from '../api/axios'
+import axios from 'axios'
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const InnmateAdd = () => {
 
+    const navigate = useNavigate();
+
+    const [innmateName, setInnmateName] = useState('');
+    const [relation, setRelation] = useState('');
+    const [age, setAge] = useState('');
+    const [bloodGroup, setBloodGroup] = useState('');
+    const [aadhar, setAadhar] = useState('');
+    const [workStatus, setWorkStatus] = useState('');
+
     const handleNewInnmate = async () => {
-
-        let name = document.getElementById(`innmate-name`).value;
-        let relation = document.getElementById(`innmate-relation`).value;
-        let age = document.getElementById(`innmate-age`).value;
-        let bloodGroup = document.getElementById(`innmate-bg`).value;
-        let aadhar = document.getElementById(`innmate-aadhar`).value;
-        let workStatus = document.getElementById(`innmate-work`).value;
-
-        const token = localStorage.getItem('token');
         const username = localStorage.getItem('username');;
-        const res = await axios.post(`/innmates`,{
-            "name": name,
+        await axios.post(`/innmates`, {
+            "name": innmateName,
             "username": username,
             "relation": relation,
             "age": age,
@@ -22,15 +24,30 @@ const InnmateAdd = () => {
             "bloodGroup": bloodGroup,
             "aadhar": aadhar,
             "working": workStatus
+        }).then((res) => {
+            if(res.status === 200){
+                navigate(-1);
+            }
         })
     }
 
     return (
         <>
-            <div id={`innmate-`} key={`innmate-`} >
+            <div>
                 <h3>Add Innmate</h3>
-                <md-outlined-text-field type="text" label="Name" class="input-field" id={`innmate-name`}></md-outlined-text-field>
-                <md-outlined-select label="Relation" class="input-field" id={`innmate-relation`}>
+                <md-outlined-text-field
+                    type="text"
+                    label="Name"
+                    class="input-field"
+                    value={innmateName}
+                    onInput={(e) => setInnmateName(e.target.value)}>
+                </md-outlined-text-field>
+
+                <md-outlined-select
+                    label="Relation"
+                    class="input-field"
+                    value={relation}
+                    onInput={(e) => setRelation(e.target.value)}>
                     <md-select-option value="Father">
                         <div slot="headline">Father</div>
                     </md-select-option>
@@ -53,10 +70,39 @@ const InnmateAdd = () => {
                         <div slot="headline">Other</div>
                     </md-select-option>
                 </md-outlined-select>
-                <md-outlined-text-field type="number" inputmode label="Age" min='1' max='100' class="input-field" id={`innmate-age`}></md-outlined-text-field>
-                <md-outlined-text-field type="text" label="Blood Group" class="input-field" id={`innmate-bg`}></md-outlined-text-field>
-                <md-outlined-text-field type="number" label="Aadhar No." class="input-field" id={`innmate-aadhar`}></md-outlined-text-field>
-                <md-outlined-select label="Is Working" class="input-field" id={`innmate-work`}>
+
+                <md-outlined-text-field
+                    type="number"
+                    inputmode
+                    label="Age"
+                    min='1'
+                    max='100'
+                    class="input-field"
+                    value={age}
+                    onInput={(e) => setAge(e.target.value)}>
+                </md-outlined-text-field>
+
+                <md-outlined-text-field
+                    type="text"
+                    label="Blood Group"
+                    class="input-field"
+                    value={bloodGroup}
+                    onInput={(e) => setBloodGroup(e.target.value)}>
+                </md-outlined-text-field>
+
+                <md-outlined-text-field
+                    type="number"
+                    label="Aadhar No."
+                    class="input-field"
+                    value={aadhar}
+                    onInput={(e) => setAadhar(e.target.value)}>
+                </md-outlined-text-field>
+
+                <md-outlined-select
+                    label="Is Working"
+                    class="input-field"
+                    value={workStatus}
+                    onInput={(e) => setWorkStatus(e.target.value)}>
                     <md-select-option value="true">
                         <div slot="headline">Yes</div>
                     </md-select-option>
@@ -65,6 +111,7 @@ const InnmateAdd = () => {
                     </md-select-option>
                 </md-outlined-select>
             </div>
+
             <div className='guest-submit'>
                 <md-filled-button onClick={() => handleNewInnmate()}>Submit</md-filled-button>
             </div>

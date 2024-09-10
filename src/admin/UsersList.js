@@ -1,5 +1,5 @@
 import './style/user-list.css'
-import axios from '../api/axios'
+import axios from 'axios'
 
 import { useLoaderData, useNavigate } from 'react-router-dom';
 
@@ -49,10 +49,7 @@ const UsersList = () => {
  
 
 export const usersListLoader = async() => {
-    const token = localStorage.getItem('token');
-
-
-      const res = await axios.get('/users')
+    const res = await axios.get('/users')
     return res.data;
 }
 

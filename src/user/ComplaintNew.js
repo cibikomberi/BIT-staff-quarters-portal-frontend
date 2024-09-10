@@ -3,41 +3,46 @@ import '@material/web/select/select-option'
 import '@material/web/textfield/outlined-text-field'
 import '@material/web/textfield/internal/outlined-text-field'
 import { useNavigate } from 'react-router-dom'
-import axios from '../api/axios'
+import axios from 'axios'
+import { useState } from 'react'
 
 const NewComplaint = () => {
     const navigate = useNavigate();
+
+    const [category, setCategory] = useState('');
+    const [title, setTitle] = useState('');
+    const [availableTime, setAvailableTime] = useState('');
+    const [description, setDescription] = useState('');
     const handleNewCompliant = async () => {
-        document.getElementById('newCompliantSubmit').disabled = true
-        let category = document.getElementById('category').value
-        let title = document.getElementById('compliant-title').value
-        let availableTime = document.getElementById('compliant-available-time').value
-        let description = document.getElementById('compliant-description').value
 
-        const token = localStorage.getItem('token');
         const user = localStorage.getItem('username');
-
         axios.post("/compliants", {
-                "category": category,
-                "title": title,
-                "availableTime": availableTime,
-                "description": description,
-                "issuedBy": user,
-                "status": "Initiated",
-            }).then((res) => {
-            if (res.ok) {
+            "category": category,
+            "title": title,
+            "availableTime": availableTime,
+            "description": description,
+            "issuedBy": user,
+            "status": "Initiated",
+        }).then((res) => {
+            console.log(res);
+            
+            if (res.status === 200) {
                 navigate(-1);
-                document.getElementById('newCompliantSubmit').disabled = false
             }
         }).catch((err) => {
+            document.getElementById('newCompliantSubmit').disabled = false
             console.log(err);
         });
     }
 
     return (
         <div className='main-area' >
-
-            <md-outlined-select label="Category" class="input-field" id='category'>
+            <md-outlined-select
+                label="Category"
+                class="input-field"
+                value={category}
+                onInput={(e) => setCategory(e.target.value)}
+            >
                 <md-select-option value="Plumbing">
                     <div slot="headline">Plumbing</div>
                 </md-select-option>
@@ -54,11 +59,21 @@ const NewComplaint = () => {
                     <div slot="headline">Others</div>
                 </md-select-option>
             </md-outlined-select>
-            <md-outlined-text-field type="text" label="Title" class="input-field" id='compliant-title'></md-outlined-text-field>
-            {/* <md-outlined-text-field type="text" label="Quarters No."   class="input-field" id='compliant-quarters-no'></md-outlined-text-field> */}
-            {/* <md-outlined-text-field type="text" label="Mobile No." class="input-field" id=''></md-outlined-text-field> */}
 
-            <md-outlined-select label="Available Time" class="input-field" id='compliant-available-time'>
+            <md-outlined-text-field
+                type="text"
+                label="Title"
+                class="input-field"
+                value={title}
+                onInput={(e) => setTitle(e.target.value)}>
+            </md-outlined-text-field>
+
+            <md-outlined-select
+                label="Available Time"
+                class="input-field"
+                value={availableTime}
+                onInput={(e) => setAvailableTime(e.target.value)}
+            >
                 <md-select-option value="9AM - 12NOON">
                     <div slot="headline">9AM - 12NOON</div>
                 </md-select-option>
@@ -70,7 +85,10 @@ const NewComplaint = () => {
                 </md-select-option>
             </md-outlined-select>
 
-            <md-outlined-text-field class="input-field"
+            <md-outlined-text-field
+                class="input-field"
+                value={description}
+                onInput={(e) => setDescription(e.target.value)}
                 type="textarea"
                 label="Description"
                 rows="3"

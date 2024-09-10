@@ -45,9 +45,7 @@ const ViewUser = () => {
         </div>
     );
 }
-export const myDetailsLoader = async() => {
-    const token = localStorage.getItem('token');
-     
+export const myDetailsLoader = async() => {     
     try {
         const res = await axios.get(`/whoami`)
         console.log(res);
@@ -60,10 +58,7 @@ export const myDetailsLoader = async() => {
     }
 }
 
-export const userDetailLoader = async(id) => {
-    const token = localStorage.getItem('token');
-     console.log(id);
-     
+export const userDetailLoader = async(id) => { 
     try {
         const res = await axios.get(`/whoisthis/${id}`)
         console.log(res);

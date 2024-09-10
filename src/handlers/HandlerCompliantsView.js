@@ -1,5 +1,5 @@
 import { Link, useLoaderData, useLocation, useNavigate } from 'react-router-dom';
-import axios from '../api/axios';
+import axios from 'axios';
 
 
 const HandlerCompliantsView = () => {
@@ -62,8 +62,6 @@ const HandlerCompliantsView = () => {
 }
  
 export const compliantsLoaderUser = async() => {
-    const token = localStorage.getItem('token');
-
     const res = await axios.get('/compliants')
      return res.json();
 }

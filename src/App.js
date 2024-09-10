@@ -39,6 +39,13 @@ import InnmateAdd from "./user/InnmateAdd";
 import HandlerCompliantsView from "./handlers/HandlerCompliantsView";
 import Error from "./Components/Error";
 import Register, { newDetailsLoader } from "./Components/Register";
+import axios from 'axios';
+
+axios.defaults.baseURL = 'http://10.10.66.23:8080';
+const token = localStorage.getItem('token');
+if (token) {
+  axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+}
 
 const router = createBrowserRouter(
 	createRoutesFromElements(

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import axios from '../api/axios'
+import axios from 'axios'
 import { useLoaderData, useNavigate } from "react-router-dom";
 
 const Innmates = () => {
@@ -7,19 +7,6 @@ const Innmates = () => {
     console.log(data);
 
     const navigate = useNavigate();
-    const token = localStorage.getItem('token');
-    useEffect(() => {
-        // innmatesCount.current.value = data.length;
-        // data.map((e,i)=>{
-        //     document.getElementById(`innmate-name-${i+1}`).value = e.name;
-        //     document.getElementById(`innmate-relation-${i+1}`).value = e.relation;
-        //     document.getElementById(`innmate-age-${i+1}`).value = e.age;
-        //     document.getElementById(`innmate-bg-${i+1}`).value = e.bloodGroup;
-        //     document.getElementById(`innmate-aadhar-${i+1}`).value = e.aadhar;
-        //     document.getElementById(`innmate-work-${i+1}`).value = String(e.working);
-        // })
-    });
-
 
     const [guestCount, setGuestCount] = useState(data.length);
 

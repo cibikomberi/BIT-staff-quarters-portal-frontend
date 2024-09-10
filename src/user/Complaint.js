@@ -11,6 +11,7 @@ const Complaints = () => {
     const [compliants, setCompliants] = useState(com);
 
     const isAdmin = location.pathname.split('/')[1] === "admin";
+    const isUser = location.pathname.split('/')[1] === "user";
 
     function viewCompliant(id) {
         navigate(`${id}/view`)
@@ -21,23 +22,21 @@ const Complaints = () => {
     const [closed, setClosed] = useState(0);
     useEffect(() => {
         if (isAdmin) {
-            const token = localStorage.getItem('token');
             axios.get('/compliants/count')
-            .then((res) => {
-                setReceived(res.data.issued)
-                setPending(res.data.pending)
-                setClosed(res.data.resolved)
-            })
+                .then((res) => {
+                    setReceived(res.data.issued)
+                    setPending(res.data.pending)
+                    setClosed(res.data.resolved)
+                })
         }
     })
 
     const searchCompliant = (e) => {
-        const token = localStorage.getItem('token');
         console.log(e.target.value);
         axios.get(`/compliants/search?keyword=${e.target.value}`)
-        .then((res) => {
-            setCompliants(res.data)
-        })
+            .then((res) => {
+                setCompliants(res.data)
+            })
     }
     return (
         <>
@@ -84,16 +83,15 @@ const Complaints = () => {
                     })}
                 </tbody>
             </table>
-            <Link to="new">
+            {isUser && <Link to="new">
                 <md-fab class="fab">
                     <md-icon slot="icon"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#555555"><path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" /></svg></md-icon>
                 </md-fab>
-            </Link>
+            </Link>}
         </>);
 }
 
 export const compliantsLoaderUser = async () => {
-    const token = localStorage.getItem('token');
     const username = localStorage.getItem('username');
 
     try {
