@@ -6,7 +6,7 @@ const Guest = () => {
     let guests = useLoaderData();
     const location = useLocation();
     const isUser = location.pathname.split('/')[1] === "user";
-    
+
     return ( 
         <>
         <table className='user-list'>
@@ -42,7 +42,6 @@ const Guest = () => {
 }
  
 export const guestLoader = async() => {
-    const token = localStorage.getItem('token');
     const res = await axios.get(`/guests`)
     return res.data;
 }

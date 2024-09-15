@@ -1,11 +1,17 @@
-import { Link, redirect, useLocation, useRouteError } from "react-router-dom";
+import { useEffect } from "react";
+import { Link, useNavigate, useLocation, useRouteError } from "react-router-dom";
 
 const Error = () => {
     const err = useRouteError();
     const location = useLocation();
+    const navigate = useNavigate();
     
     const userType = location.pathname.split('/')[1];
-    console.log(err.status);
+    useEffect(() =>{
+        if(err.status === 401){
+            navigate('/')
+        }
+    })
 
     
     return ( 

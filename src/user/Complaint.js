@@ -1,49 +1,50 @@
 import './style/compliants.css'
 import axios from 'axios'
-import { Link, useLoaderData, useLocation, useNavigate, redirect } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { Link, useLoaderData, useLocation, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 const Complaints = () => {
 
     const navigate = useNavigate();
     const location = useLocation();
-    const com = useLoaderData()
-    const [compliants, setCompliants] = useState(com);
 
     const isAdmin = location.pathname.split('/')[1] === "admin";
     const isUser = location.pathname.split('/')[1] === "user";
+    const isHandler = location.pathname.split('/')[1] === "handler";
+
+    const { complaints, count } = useLoaderData()
+    const [compliants, setCompliants] = useState(complaints);
+    console.log(compliants);
+
+    const issued = count.issued;
+    const pending = count.pending;
+    const resolved = count.resolved;
 
     function viewCompliant(id) {
         navigate(`${id}/view`)
     }
 
-    const [received, setReceived] = useState(0);
-    const [pending, setPending] = useState(0);
-    const [closed, setClosed] = useState(0);
-    useEffect(() => {
+    const searchCompliant = (e) => {
         if (isAdmin) {
-            axios.get('/compliants/count')
+            axios.get(`/compliants/search?keyword=${e.target.value}`)
                 .then((res) => {
-                    setReceived(res.data.issued)
-                    setPending(res.data.pending)
-                    setClosed(res.data.resolved)
+                    setCompliants(res.data)
                 })
         }
-    })
-
-    const searchCompliant = (e) => {
-        console.log(e.target.value);
-        axios.get(`/compliants/search?keyword=${e.target.value}`)
-            .then((res) => {
-                setCompliants(res.data)
-            })
+        if (isHandler) {
+            const id = localStorage.getItem('id');
+            axios.get(`/compliants/handler/${id}/search?keyword=${e.target.value}`)
+                .then((res) => {
+                    setCompliants(res.data)
+                })
+        }
     }
     return (
         <>
-            {isAdmin && <div className='compliant-summary'>
+            {(isAdmin || isHandler) && <div className='compliant-summary'>
                 <div>
                     <p className="key-text">Compliants Received</p>
-                    <p className="value-text">{received}</p>
+                    <p className="value-text">{issued}</p>
                 </div>
                 <div>
                     <p className="key-text">Compliants Pending</p>
@@ -51,7 +52,7 @@ const Complaints = () => {
                 </div>
                 <div>
                     <p className="key-text">Compliants Closed</p>
-                    <p className="value-text">{closed}</p>
+                    <p className="value-text">{resolved}</p>
                 </div>
                 <input className="search-field" placeholder="Search here" onChange={searchCompliant} />
             </div>}
@@ -70,13 +71,13 @@ const Complaints = () => {
                 <tbody>
                     {compliants.map((e, i) => {
                         return (
-                            <tr key={e.compliantId} onClick={() => viewCompliant(e.compliantId)}>
-                                <td>{e.compliantId}</td>
+                            <tr key={e.id} onClick={() => viewCompliant(e.id)}>
+                                <td>{e.id}</td>
                                 <td>{e.category}</td>
                                 <td>{e.title}</td>
-                                {isAdmin && <td>{e.issuedBy}</td>}
+                                {isAdmin && <td>{e.issuedBy.name}</td>}
                                 <td>{e.issuedOn.split('T')[0]}</td>
-                                <td>{e.assignedTo}</td>
+                                <td>{e.assignedTo.name}</td>
                                 <td>{e.status}</td>
                             </tr>
                         )
@@ -92,32 +93,39 @@ const Complaints = () => {
 }
 
 export const compliantsLoaderUser = async () => {
-    const username = localStorage.getItem('username');
+    const id = localStorage.getItem('id');
 
-    try {
-        const res = await axios.get(`/compliants/${username}`)
-        console.log(res);
-        return res.data;
-    } catch (err) {
-        if (err.status === 401) {
-            return redirect(`/`);
-        }
-        throw new Error(err)
-    }
+    const complaints = await axios.get(`/compliants/${id}`)
+        .then((res) => res.data)
+
+    const count = { issued: 0, pending: 0, resolved: 0 }
+    return { complaints, count }
+
 }
 export const compliantsLoaderAdmin = async () => {
-    const token = localStorage.getItem('token');
 
-    try {
-        const res = await axios.get(`/compliants`)
-        console.log(res);
-        return res.data;
-    } catch (err) {
-        if (err.status === 401) {
-            return redirect(`/`);
-        }
-        throw new Error(err)
-    }
+    const complaints = await axios.get(`/compliants`)
+        .then((res) => res.data)
+
+    const count = await axios.get('/compliants/count')
+        .then((res) => res.data)
+
+    return { complaints, count }
+}
+
+export const compliantsLoaderHandler = async () => {
+    const id = localStorage.getItem('id');
+
+    const complaints = await axios.get(`/compliants/handler/${id}`)
+        .then((res) => res.data)
+    console.log(complaints);
+
+    const count = await axios.get(`/compliants/handler/count/${id}`)
+        .then((res) => res.data)
+
+    console.log(count);
+
+    return { complaints, count }
 }
 
 export default Complaints;

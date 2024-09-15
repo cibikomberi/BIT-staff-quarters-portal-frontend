@@ -6,7 +6,6 @@ import complaint from "../images/complaint.jpg"
 import innmate from "../images/innmate.png"
 import { Link } from 'react-router-dom';
 
-
 const UserFront = () => {
     return ( 
         

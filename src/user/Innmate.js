@@ -1,6 +1,6 @@
 import "./style/innmate.css"
 import axios from 'axios'
-import { Link, useLoaderData, useLocation, redirect } from 'react-router-dom';
+import { Link, useLoaderData, useLocation } from 'react-router-dom';
 import { useState } from "react";
 
 const Innmates = () => {
@@ -29,7 +29,7 @@ const Innmates = () => {
                         {isAdmin &&
                             <md-list-item>
                                 <div slot="headline">Faculty:</div>
-                                <div slot="end">{e.username}</div>
+                                <div slot="end">{e.faculty.id}</div>
                             </md-list-item>}
                         <md-list-item>
                             <div slot="headline">Age:</div>
@@ -75,33 +75,16 @@ const Innmates = () => {
 }
 
 export const innmatesLoaderUser = async () => {
-    const token = localStorage.getItem('token');
-    const username = localStorage.getItem('username');
+    const id = localStorage.getItem('id');
 
-    try {
-        const res = await axios.get(`/innmates/${username}`)
-        console.log(res);
-        return res.data;
-    } catch (err) {
-        if (err.status === 401) {
-            return redirect(`/`);
-        }
-        throw new Error(err)
-    }
+    const data = await axios.get(`/innmates/${id}`)
+        .then((res) => res.data)
+    return data;
 }
 export const innmatesLoaderAdmin = async () => {
-    const token = localStorage.getItem('token');
-
-    try {
-        const res = await axios.get(`/innmates`)
-        console.log(res);
-        return res.data;
-    } catch (err) {
-        if (err.status === 401) {
-            return redirect(`/`);
-        }
-        throw new Error(err)
-    }
+    const data = await axios.get(`/innmates`)
+        .then((res) => res.data)
+    return data;
 }
 
 

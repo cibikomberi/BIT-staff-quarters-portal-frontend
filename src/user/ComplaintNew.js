@@ -15,17 +15,16 @@ const NewComplaint = () => {
     const [description, setDescription] = useState('');
     const handleNewCompliant = async () => {
 
-        const user = localStorage.getItem('username');
-        axios.post("/compliants", {
-            "category": category,
-            "title": title,
-            "availableTime": availableTime,
-            "description": description,
-            "issuedBy": user,
-            "status": "Initiated",
+        const id = localStorage.getItem('id');
+        axios.post(`/compliants/${id}`, {
+                "category": category,
+                "title": title,
+                "availableTime": availableTime,
+                "description": description,
+                "status": "Initiated"
         }).then((res) => {
             console.log(res);
-            
+
             if (res.status === 200) {
                 navigate(-1);
             }
@@ -92,12 +91,11 @@ const NewComplaint = () => {
                 type="textarea"
                 label="Description"
                 rows="3"
-                id='compliant-description'
             >
             </md-outlined-text-field>
 
 
-            <md-filled-button class="button-primary" id="newCompliantSubmit" onClick={() => handleNewCompliant()}>Submit</md-filled-button>
+            <md-filled-button class="button-primary" onClick={() => handleNewCompliant()}>Submit</md-filled-button>
         </div>
     );
 }

@@ -14,10 +14,9 @@ const InnmateAdd = () => {
     const [workStatus, setWorkStatus] = useState('');
 
     const handleNewInnmate = async () => {
-        const username = localStorage.getItem('username');;
-        await axios.post(`/innmates`, {
+        const id = localStorage.getItem('id');;
+        await axios.post(`/innmates/${id}`, {
             "name": innmateName,
-            "username": username,
             "relation": relation,
             "age": age,
             "staying": true,

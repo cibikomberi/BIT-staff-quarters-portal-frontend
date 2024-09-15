@@ -38,7 +38,7 @@ const Login = () => {
                     } else if (response.data.roles[0].authority === "ADMIN") {
                         navigate("/admin/home")
                     } else if (response.data.roles[0].authority === "HANDLER") {
-                        navigate("/handler/home")
+                        navigate("/handler")
                     }
                 }
             })

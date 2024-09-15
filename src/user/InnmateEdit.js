@@ -1,40 +1,55 @@
-import { useEffect, useRef, useState } from "react";
 import axios from 'axios'
+import { useState } from 'react';
 import { useLoaderData, useNavigate } from "react-router-dom";
 
 const Innmates = () => {
     const data = useLoaderData();
-    console.log(data);
-
     const navigate = useNavigate();
 
-    const [guestCount, setGuestCount] = useState(data.length);
+    const [innmates, setInnmates] = useState(data);
 
-    axios.put(`/innmates/update`, {
+    const handleInnmateChange = (index, field, event) => {
+        const values = [...innmates];
+        values[index][field] = event.target.value;
+        setInnmates(values)
+        console.log(innmates);
+    };
+
+    const handleSubmit = () => {
+        const id = localStorage.getItem('id')
         
-    }).then((res => {
-        if (res.status === 200) {
-            navigate(-1);
-        }
-    })).catch(() => {
-    })
-
-const handleChange = (e) => {
-    console.log(e);
-    
-}
+        axios.put(`/innmates/${id}`, innmates)
+        .then((res => {
+            if (res.status === 200) {
+                navigate(-1);
+            }
+        })).catch(() => {
+        })
+    }
     return (
-
         <>
-
             <div className='guest-details'>
                 Innmates Details
 
-                {data.map((e, i) => {
-                    return (<div id={`innmate-${i + 1}`} key={`innmate-${i + 1}`} >
+                {innmates.map((e, i) => {
+                    return (<div key={`innmate-${i + 1}`} >
                         <h3>Person {i + 1}</h3>
-                        <md-outlined-text-field type="text" label="Name" class="input-field" id={`innmate-name-${i + 1}`} value={e.name} onInput={event => handleChange(event)}></md-outlined-text-field>
-                        <md-outlined-select label="Relation" class="input-field" id={`innmate-relation-${i + 1}`} value = {e.relation}>
+
+                        <md-outlined-text-field
+                            type="text"
+                            label="Name"
+                            class="input-field"
+                            id={`innmate-name-${i + 1}`}
+                            value={e.name}
+                            onInput={event => handleInnmateChange(i, 'name', event)}>
+
+                        </md-outlined-text-field>
+                        <md-outlined-select
+                            label="Relation"
+                            class="input-field"
+                            onInput={event => handleInnmateChange(i, 'relation', event)}
+                            value={e.relation}
+                        >
                             <md-select-option value="Father">
                                 <div slot="headline">Father</div>
                             </md-select-option>
@@ -57,23 +72,52 @@ const handleChange = (e) => {
                                 <div slot="headline">Other</div>
                             </md-select-option>
                         </md-outlined-select>
-                        <md-outlined-text-field type="number" inputmode label="Age" min='1' max='100' class="input-field" id={`innmate-age-${i + 1}`} value = {e.age}></md-outlined-text-field>
-                        <md-outlined-text-field type="text" label="Blood Group" class="input-field" id={`innmate-bg-${i + 1}`} value = {e.bloodGroup}></md-outlined-text-field>
-                        <md-outlined-text-field type="number" label="Aadhar No." class="input-field" id={`innmate-aadhar-${i + 1}`} value = {e.aadhar}></md-outlined-text-field>
-                        <md-outlined-select label="Is Working" class="input-field" id={`innmate-work-${i + 1}`} value = {e.working}>
-                            <md-select-option value="true">
+
+                        <md-outlined-text-field
+                            type="number"
+                            label="Age"
+                            min='1'
+                            max='100'
+                            class="input-field"
+                            onInput={event => handleInnmateChange(i, 'age', event)}
+                            value={e.age}>
+                        </md-outlined-text-field>
+
+                        <md-outlined-text-field
+                            type="text"
+                            label="Blood Group"
+                            class="input-field"
+                            onInput={event => handleInnmateChange(i, 'bloodGroup', event)}
+                            value={e.bloodGroup}>
+                        </md-outlined-text-field>
+
+                        <md-outlined-text-field
+                            type="number"
+                            label="Aadhar No."
+                            class="input-field"
+                            onInput={event => handleInnmateChange(i, 'aadhar', event)}
+                            value={e.aadhar}>
+                        </md-outlined-text-field>
+
+                        <md-outlined-select
+                            label="Is Working"
+                            class="input-field"
+                            onInput={event => handleInnmateChange(i, 'working', event)}
+                            value={e.working}>
+
+                            <md-select-option value={true}>
                                 <div slot="headline">Yes</div>
                             </md-select-option>
-                            <md-select-option value="false">
+                            <md-select-option value={false}>
                                 <div slot="headline">No</div>
                             </md-select-option>
+
                         </md-outlined-select>
                     </div>)
                 })}
             </div>
-{data.map((e) => {<p>e</p>})}
             <div className='guest-submit'>
-                <md-filled-button>Submit</md-filled-button>
+                <md-filled-button onClick={handleSubmit}>Submit</md-filled-button>
             </div>
         </>
     );
