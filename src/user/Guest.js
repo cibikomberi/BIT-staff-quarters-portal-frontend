@@ -16,6 +16,7 @@ const Guest = () => {
                     <th>Guest Name</th>
                     <th>Staying From</th>
                     <th>Stay Upto</th>
+                    <th>Faculty</th>
                     <th>Place</th>
                 </tr>
                 </thead>
@@ -27,6 +28,7 @@ const Guest = () => {
                         <td>{e.name}</td>
                         <td>{e.fromDate}</td>
                         <td>{e.toDate}</td>
+                        <td>{e.faculty.name}</td>
                         <td>{e.place}</td>
                     </tr>
                 )})}
@@ -41,7 +43,14 @@ const Guest = () => {
      );
 }
  
-export const guestLoader = async() => {
+export const guestLoaderUser = async() => {
+    const id = localStorage.getItem('id')
+
+    const res = await axios.get(`/guests/${id}`)
+    return res.data;
+}
+
+export const guestLoaderAdmin = async() => {
     const res = await axios.get(`/guests`)
     return res.data;
 }

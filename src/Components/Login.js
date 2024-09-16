@@ -10,12 +10,11 @@ const Login = () => {
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [isError, setIsError] = useState(false);
-    const [disabled, setDisabled] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
+
 
     const handleLogin = async () => {
-        setIsError(false);
-        setDisabled(true);
+        setErrorMessage(null)
 
         axios.post('/login', {
             "username": username,
@@ -38,13 +37,12 @@ const Login = () => {
                     } else if (response.data.roles[0].authority === "ADMIN") {
                         navigate("/admin/home")
                     } else if (response.data.roles[0].authority === "HANDLER") {
-                        navigate("/handler")
+                        navigate("/handler/compliants")
                     }
                 }
             })
             .catch(function (error) {
-                setIsError(true);
-                setDisabled(false);
+                setErrorMessage("Username or Password is incorrect")
             });
     }
     return (
@@ -61,8 +59,6 @@ const Login = () => {
                         class="text-fiell"
                         value={username}
                         onInput={(e) => setUsername(e.target.value)}
-                        // errorText="Please verify your input"
-                        // error={isError}
                     >
                     </md-outlined-text-field>
 
@@ -73,19 +69,29 @@ const Login = () => {
                         class="text-fiell"
                         value={password}
                         onInput={(e) => setPassword(e.target.value)}
-                        // error = {isError}
-                        // errorText="Please verify your input"
-                        >
+                    >
                     </md-outlined-text-field>
 
-                    <Link to={'/register/1'}>
-                        <md-text-button class="button-primary">Create Account</md-text-button>
-                    </Link>
+                    <p style={{ color: "red", fontSize: "16px", margin: "5px", paddingLeft: "20px" }}>{errorMessage}</p>
+
+
+                    <span style={{position: "relative"}}>
+                        <md-text-button class="button-primary" id="usage-anchor" onClick={() => {const menuEl = document.body.querySelector('#usage-menu');menuEl.show()}}>Create Account</md-text-button>
+                        <md-menu id="usage-menu" anchor="usage-anchor">
+                            <md-menu-item>
+                                <div slot="headline">New Faculty</div>
+                            </md-menu-item>
+                            <md-menu-item style={{width:"max-content"}}>
+                                <div slot="headline">New Compliant Handler</div>
+                            </md-menu-item>
+                        </md-menu>
+                    </span>
+
                     <md-filled-button
                         class="button-primary"
                         id='login-btn'
                         onClick={() => handleLogin()}
-                        >
+                    >
                         Sign In
                     </md-filled-button>
                 </div>

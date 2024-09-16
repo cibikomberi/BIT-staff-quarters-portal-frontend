@@ -29,7 +29,7 @@ const Innmates = () => {
                         {isAdmin &&
                             <md-list-item>
                                 <div slot="headline">Faculty:</div>
-                                <div slot="end">{e.faculty.id}</div>
+                                <div slot="end">{e.faculty.name}</div>
                             </md-list-item>}
                         <md-list-item>
                             <div slot="headline">Age:</div>

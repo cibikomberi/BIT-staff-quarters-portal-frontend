@@ -72,7 +72,6 @@ const Main = (props) => {
 
             {(currentLocation === "handler") && <nav>
                 <NavLink className='nav-items' to='compliants'>Compliants</NavLink>
-                <NavLink className='nav-items' to='past-compliants'>Past Compliants</NavLink>
             </nav>}
 
             <main className="content">

@@ -43,7 +43,9 @@ const Guest = () => {
 	};
 
 	const handleNewGuest = async () => {
-		await axios.post(`/guests`,
+		const id = localStorage.getItem('id')
+
+		await axios.post(`/guests/${id}`,
 			fields.map((name) => ({
 				'name': name,
 				'place': place,

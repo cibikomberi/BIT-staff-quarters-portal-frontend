@@ -1,22 +1,27 @@
 import './style/user-list.css'
 import axios from 'axios'
+import { useState } from 'react';
 
 import { useLoaderData, useNavigate } from 'react-router-dom';
 
 const UsersList = () => {
 
-    let data = useLoaderData();
-    console.log(data);
+    let loaderData = useLoaderData();
+    const [data, setData] = useState(loaderData);
 
     const navigate = useNavigate();
-    function viewUser(id) {
+    const viewUser = (id) => {
         console.log("clicked " + id);
         navigate(`${id}/view`)
+    }
+    const searchUser = async(keyword) => {
+        axios.get(`/users/search?keyword=${keyword}`)
+            .then((res) => setData(res.data))
     }
 
     return (
         <div className='main-area' style={{ flexDirection: 'row', alignItems: "flex-end" }}>
-            <input className="search-field" placeholder="Search here" />
+            <input className="search-field" placeholder="Search here" onChange={(e) => searchUser(e.target.value)}/>
 
             <table className='user-list'>
                 <thead>
@@ -37,8 +42,8 @@ const UsersList = () => {
                                 <td>{e.id}</td>
                                 <td>{e.name}</td>
                                 <td>{e.roles}</td>
-                                <td>{e.details && e.details.designation}</td>
-                                <td>{e.details && e.details.quartersNo}</td>
+                                <td>{e.designation}</td>
+                                <td>{e.quartersNo}</td>
                             </tr>
                         )
                     })}

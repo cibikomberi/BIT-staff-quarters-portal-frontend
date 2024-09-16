@@ -13,6 +13,7 @@ const NewComplaint = () => {
     const [title, setTitle] = useState('');
     const [availableTime, setAvailableTime] = useState('');
     const [description, setDescription] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
     const handleNewCompliant = async () => {
 
         const id = localStorage.getItem('id');
@@ -29,8 +30,7 @@ const NewComplaint = () => {
                 navigate(-1);
             }
         }).catch((err) => {
-            document.getElementById('newCompliantSubmit').disabled = false
-            console.log(err);
+            setErrorMessage(err.response.data)
         });
     }
 
@@ -94,7 +94,7 @@ const NewComplaint = () => {
             >
             </md-outlined-text-field>
 
-
+             <p style={{color: "red"}}>{errorMessage}</p>
             <md-filled-button class="button-primary" onClick={() => handleNewCompliant()}>Submit</md-filled-button>
         </div>
     );

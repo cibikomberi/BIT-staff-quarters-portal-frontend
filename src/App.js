@@ -10,6 +10,8 @@ import "@material/web/dialog/dialog";
 import "@material/web/list/list";
 import "@material/web/list/list-item";
 import "@material/web/fab/fab";
+import "@material/web/menu/menu";
+import "@material/web/menu/menu-item";
 import "@material/web/progress/circular-progress";
 import "@material/web/progress/linear-progress";
 
@@ -28,7 +30,7 @@ import Complaints, { compliantsLoaderAdmin, compliantsLoaderHandler, compliantsL
 import Innmates, { innmatesLoaderAdmin, innmatesLoaderUser } from "./user/Innmate";
 import InnmatesEdit from "./user/InnmateEdit";
 import InnmatesCheckout from "./user/InnmateCheckout";
-import Guest, { guestLoader } from "./user/Guest";
+import Guest, { guestLoaderUser, guestLoaderAdmin } from "./user/Guest";
 import GuestNew from "./user/GuestNew";
 import EditProfile from "./user/EditProfile";
 import AdminFront from "./admin/AdminFront";
@@ -71,7 +73,7 @@ const router = createBrowserRouter(
 					<Route path="checkout" element={<InnmatesCheckout />} loader={innmatesLoaderUser}></Route>
 				</Route>
 				<Route path="guest">
-					<Route index element={<Guest />} loader={guestLoader} />
+					<Route index element={<Guest />} loader={guestLoaderUser} />
 					<Route path="new" element={<GuestNew />} />
 				</Route>
 			</Route>
@@ -79,6 +81,10 @@ const router = createBrowserRouter(
 
 			<Route path="/admin" element={<Main />} errorElement={<Error />}>
 				<Route path="home" element={<AdminFront />} />
+				<Route path="profile">
+					<Route path="view" element={<ViewUser />} loader={myDetailsLoader}></Route>
+					<Route path="edit" element={<EditProfile />} loader={myDetailsLoader}></Route>
+				</Route>
 				<Route path="users">
 					<Route index element={<UsersList />} loader={usersListLoader} />
 					<Route path=":userId">
@@ -96,20 +102,20 @@ const router = createBrowserRouter(
 					<Route path="checkout" element={<InnmatesCheckout />} loader={innmatesLoaderAdmin}></Route>
 				</Route>
 				<Route path="guest">
-					<Route index element={<Guest />} loader={guestLoader} />
+					<Route index element={<Guest />} loader={guestLoaderAdmin} />
 					<Route path="new" element={<GuestNew />} />
 				</Route>
 			</Route>
 			<Route path="/handler" element={<Main />} errorElement={<Error />}>
-
+				<Route path="profile">
+					<Route path="view" element={<ViewUser />} loader={myDetailsLoader}></Route>
+					<Route path="edit" element={<EditProfile />} loader={myDetailsLoader}></Route>
+				</Route>
 				<Route path="compliants">
 					<Route index element={<Complaints />} loader={compliantsLoaderHandler}></Route>
-
 					<Route path=":id/view" element={<ViewCompliant />} loader={(a) => getCompliantById(a.params.id)}></Route>
-
 				</Route>
 
-				<Route path="past-compliants" element={<Complaints />} loader={compliantsLoaderUser}></Route>
 			</Route>
 		</Route>
 	)
