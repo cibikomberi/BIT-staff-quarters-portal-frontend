@@ -1,16 +1,37 @@
 import './style/main.css'
-import logo from "../images/1407443626926816.jpeg";
 import { NavLink, Link, Outlet, useLocation, useNavigation, Navigate } from "react-router-dom";
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
-const Main = (props) => {
+const Main = () => {
     const isAuth = !!localStorage.getItem("token");
     
     const username = localStorage.getItem("username");
+    const id = localStorage.getItem("id");
     const name = localStorage.getItem("name");
 
     const navigation = useNavigation();
     const location = useLocation();
     const currentLocation = location.pathname.split('/')[1];
+
+    const [imageURL, setImageURL] = useState(null);
+    const getImage = async () => {
+        const response = await axios.get(
+            `/users/${id}/image`,
+            { responseType: "blob" }
+        );
+        setImageURL(URL.createObjectURL(response.data));
+    }
+
+    useEffect(() => {
+            getImage();
+
+        return () => {
+            if (imageURL) {
+                URL.revokeObjectURL(imageURL);
+            }
+        };
+    }, [id]);
 
     if (isAuth) {
     return (
@@ -26,7 +47,7 @@ const Main = (props) => {
                     onClick={() => {
                         document.getElementById("profile-dialog").show();
                     }}
-                    src={logo}
+                    src={imageURL}
                     alt="profile pic"
                 />
             </header>
@@ -35,7 +56,7 @@ const Main = (props) => {
                     Profile
                 </div>
                 <form slot="content" id="form-id" className="formId" method="dialog">
-                    <img src={logo} alt="profile pic"></img>
+                    <img src={imageURL} alt="profile pic"></img>
                     <md-list>
                         <md-list-item>
                             <div slot="headline">Username:</div>

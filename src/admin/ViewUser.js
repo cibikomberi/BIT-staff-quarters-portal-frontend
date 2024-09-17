@@ -1,5 +1,5 @@
-import logo from "../images/1407443626926816.jpeg";
 import axios from "axios";
+import { useEffect, useState } from 'react';
 import { Link, useLoaderData } from "react-router-dom";
 import './style/view-user.css'
 const ViewUser = () => {
@@ -9,9 +9,28 @@ const ViewUser = () => {
         document.getElementById("profile-dialog").close();
     }
 
+    const id = localStorage.getItem("id");
+    const [imageURL, setImageURL] = useState(null);
+    const getImage = async () => {
+        const response = await axios.get(
+            `/users/${id}/image`,
+            { responseType: "blob" }
+        );
+        setImageURL(URL.createObjectURL(response.data));
+    }
+
+    useEffect(() => {
+            getImage();
+
+        return () => {
+            if (imageURL) {
+                URL.revokeObjectURL(imageURL);
+            }
+        };
+    }, [id]);
     return (
         <div className="main-area fl" style={{ height: "100%", flexDirection: "row", padding: 0 }}>
-            <img src={logo} alt="profile pic" className="img-view" />
+            <img src={imageURL} alt="profile pic" className="img-view" />
             <div>
                 <table className="user-table">
                     <thead>
