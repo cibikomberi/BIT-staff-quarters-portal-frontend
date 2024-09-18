@@ -118,12 +118,9 @@ export const compliantsLoaderHandler = async () => {
 
     const complaints = await axios.get(`/compliants/handler/${id}`)
         .then((res) => res.data)
-    console.log(complaints);
 
     const count = await axios.get(`/compliants/handler/count/${id}`)
         .then((res) => res.data)
-
-    console.log(count);
 
     return { complaints, count }
 }

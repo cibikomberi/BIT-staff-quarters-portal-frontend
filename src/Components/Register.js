@@ -9,24 +9,36 @@ const Register = () => {
         </>
      );
 }
-export const newDetailsLoader = () => {
+export const newDetailsLoaderUser = () => {
     return {
-        "id": null,
-        "username": null,
-        "name": null,
-        "details": {
-            "id": null,
-            "name": null,
-            "department": null,
-            "email": null,
-            "phone": null,
-            "designation": null,
-            "quartersNo": null,
-            "address": null,
-            "aadhar": null
-        },
-        "password": null,
-        "roles": "USER"
+            "id": 1,
+            "username": "",
+            "name": "",
+            "designation": "",
+            "email": "",
+            "phone": "",
+            "roles": "USER",
+            "facultyId": "",
+            "department": "",
+            "quartersNo": "",
+            "address": "",
+            "aadhar": ""
+    }
+}
+
+export const newDetailsLoaderHandler = () => {
+    return {
+            "id": 1,
+            "username": '',
+            "name": "",
+            "designation": "",
+            "email": "",
+            "phone": "",
+            "roles": "HANDLER",
+            "address": "",
+            "aadhar": "",
+            "category": ""
+        
     }
 }
 export default Register;

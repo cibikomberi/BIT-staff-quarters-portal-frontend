@@ -19,10 +19,10 @@ const InnmateAdd = () => {
             "name": innmateName,
             "relation": relation,
             "age": age,
-            "staying": true,
+            "isStaying": true,
             "bloodGroup": bloodGroup,
             "aadhar": aadhar,
-            "working": workStatus
+            "isWorking": workStatus
         }).then((res) => {
             if(res.status === 200){
                 navigate(-1);

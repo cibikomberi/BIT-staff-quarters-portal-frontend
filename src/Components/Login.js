@@ -41,7 +41,7 @@ const Login = () => {
                     }
                 }
             })
-            .catch(function (error) {
+            .catch((error) => {                
                 setErrorMessage("Username or Password is incorrect")
             });
     }
@@ -79,10 +79,10 @@ const Login = () => {
                         <md-text-button class="button-primary" id="usage-anchor" onClick={() => {const menuEl = document.body.querySelector('#usage-menu');menuEl.show()}}>Create Account</md-text-button>
                         <md-menu id="usage-menu" anchor="usage-anchor">
                             <md-menu-item>
-                                <div slot="headline">New Faculty</div>
+                                <Link to={'/register/user'} slot="headline">New Faculty</Link>
                             </md-menu-item>
                             <md-menu-item style={{width:"max-content"}}>
-                                <div slot="headline">New Compliant Handler</div>
+                                <Link to={'/register/handler'} slot="headline">New Compliant Handler</Link>
                             </md-menu-item>
                         </md-menu>
                     </span>

@@ -1,4 +1,5 @@
 import './style/main.css'
+import defaultProfileImage from '../images/default.jpg'
 import { NavLink, Link, Outlet, useLocation, useNavigation, Navigate } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import axios from 'axios';
@@ -16,11 +17,15 @@ const Main = () => {
 
     const [imageURL, setImageURL] = useState(null);
     const getImage = async () => {
-        const response = await axios.get(
-            `/users/${id}/image`,
+        await axios.get(
+            `/users/image/${id}`,
             { responseType: "blob" }
-        );
-        setImageURL(URL.createObjectURL(response.data));
+        )
+        .then((res) => {
+            setImageURL(URL.createObjectURL(res.data));
+        }).catch(() => {
+            setImageURL(defaultProfileImage);
+        });
     }
 
     useEffect(() => {

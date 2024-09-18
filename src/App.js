@@ -21,7 +21,6 @@ import {
 	createRoutesFromElements,
 	RouterProvider,
 } from "react-router-dom";
-// import { useState } from "react";
 import Login from "./Components/Login";
 import Main from "./Components/Main";
 import UserFront from "./user/UserFront";
@@ -39,8 +38,9 @@ import ViewUser, { myDetailsLoader, userDetailLoader } from "./admin/ViewUser";
 import ViewCompliant, { getCompliantById } from "./user/CompliantView";
 import InnmateAdd from "./user/InnmateAdd";
 import Error from "./Components/Error";
-import Register, { newDetailsLoader } from "./Components/Register";
+import Register, { newDetailsLoaderHandler, newDetailsLoaderUser } from "./Components/Register";
 import axios from 'axios';
+
 
 axios.defaults.baseURL = 'http://localhost:8080';
 const token = localStorage.getItem('token');
@@ -52,8 +52,8 @@ const router = createBrowserRouter(
 	createRoutesFromElements(
 		<Route>
 			<Route exact path="/" element={<Login />}></Route>
-			<Route exact path="/register/1" element={<Register />} loader={newDetailsLoader}></Route>
-			<Route exact path="/register/2" element={<Register />} loader={newDetailsLoader}></Route>
+			<Route exact path="/register/user" element={<Register />} loader={newDetailsLoaderUser}></Route>
+			<Route exact path="/register/handler" element={<Register />} loader={newDetailsLoaderHandler}></Route>
 
 			<Route path="/user" element={<Main />} errorElement={<Error />}>
 				<Route path="home" element={<UserFront />} />
