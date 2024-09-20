@@ -37,7 +37,7 @@ const Login = () => {
                     } else if (response.data.roles[0].authority === "ADMIN") {
                         navigate("/admin/home")
                     } else if (response.data.roles[0].authority === "HANDLER") {
-                        navigate("/handler/compliants")
+                        navigate("/handler/home")
                     }
                 }
             })
@@ -59,8 +59,7 @@ const Login = () => {
                         class="text-fiell"
                         value={username}
                         onInput={(e) => setUsername(e.target.value)}
-                    >
-                    </md-outlined-text-field>
+                    />
 
                     <md-outlined-text-field
                         type="password"
@@ -69,8 +68,7 @@ const Login = () => {
                         class="text-fiell"
                         value={password}
                         onInput={(e) => setPassword(e.target.value)}
-                    >
-                    </md-outlined-text-field>
+                    />
 
                     <p style={{ color: "red", fontSize: "16px", margin: "5px", paddingLeft: "20px" }}>{errorMessage}</p>
 

@@ -11,7 +11,7 @@ const Register = () => {
 }
 export const newDetailsLoaderUser = () => {
     return {
-            "id": 1,
+            "id": 0,
             "username": "",
             "name": "",
             "designation": "",
@@ -28,7 +28,7 @@ export const newDetailsLoaderUser = () => {
 
 export const newDetailsLoaderHandler = () => {
     return {
-            "id": 1,
+            "id": 0,
             "username": '',
             "name": "",
             "designation": "",

@@ -40,6 +40,8 @@ import InnmateAdd from "./user/InnmateAdd";
 import Error from "./Components/Error";
 import Register, { newDetailsLoaderHandler, newDetailsLoaderUser } from "./Components/Register";
 import axios from 'axios';
+import SetPassword from "./user/SetPassword";
+import HandlerFront from "./handlers/HandlerFront";
 
 
 axios.defaults.baseURL = 'http://localhost:8080';
@@ -52,11 +54,18 @@ const router = createBrowserRouter(
 	createRoutesFromElements(
 		<Route>
 			<Route exact path="/" element={<Login />}></Route>
-			<Route exact path="/register/user" element={<Register />} loader={newDetailsLoaderUser}></Route>
-			<Route exact path="/register/handler" element={<Register />} loader={newDetailsLoaderHandler}></Route>
+
+			<Route exact path="/register">
+				<Route path="user" element={<EditProfile />} loader={newDetailsLoaderUser} />
+				<Route path="user/setPassword" element={<SetPassword />} />
+				<Route path="handler" element={<EditProfile />} loader={newDetailsLoaderHandler} />
+				<Route path="handler/setPassword" element={<SetPassword />} />
+			</Route>
+
 
 			<Route path="/user" element={<Main />} errorElement={<Error />}>
 				<Route path="home" element={<UserFront />} />
+				<Route path="editPassword" element={<SetPassword />} />
 				<Route path="compliants">
 					<Route index element={<Complaints />} loader={compliantsLoaderUser}></Route>
 					<Route path="new" element={<NewComplaint />}></Route>
@@ -81,6 +90,7 @@ const router = createBrowserRouter(
 
 			<Route path="/admin" element={<Main />} errorElement={<Error />}>
 				<Route path="home" element={<AdminFront />} />
+				<Route path="editPassword" element={<SetPassword />} />
 				<Route path="profile">
 					<Route path="view" element={<ViewUser />} loader={myDetailsLoader}></Route>
 					<Route path="edit" element={<EditProfile />} loader={myDetailsLoader}></Route>
@@ -107,6 +117,8 @@ const router = createBrowserRouter(
 				</Route>
 			</Route>
 			<Route path="/handler" element={<Main />} errorElement={<Error />}>
+			<Route path="editPassword" element={<SetPassword />} />
+				<Route path="home" element={<HandlerFront />} />
 				<Route path="profile">
 					<Route path="view" element={<ViewUser />} loader={myDetailsLoader}></Route>
 					<Route path="edit" element={<EditProfile />} loader={myDetailsLoader}></Route>

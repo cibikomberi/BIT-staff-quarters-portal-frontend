@@ -1,15 +1,13 @@
 import axios from 'axios'
 import defaultProfileImage from '../images/default.jpg'
 import { useEffect, useState } from "react";
-import { useLoaderData, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLoaderData, useLocation, useNavigate } from "react-router-dom";
 
 const EditProfile = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
     const newUser = (location.pathname.split('/')[1] === 'register')
-    console.log(newUser);
-    
 
     const loaderData = useLoaderData();
 
@@ -55,31 +53,20 @@ const EditProfile = () => {
             new Blob([JSON.stringify(data)], { type: "application/json" })
         );
 
-        if (newUser) {
-            axios.defaults.headers.common['Authorization'] = ``;
-            axios.post(`/register/${location.pathname.split('/')[2]}`, formData)
-                .then((res) => {
-                    if (res.status === 200) {
-                        navigate('/')
-                    }
-                }).catch((err) => {
-                    setErrorMessage(err.message + ' ' + err.code)
-                    if (err.status === 413) {
-                        setErrorMessage("Image is too  large")
-                    }
-                })
-        } else {
-            axios.put(`/update/${data.roles.toString().toLowerCase()}/${data.id}`, formData).then((res => {
-                if (res.status === 200) {
-                    navigate(-1);
-                }
-            })).catch((err) => {
-                setErrorMessage(err.message + ' ' + err.code)
-                if (err.status === 413) {
-                    setErrorMessage("Image is too  large")
-                }
-            })
-        }
+        axios.put(`/update/${data.roles.toString().toLowerCase()}/${data.id}`, formData).then((res => {
+            if (res.status === 200) {
+                navigate(-1);
+            }
+        })).catch((err) => {
+            setErrorMessage(err.message + ' ' + err.code)
+            if (err.response.data) {
+                setErrorMessage(err.response.data)
+            }
+            if (err.status === 413) {
+                setErrorMessage("Image is too  large")
+            }
+        })
+
     }
 
     const setValues = (field, value) => {
@@ -88,7 +75,7 @@ const EditProfile = () => {
         setData(val);
     }
     return (
-        <div className="main-area fl" style={{ flexDirection: "row", padding: 0 }}>
+        <div className="main-area fl" style={{ flexDirection: "row", padding: 0, minHeight: "100%"}}>
             <div>
                 <img src={imageURL} alt="profile pic" style={{ width: "500px", borderRadius: "50%", boxShadow: "0 2px 4px 0 rgba(0, 0, 0, 0.2)" }} />
 
@@ -127,11 +114,11 @@ const EditProfile = () => {
                     onInput={(e) => setValues('designation', e.target.value)}>
 
                 </md-outlined-text-field>}
-                {"facltyId" in data && <md-outlined-text-field
+                {"facultyId" in data && <md-outlined-text-field
                     class="input-field"
                     label="Faculty Id"
-                    value={data.facltyId}
-                    onInput={(e) => setValues('facltyId', e.target.value)}>
+                    value={data.facultyId}
+                    onInput={(e) => setValues('facultyId', e.target.value)}>
 
                 </md-outlined-text-field>}
                 {"address" in data && <md-outlined-text-field
@@ -195,7 +182,11 @@ const EditProfile = () => {
 
                 <p style={{ color: "red", fontSize: "16px", margin: "5px", paddingLeft: "20px" }}>{errorMessage}</p>
 
-                <md-filled-button class="button-primary" id="edit-profile-btn" onClick={() => handleSubmit()}>Save</md-filled-button>
+                {!newUser && <md-filled-button class="button-primary" id="edit-profile-btn" onClick={() => handleSubmit()}>Save</md-filled-button>}
+                {newUser &&
+                    <Link to={'setPassword'} state={{ 'data': data, 'image': image }}>
+                        <md-filled-button class="button-primary" id="edit-profile-btn">Next</md-filled-button>
+                    </Link>}
             </div>
         </div>);
 }

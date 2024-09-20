@@ -139,4 +139,7 @@ main{
         display: unset;
         z-index: 99;
     }
+    .summary{
+        width: 90%;
+    }
 }

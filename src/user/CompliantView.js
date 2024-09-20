@@ -1,21 +1,32 @@
-import { useLoaderData, Link, useLocation } from "react-router-dom";
+import { useLoaderData, Link, useLocation, useNavigate } from "react-router-dom";
 import axios from 'axios'
+import { useState } from "react";
 
 const ViewCompliant = () => {
+    const [errorMessage, setErrorMessage] = useState('');
     const compliant = useLoaderData();
     const location = useLocation();
+    const navigate = useNavigate();
 
     const isAdmin = location.pathname.split('/')[1] === 'admin';
     const isHandler = location.pathname.split('/')[1] === 'handler';
 
     const handleStatusChange = (status) => {
         axios.post(`/compliants/${compliant.id}/updateStatus`, {
-            'status' : status
+            'status': status
         }).then((res) => {
-                if (res.status === 200) {
-                    window.location.reload(false);
-                }
-            })
+            if (res.status === 200) {
+                window.location.reload(false);
+            }
+        }).catch((err) => {
+            if (err.status === 401) {
+                navigate('/')
+            }
+            setErrorMessage(err.message + ' ' + err.code)
+            if (err.response.data) {
+                setErrorMessage(err.response.data)
+            }
+        });
     }
     return (<>
         <div className='main-area' style={{ alignItems: "flex-start", flexWrap: "nowrap" }}>
@@ -40,11 +51,30 @@ const ViewCompliant = () => {
                     <p className="key-text">Compliant Title</p>
                     <p className="value-text">{compliant.title}</p>
                 </div>
+            </div>
+            <div className='summary' style={{ flexDirection: "column" }}>
                 <div>
                     <p className="key-text">Description</p>
                     <p className="value-text">{compliant.description}</p>
                 </div>
+                <br />
+                <br />
+                <div>
+                    <p className="key-text" style={{ fontSize: "17px" }}>Faculty available time</p>
+                    <p className="value-text" style={{ fontSize: "30px" }}>{compliant.availableTime}</p>
+                </div>
             </div>
+            <div className='summary'>
+                <div>
+                    <p className="key-text">Raised On</p>
+                    <p className="value-text">{compliant.issuedOn.split('T')[0]}</p>
+                </div>
+                {compliant.resolvedOn && <div>
+                    <p className="key-text">Resolved On</p>
+                    <p className="value-text">{compliant.resolvedOn.split('T')[0]}</p>
+                </div>}
+            </div>
+
             <div className='summary'>
                 <div>
                     <p className="key-text">Issued By </p>
@@ -80,6 +110,7 @@ const ViewCompliant = () => {
                     </p>
                 </div>
             </div>
+            <p style={{ color: "red" }}>{errorMessage}</p>
         </div>
 
         {(isAdmin || isHandler) && <div style={{ marginLeft: "50px" }}>
@@ -115,7 +146,7 @@ const ViewCompliant = () => {
 }
 
 export const getCompliantById = async (id) => {
-    const res = await axios.get(`/compliant/${id}`)
+    const res = await axios.get(`/compliants/${id}`)
     return res.data;
 }
 export default ViewCompliant;

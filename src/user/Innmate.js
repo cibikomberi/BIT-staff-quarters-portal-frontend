@@ -1,11 +1,14 @@
 import "./style/innmate.css"
 import axios from 'axios'
-import { Link, useLoaderData, useLocation } from 'react-router-dom';
+import { Link, useLoaderData, useLocation, useNavigate } from 'react-router-dom';
 import { useState } from "react";
 
 const Innmates = () => {
 
     const inn = useLoaderData()
+    const navigate = useNavigate()
+
+    const [errorMessage, setErrorMessage] = useState('');
     const [innmates, setInnmates] = useState(inn);
 
     const location = useLocation();
@@ -15,7 +18,15 @@ const Innmates = () => {
         console.log(e.target.value);
         axios.get(`/innmates/search?keyword=${e.target.value}`).then((res) => {
             setInnmates(res.data)
-        })
+        }).catch((err) => {
+            if (err.status === 401) {
+                navigate('/')
+            }
+            setErrorMessage(err.message + ' ' + err.code)
+            if (err.response.data) {
+                setErrorMessage(err.response.data)
+            }
+        });
     }
     return (
         <div className='main-area' style={{ flexDirection: 'row', position: "relative" }}>
@@ -51,6 +62,8 @@ const Innmates = () => {
                     </md-list>
                 </div>
             ))}
+            <p style={{ color: "red" }}>{errorMessage}</p>
+
             {!isAdmin && <div>
                 <Link to="add">
                     <md-fab lowered aria-label="Edit" class="fab">

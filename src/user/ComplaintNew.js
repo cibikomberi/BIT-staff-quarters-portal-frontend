@@ -18,11 +18,11 @@ const NewComplaint = () => {
 
         const id = localStorage.getItem('id');
         axios.post(`/compliants/${id}`, {
-                "category": category,
-                "title": title,
-                "availableTime": availableTime,
-                "description": description,
-                "status": "Initiated"
+            "category": category,
+            "title": title,
+            "availableTime": availableTime,
+            "description": description,
+            "status": "Initiated"
         }).then((res) => {
             console.log(res);
 
@@ -30,7 +30,13 @@ const NewComplaint = () => {
                 navigate(-1);
             }
         }).catch((err) => {
-            setErrorMessage(err.response.data)
+            if (err.status === 401) {
+                navigate('/')
+            }
+            setErrorMessage(err.message + ' ' + err.code)
+            if (err.response.data) {
+                setErrorMessage(err.response.data)
+            }
         });
     }
 
@@ -94,7 +100,7 @@ const NewComplaint = () => {
             >
             </md-outlined-text-field>
 
-             <p style={{color: "red"}}>{errorMessage}</p>
+            <p style={{ color: "red" }}>{errorMessage}</p>
             <md-filled-button class="button-primary" onClick={() => handleNewCompliant()}>Submit</md-filled-button>
         </div>
     );

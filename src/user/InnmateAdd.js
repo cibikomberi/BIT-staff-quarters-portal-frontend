@@ -6,6 +6,7 @@ const InnmateAdd = () => {
 
     const navigate = useNavigate();
 
+    const [errorText, setErrorText] = useState('');
     const [innmateName, setInnmateName] = useState('');
     const [relation, setRelation] = useState('');
     const [age, setAge] = useState('');
@@ -24,15 +25,23 @@ const InnmateAdd = () => {
             "aadhar": aadhar,
             "isWorking": workStatus
         }).then((res) => {
-            if(res.status === 200){
+            if (res.status === 200) {
                 navigate(-1);
+            }
+        }).catch((err) => {
+            if (err.status === 401) {
+                navigate('/')
+            }
+            setErrorText(err.message + ' ' + err.code)
+            if (err.response.data) {
+                setErrorText(err.response.data)
             }
         })
     }
 
     return (
         <>
-            <div>
+            <div className='guest-details'>
                 <h3>Add Innmate</h3>
                 <md-outlined-text-field
                     type="text"
@@ -109,6 +118,8 @@ const InnmateAdd = () => {
                         <div slot="headline">No</div>
                     </md-select-option>
                 </md-outlined-select>
+
+                <p style={{ color: "red", alignSelf: "center", fontSize:"18px" }}>{errorText}</p>
             </div>
 
             <div className='guest-submit'>

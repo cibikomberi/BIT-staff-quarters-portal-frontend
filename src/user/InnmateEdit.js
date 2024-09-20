@@ -6,6 +6,7 @@ const Innmates = () => {
     const data = useLoaderData();
     const navigate = useNavigate();
 
+    const [errorText, setErrorText] = useState('');
     const [innmates, setInnmates] = useState(data);
 
     const handleInnmateChange = (index, field, event) => {
@@ -17,14 +18,21 @@ const Innmates = () => {
 
     const handleSubmit = () => {
         const id = localStorage.getItem('id')
-        
+
         axios.put(`/innmates/${id}`, innmates)
-        .then((res => {
-            if (res.status === 200) {
-                navigate(-1);
-            }
-        })).catch(() => {
-        })
+            .then((res => {
+                if (res.status === 200) {
+                    navigate(-1);
+                }
+            })).catch((err) => {
+                if (err.status === 401) {
+                    navigate('/')
+                }
+                setErrorText(err.message + ' ' + err.code)
+                if (err.response.data) {
+                    setErrorText(err.response.data)
+                }
+            });
     }
     return (
         <>
@@ -102,8 +110,8 @@ const Innmates = () => {
                         <md-outlined-select
                             label="Is Working"
                             class="input-field"
-                            onInput={event => handleInnmateChange(i, 'working', event)}
-                            value={e.working}>
+                            onInput={event => handleInnmateChange(i, 'isWorking', event)}
+                            value={e.isWorking}>
 
                             <md-select-option value={true}>
                                 <div slot="headline">Yes</div>
@@ -115,6 +123,8 @@ const Innmates = () => {
                         </md-outlined-select>
                     </div>)
                 })}
+
+                <p style={{ color: "red", alignSelf: "center", fontSize: "18px" }}>{errorText}</p>
             </div>
             <div className='guest-submit'>
                 <md-filled-button onClick={handleSubmit}>Submit</md-filled-button>

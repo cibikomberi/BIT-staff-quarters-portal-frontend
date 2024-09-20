@@ -17,6 +17,11 @@ const UsersList = () => {
     const searchUser = async(keyword) => {
         axios.get(`/users/search?keyword=${keyword}`)
             .then((res) => setData(res.data))
+            .catch((err) => {
+                if (err.status === 401) {
+                    navigate('/');
+                }
+            });
     }
 
     return (

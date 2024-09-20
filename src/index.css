@@ -2,9 +2,13 @@
   font-family: g-sans;
   src: url(./Components/style/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPjIUvQ.woff2);
 }
-
-body {
+#root{
+  height: 100vh;
+}
+html, body {
   margin: 0;
+  width: 100vw;
+  height: 100vh;
   font-family: g-sans;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

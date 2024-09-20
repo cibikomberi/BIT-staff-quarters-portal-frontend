@@ -95,7 +95,7 @@ const Complaints = () => {
 export const compliantsLoaderUser = async () => {
     const id = localStorage.getItem('id');
 
-    const complaints = await axios.get(`/compliants/${id}`)
+    const complaints = await axios.get(`/compliants/user/${id}`) // TODO
         .then((res) => res.data)
 
     const count = { issued: 0, pending: 0, resolved: 0 }

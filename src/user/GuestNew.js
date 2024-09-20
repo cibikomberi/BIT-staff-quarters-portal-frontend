@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 const Guest = () => {
 
 	const navigate = useNavigate();
+	const [errorMessage, setErrorMessage] = useState('');
 	const [fields, setFields] = useState(['']);
 	const [guestCount, setGuestCount] = useState(1);
 	const [place, setPlace] = useState('');
@@ -56,7 +57,15 @@ const Guest = () => {
 			if (res.status === 200) {
 				navigate(-1);
 			}
-		});
+		}).catch((err) => {
+            if (err.status === 401) {
+                navigate('/')
+            }
+            setErrorMessage(err.message + ' ' + err.code)
+            if (err.response.data) {
+                setErrorMessage(err.response.data)
+            }
+        });
 	}
 
 	return (
@@ -103,6 +112,7 @@ const Guest = () => {
 					</md-outlined-text-field>
 				)}
 			</div>
+			<p style={{ color: "red" }}>{errorMessage}</p>
 
 			<div className='guest-submit'>
 				<md-filled-button onClick={() => handleNewGuest()}>Submit</md-filled-button>

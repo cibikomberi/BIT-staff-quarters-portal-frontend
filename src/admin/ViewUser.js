@@ -1,10 +1,11 @@
 import axios from "axios";
 import defaultProfileImage from '../images/default.jpg'
 import { useEffect, useState } from 'react';
-import { Link, useLoaderData } from "react-router-dom";
+import { Link, useLoaderData, useNavigate } from "react-router-dom";
 import './style/view-user.css'
 const ViewUser = () => {
     const data = useLoaderData();
+    const navigate = useNavigate()
     console.log(data);
     if (document.getElementById("profile-dialog")) {
         document.getElementById("profile-dialog").close();
@@ -18,7 +19,10 @@ const ViewUser = () => {
         )
         .then((res) => {
             setImageURL(URL.createObjectURL(res.data));
-        }).catch(() => {
+        }).catch((err) => {
+            if (err.status === 401) {
+                navigate('/')
+            }
             setImageURL(defaultProfileImage);
         });
     }

@@ -18,9 +18,10 @@ const Guest = () => {
         }).then(() => {
             window.location.reload();
         }).catch((err) => {
-            console.log(err);
-
-            setErrorText(err.message + ' ' + err.code);
+            setErrorText(err.message + ' ' + err.code)
+            if (err.response.data) {
+                setErrorText(err.response.data)
+            }
             document.getElementById('checkout-error').show();
         })
     }
@@ -43,8 +44,8 @@ const Guest = () => {
                             <tr key={e.id}>
                                 <td>{i + 1}</td>
                                 <td>{e.name}</td>
-                                <td>{e.fromDate}</td>
-                                <td>{e.toDate}</td>
+                                <td>{e.fromDate.split('T')[0]}</td>
+                                <td>{e.toDate.split('T')[0]}</td>
                                 <td>{e.faculty.name}</td>
                                 <td>{e.place}</td>
                                 {isUser && <td>
