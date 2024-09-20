@@ -1,44 +1,13 @@
 import EditProfile from "../user/EditProfile";
 
 const Register = () => {
-    return ( 
+    return (
         <>
             <div>
                 <EditProfile />
             </div>
         </>
-     );
-}
-export const newDetailsLoaderUser = () => {
-    return {
-            "id": 0,
-            "username": "",
-            "name": "",
-            "designation": "",
-            "email": "",
-            "phone": "",
-            "roles": "USER",
-            "facultyId": "",
-            "department": "",
-            "quartersNo": "",
-            "address": "",
-            "aadhar": ""
-    }
+    );
 }
 
-export const newDetailsLoaderHandler = () => {
-    return {
-            "id": 0,
-            "username": '',
-            "name": "",
-            "designation": "",
-            "email": "",
-            "phone": "",
-            "roles": "HANDLER",
-            "address": "",
-            "aadhar": "",
-            "category": ""
-        
-    }
-}
 export default Register;

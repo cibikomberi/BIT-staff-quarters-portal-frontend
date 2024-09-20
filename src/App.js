@@ -1,4 +1,5 @@
 import "@material/web/textfield/outlined-text-field";
+import "@material/web/textfield/filled-text-field";
 import "@material/web/checkbox/checkbox";
 import "@material/web/button/filled-button";
 import "@material/web/button/elevated-button";
@@ -14,6 +15,7 @@ import "@material/web/menu/menu";
 import "@material/web/menu/menu-item";
 import "@material/web/progress/circular-progress";
 import "@material/web/progress/linear-progress";
+import axios from 'axios';
 
 import {
 	Route,
@@ -31,17 +33,18 @@ import InnmatesEdit from "./user/InnmateEdit";
 import InnmatesCheckout from "./user/InnmateCheckout";
 import Guest, { guestLoaderUser, guestLoaderAdmin } from "./user/Guest";
 import GuestNew from "./user/GuestNew";
-import EditProfile from "./user/EditProfile";
+import EditProfile, { newDetailsLoaderHandler, newDetailsLoaderUser } from "./user/EditProfile";
 import AdminFront from "./admin/AdminFront";
 import UsersList, { usersListLoader } from "./admin/UsersList";
 import ViewUser, { myDetailsLoader, userDetailLoader } from "./admin/ViewUser";
 import ViewCompliant, { getCompliantById } from "./user/CompliantView";
 import InnmateAdd from "./user/InnmateAdd";
 import Error from "./Components/Error";
-import Register, { newDetailsLoaderHandler, newDetailsLoaderUser } from "./Components/Register";
-import axios from 'axios';
 import SetPassword from "./user/SetPassword";
 import HandlerFront from "./handlers/HandlerFront";
+import Checkouts, { getAllCheckouts, getAllCheckoutsByUser } from "./user/Checkouts";
+import VerifyCheckout from "./user/VerifyCheckout";
+import SecurityFront from "./security/SecurityFront";
 
 
 axios.defaults.baseURL = 'http://localhost:8080';
@@ -85,6 +88,7 @@ const router = createBrowserRouter(
 					<Route index element={<Guest />} loader={guestLoaderUser} />
 					<Route path="new" element={<GuestNew />} />
 				</Route>
+				<Route path="checkouts" element={<Checkouts />} loader={getAllCheckoutsByUser} />
 			</Route>
 
 
@@ -115,10 +119,13 @@ const router = createBrowserRouter(
 					<Route index element={<Guest />} loader={guestLoaderAdmin} />
 					<Route path="new" element={<GuestNew />} />
 				</Route>
+				<Route path="checkouts" element={<Checkouts />} loader={getAllCheckouts} />
 			</Route>
+
+
 			<Route path="/handler" element={<Main />} errorElement={<Error />}>
-			<Route path="editPassword" element={<SetPassword />} />
 				<Route path="home" element={<HandlerFront />} />
+				<Route path="editPassword" element={<SetPassword />} />
 				<Route path="profile">
 					<Route path="view" element={<ViewUser />} loader={myDetailsLoader}></Route>
 					<Route path="edit" element={<EditProfile />} loader={myDetailsLoader}></Route>
@@ -127,8 +134,19 @@ const router = createBrowserRouter(
 					<Route index element={<Complaints />} loader={compliantsLoaderHandler}></Route>
 					<Route path=":id/view" element={<ViewCompliant />} loader={(a) => getCompliantById(a.params.id)}></Route>
 				</Route>
-
 			</Route>
+
+
+			<Route path="/security" element={<Main />} errorElement={<Error />}>
+				<Route path="home" element={<SecurityFront />} />
+				<Route path="profile">
+					<Route path="view" element={<ViewUser />} loader={myDetailsLoader}></Route>
+					<Route path="edit" element={<EditProfile />} loader={myDetailsLoader}></Route>
+				</Route>
+				<Route path="editPassword" element={<SetPassword />} />
+				<Route path="verifyCheckout" element={<VerifyCheckout />} />
+			</Route>
+
 		</Route>
 	)
 )

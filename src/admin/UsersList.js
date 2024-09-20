@@ -14,7 +14,7 @@ const UsersList = () => {
         console.log("clicked " + id);
         navigate(`${id}/view`)
     }
-    const searchUser = async(keyword) => {
+    const searchUser = async (keyword) => {
         axios.get(`/users/search?keyword=${keyword}`)
             .then((res) => setData(res.data))
             .catch((err) => {
@@ -26,7 +26,7 @@ const UsersList = () => {
 
     return (
         <div className='main-area' style={{ flexDirection: 'row', alignItems: "flex-end" }}>
-            <input className="search-field" placeholder="Search here" onChange={(e) => searchUser(e.target.value)}/>
+            <input className="search-field" placeholder="Search here" onChange={(e) => searchUser(e.target.value)} />
 
             <table className='user-list'>
                 <thead>

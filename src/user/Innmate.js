@@ -106,5 +106,4 @@ export const innmatesLoaderAdmin = async () => {
     return data;
 }
 
-
 export default Innmates;

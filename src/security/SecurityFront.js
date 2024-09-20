@@ -1,9 +1,9 @@
 import CardLayout from '../Components/CardLayout'
-import complaint from "../images/complaint.jpg"
+import checkin from "../images/checkin.jpg"
 
 import { Link } from 'react-router-dom';
 
-const HandlerFront = () => {
+const SecurityFront = () => {
     return (
 
         <div style={{
@@ -12,9 +12,9 @@ const HandlerFront = () => {
             flexWrap: "wrap",
             justifyContent: "center",
         }}>
-            <Link to="../compliants"><CardLayout head="Complaint registration" img={complaint} /></Link>
+            <Link to="../verifyCheckout"><CardLayout head="Verify Checkout" img={checkin} /></Link>
         </div>
     );
 }
 
-export default HandlerFront;
+export default SecurityFront;

@@ -2,7 +2,7 @@
 @import "@material/web/icon/internal/icon-styles.css";
 
 
-.login-div{
+.login-div {
     width: 100%;
     height: 100%;
     background-color: #F5F4F5;
@@ -11,8 +11,9 @@
     justify-content: center;
     color: rgb(67, 67, 67);
 }
-.login-main{
-    
+
+.login-main {
+
     height: 400px;
     width: 75vw;
     align-items: center;
@@ -21,38 +22,45 @@
     border-radius: 25px;
     padding: 15px;
 }
-.login-ins{
+
+.login-ins {
     width: 50%;
     font-size: 32px;
 }
-.login-log{
+
+.login-log {
     font-size: 1.5em;
 }
-.login-ins h1{
+
+.login-ins h1 {
     font-size: 64px;
     margin: 10px;
 }
-.login-ins p{
+
+.login-ins p {
     margin: 10px;
 }
-.login-email{
-    height:20px;
+
+.login-email {
+    height: 20px;
     width: 50px;
 }
-.text-fiell{
+
+.text-fiell {
     /* height: 75px; */
     width: 85%;
     margin: 15px;
-    
+
 }
 
 @media only screen and (max-width: 850px) {
-    .login-main{
+    .login-main {
         display: flex;
         flex-direction: column;
         height: fit-content;
     }
-    .login-ins{
+
+    .login-ins {
         width: 100%;
     }
-  }
+}

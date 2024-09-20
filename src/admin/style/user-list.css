@@ -1,4 +1,4 @@
-.search-field{
+.search-field {
     width: 80%;
     height: 40px;
     padding: 5px;
@@ -7,41 +7,43 @@
     font-weight: 100;
     margin: 10px;
     border: none;
-    box-shadow:  0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     border-radius: 32px;
     transition: box-shadow 0.25s;
 }
+
 .search-field:focus {
     outline: none;
-    box-shadow:  0 4px 8px 0 rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3);
 }
 
-
-.user-list{
+.user-list {
     padding-top: 32px;
     border-collapse: collapse;
     width: 100%;
 }
-.user-list thead{
+
+.user-list thead {
     font-size: large;
     height: 52px;
-    
+
 }
-.user-list tbody tr{
+
+.user-list tbody tr {
     height: 38px;
 }
-.user-list tbody tr svg{
+
+.user-list tbody tr svg {
     visibility: hidden;
 }
-.user-list tbody tr:hover{
 
+.user-list tbody tr:hover {
     background-color: rgba(200, 200, 200, 0.4);
-
-    svg{
+    svg {
         visibility: unset;
     }
 }
 
-.user-list tr td{
+.user-list tr td {
     text-align: center;
 }

@@ -38,10 +38,12 @@ const Login = () => {
                         navigate("/admin/home")
                     } else if (response.data.roles[0].authority === "HANDLER") {
                         navigate("/handler/home")
+                    } else if (response.data.roles[0].authority === "SECURITY") {
+                        navigate("/security/home")
                     }
                 }
             })
-            .catch((error) => {                
+            .catch((error) => {
                 setErrorMessage("Username or Password is incorrect")
             });
     }
@@ -73,13 +75,13 @@ const Login = () => {
                     <p style={{ color: "red", fontSize: "16px", margin: "5px", paddingLeft: "20px" }}>{errorMessage}</p>
 
 
-                    <span style={{position: "relative"}}>
-                        <md-text-button class="button-primary" id="usage-anchor" onClick={() => {const menuEl = document.body.querySelector('#usage-menu');menuEl.show()}}>Create Account</md-text-button>
+                    <span style={{ position: "relative" }}>
+                        <md-text-button class="button-primary" id="usage-anchor" onClick={() => { const menuEl = document.body.querySelector('#usage-menu'); menuEl.show() }}>Create Account</md-text-button>
                         <md-menu id="usage-menu" anchor="usage-anchor">
                             <md-menu-item>
                                 <Link to={'/register/user'} slot="headline">New Faculty</Link>
                             </md-menu-item>
-                            <md-menu-item style={{width:"max-content"}}>
+                            <md-menu-item style={{ width: "max-content" }}>
                                 <Link to={'/register/handler'} slot="headline">New Compliant Handler</Link>
                             </md-menu-item>
                         </md-menu>

@@ -14,8 +14,8 @@ const NewComplaint = () => {
     const [availableTime, setAvailableTime] = useState('');
     const [description, setDescription] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
+    
     const handleNewCompliant = async () => {
-
         const id = localStorage.getItem('id');
         axios.post(`/compliants/${id}`, {
             "category": category,

@@ -4,6 +4,10 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 const SetPassword = () => {
 
+    if (document.getElementById("profile-dialog")) {
+        document.getElementById("profile-dialog").close();
+    }
+
     const [errorMessage, setErrorMessage] = useState('');
     const [password, setPassword] = useState('');
     const [passwordConfirmed, setPasswordConfirmed] = useState('');
@@ -11,7 +15,6 @@ const SetPassword = () => {
     const navigate = useNavigate();
 
     const isNewUser = location.pathname.split('/')[1] === 'register';
-
 
     const handleSubmit = async () => {
         if (password === passwordConfirmed) {
@@ -42,26 +45,27 @@ const SetPassword = () => {
                     });
             } else {
                 const id = localStorage.getItem('id');
-                axios.post(`users/changePassword/${id}`,{
-                    "password" : password
+                axios.post(`users/changePassword/${id}`, {
+                    "password": password
                 }).then((res) => {
-                        if(res.status === 200){
-                            navigate(-1);
-                        }
-                    }).catch((err) => {
-                        if (err.status === 401) {
-                            navigate('/')
-                        }
-                        setErrorMessage(err.message + ' ' + err.code)
-                        if (err.response.data) {
-                            setErrorMessage(err.response.data)
-                        }
-                    });
+                    if (res.status === 200) {
+                        navigate(-1);
+                    }
+                }).catch((err) => {
+                    if (err.status === 401) {
+                        navigate('/')
+                    }
+                    setErrorMessage(err.message + ' ' + err.code)
+                    if (err.response.data) {
+                        setErrorMessage(err.response.data)
+                    }
+                });
             }
         } else {
             setErrorMessage("Passwords do not match");
         }
     }
+    
     return (
         <div className="login-div">
             <div className='login-main' style={{ flexDirection: 'column' }}>

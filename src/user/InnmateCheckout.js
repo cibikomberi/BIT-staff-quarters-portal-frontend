@@ -33,7 +33,6 @@ const InnmatesCheckout = () => {
 					setErrorMessage(err.response.data)
 				}
 			})
-
 	}
 	return (
 		<div className='main-area'>

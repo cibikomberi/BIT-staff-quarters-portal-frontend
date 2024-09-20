@@ -1,29 +1,33 @@
-.card{
-    width: 45vw;
-    max-width: 500px;
-    /* min-width: 350px; */
-    border-radius: 15px;
-    background-color: #343434;
-    color: aliceblue;
-    margin: 0px;
-    margin: 10px;
-    display: grid;
-    
-  }
-  .card:hover{
-    background-color: #004A77;
-  }
-  .card img{
-    width: 100%;
-    border-radius: 15px;
-  }
-  .card h1,.card p{
-    padding: 5px;
-    margin: 0px;
-  }
+.card {
+	width: 45vw;
+	max-width: 500px;
+	/* min-width: 350px; */
+	border-radius: 15px;
+	background-color: #343434;
+	color: aliceblue;
+	margin: 0px;
+	margin: 10px;
+	display: grid;
+
+}
+
+.card:hover {
+	background-color: #004A77;
+}
+
+.card img {
+	width: 100%;
+	border-radius: 15px;
+}
+
+.card h1,
+.card p {
+	padding: 5px;
+	margin: 0px;
+}
 
 @media only screen and (max-width: 850px) {
-  .card{
-    width: 90vw;
-  }
+	.card {
+		width: 90vw;
+	}
 }

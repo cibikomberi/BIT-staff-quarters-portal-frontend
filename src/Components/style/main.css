@@ -1,13 +1,14 @@
-.main{
+.main {
     /* background-color: aquamarine; */
     display: grid;
     grid-template-columns: auto auto;
     grid-template-rows: auto auto;
-    grid-template-areas: 
-    "head head"
-    "nav main";
+    grid-template-areas:
+        "head head"
+        "nav main";
 }
-.nav-toggler{
+
+.nav-toggler {
     width: 100vw;
     height: 100vh;
     position: fixed;
@@ -15,10 +16,12 @@
     left: 0px;
     z-index: -1;
 }
-header{
+
+header {
     grid-area: head;
 }
-.header-main{
+
+.header-main {
     height: 64px;
     width: 100vw;
     display: flex;
@@ -26,46 +29,52 @@ header{
     justify-content: space-between;
     z-index: 1;
 }
-.header-main h3{
+
+.header-main h3 {
     margin: 15px;
-    font-size: 24px; 
+    font-size: 24px;
 }
-.header-main img{
+
+.header-main img {
     height: 54px;
     margin: 5px;
     margin-right: 25px;
     border-radius: 27px;
 }
-.formId{
+
+.formId {
     display: flex;
     flex-direction: column;
 }
-.formId img{
+
+.formId img {
     width: 50%;
     border-radius: 50%;
     align-self: center;
 }
 
-#nav-toggle{
+#nav-toggle {
     display: none;
 }
-#nav-toggle:checked ~ main{
+
+#nav-toggle:checked~main {
     --navWidth: 0px;
 }
-#nav-toggle:checked ~ nav{
+
+#nav-toggle:checked~nav {
     transform: translateX(-225px);
     overflow: hidden;
     --navWidth: 0px;
 }
 
-nav{
+nav {
     grid-area: nav;
     height: calc(100vh - 64px);
     width: var(--navWidth);
     transition: all .5s;
 }
 
-.nav-items{
+.nav-items {
     text-decoration: none;
     padding: 7px;
     display: flex;
@@ -77,44 +86,49 @@ nav{
     border-radius: 25px;
 }
 
-.nav-items:hover{
+.nav-items:hover {
     background-color: #0b57d014;
 }
-.nav-items.active{
+
+.nav-items.active {
     background-color: #c2e7ff;
     font-weight: 500;
 }
 
-main{
+main {
     grid-area: main;
     width: calc(100svw - var(--navWidth) - 10px);
     margin: 5px;
     height: calc(100vh - 84px);
-    background-color: #FFFFFF; 
+    background-color: #FFFFFF;
     border-radius: 25px;
     overflow: auto;
-    transition: all 0.5s ;
-    md-list:hover{
+    transition: all 0.5s;
+
+    md-list:hover {
         /* scale:1.01; */
-        box-shadow:  0 4px 8px 0 rgba(0, 0, 0, 0.3);
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3);
         transition: box-shadow .1s;
     }
 }
 
 @media only screen and (max-width: 850px) {
-    :root{
-        --navWidth : 225px;
+    :root {
+        --navWidth: 225px;
     }
-    .main{
-        grid-template-areas: 
-        "head head"
-        "main main";
+
+    .main {
+        grid-template-areas:
+            "head head"
+            "main main";
     }
-    main{
+
+    main {
         width: calc(100vw - 10px);
     }
-    nav{
-        --navWidth : 225px;
+
+    nav {
+        --navWidth: 225px;
         padding-top: 25px;
         z-index: 100;
         width: var(--navWidth);
@@ -126,20 +140,24 @@ main{
         box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
 
     }
-    .nav-toggler{
+
+    .nav-toggler {
         display: none;
         background-color: rgba(0, 0, 0, 0.168);
         z-index: -1;
     }
-    #nav-toggle:checked ~ nav{
-        --navWidth : 225px;
+
+    #nav-toggle:checked~nav {
+        --navWidth: 225px;
         transform: unset;
     }
-    #nav-toggle:checked ~ .nav-toggler{
+
+    #nav-toggle:checked~.nav-toggler {
         display: unset;
         z-index: 99;
     }
-    .summary{
+
+    .summary {
         width: 90%;
     }
 }

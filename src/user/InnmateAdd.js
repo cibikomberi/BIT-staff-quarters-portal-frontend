@@ -119,7 +119,7 @@ const InnmateAdd = () => {
                     </md-select-option>
                 </md-outlined-select>
 
-                <p style={{ color: "red", alignSelf: "center", fontSize:"18px" }}>{errorText}</p>
+                <p style={{ color: "red", alignSelf: "center", fontSize: "18px" }}>{errorText}</p>
             </div>
 
             <div className='guest-submit'>

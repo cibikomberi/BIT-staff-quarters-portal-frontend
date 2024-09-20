@@ -1,6 +1,6 @@
 import './style/main.css'
 import defaultProfileImage from '../images/default.jpg'
-import { NavLink, Link, Outlet, useLocation, useNavigation, Navigate, useNavigate } from "react-router-dom";
+import { NavLink, Link, Outlet, useLocation, useNavigation, Navigate } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
@@ -11,35 +11,22 @@ const Main = () => {
     const id = localStorage.getItem("id");
     const name = localStorage.getItem("name");
 
-    const navigate = useNavigate()
     const navigation = useNavigation();
     const location = useLocation();
     const currentLocation = location.pathname.split('/')[1];
 
     const [imageURL, setImageURL] = useState(null);
-    const getImage = async () => {
-        await axios.get(
-            `/users/image/${id}`,
-            { responseType: "blob" }
-        )
-            .then((res) => {
-                setImageURL(URL.createObjectURL(res.data));
-            }).catch((err) => {
-                if (err.status === 401) {
-                    navigate('/')
-                }
-                setImageURL(defaultProfileImage);
-            });
-    }
+
 
     useEffect(() => {
-        getImage();
-
-        return () => {
-            if (imageURL) {
-                URL.revokeObjectURL(imageURL);
-            }
-        };
+        axios.get(
+            `/users/image/${id}`,
+            { responseType: "blob" }
+        ).then((res) => {
+            setImageURL(URL.createObjectURL(res.data));
+        }).catch(() => {
+            setImageURL(defaultProfileImage);
+        });
     }, [id]);
 
     if (isAuth) {
@@ -92,6 +79,7 @@ const Main = () => {
                     <NavLink className='nav-items' to='compliants'>Compliant Registration</NavLink>
                     <NavLink className='nav-items' to='innmates'>Innmates</NavLink>
                     <NavLink className='nav-items' to='guest'>Guest</NavLink>
+                    <NavLink className='nav-items' to='checkouts'>Checkouts</NavLink>
                 </nav>}
 
                 {(currentLocation === "admin") && <nav>
@@ -100,10 +88,15 @@ const Main = () => {
                     <NavLink className='nav-items' to='compliants'>Compliants</NavLink>
                     <NavLink className='nav-items' to='innmates'>Innmates</NavLink>
                     <NavLink className='nav-items' to='guest'>Guest</NavLink>
+                    <NavLink className='nav-items' to='checkouts'>Checkouts</NavLink>
                 </nav>}
 
                 {(currentLocation === "handler") && <nav>
                     <NavLink className='nav-items' to='compliants'>Compliants</NavLink>
+                </nav>}
+
+                {(currentLocation === "security") && <nav>
+                    <NavLink className='nav-items' to='verifyCheckout'>Verify Checkouts</NavLink>
                 </nav>}
 
                 <main className="content">

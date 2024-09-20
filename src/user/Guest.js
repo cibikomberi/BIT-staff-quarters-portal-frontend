@@ -6,8 +6,10 @@ const Guest = () => {
 
     let guests = useLoaderData();
     const location = useLocation();
+
     const isUser = location.pathname.split('/')[1] === "user";
     const id = localStorage.getItem('id');
+    
     const [errorText, setErrorText] = useState('');
     const [activeName, setActiveName] = useState('');
     const [activeId, setActiveId] = useState('');

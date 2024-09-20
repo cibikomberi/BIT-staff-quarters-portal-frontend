@@ -1,39 +1,40 @@
-.guest-count{
+.guest-count {
     display: flex;
-    align-items: center; 
-    justify-content:center;
+    align-items: center;
+    justify-content: center;
     font-size: 32px;
 }
 
-.guest-count *{
+.guest-count * {
     padding: 2px;
 }
 
-.guest-data{
-    display:flex;
+.guest-data {
+    display: flex;
     justify-content: flex-start;
     flex-wrap: wrap;
     justify-content: center;
 }
 
-.guest-data *,.guest-details *{
+.guest-data *,
+.guest-details * {
     padding: 4px;
     width: 100%;
     width: 85%;
     max-width: 350px;
 }
 
-.guest-details{
+.guest-details {
     margin: 10px;
     margin-top: 24px;
     font-size: 24px;
-    display:flex;
+    display: flex;
     align-content: center;
     flex-wrap: wrap;
     flex-direction: column;
 }
 
-.guest-submit{
-    display:flex;
+.guest-submit {
+    display: flex;
     justify-content: center;
 }

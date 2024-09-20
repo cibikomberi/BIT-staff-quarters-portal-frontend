@@ -53,19 +53,19 @@ const Guest = () => {
 				'fromDate': fromDate,
 				'toDate': toDate
 			}))
-		).then((res) =>{
+		).then((res) => {
 			if (res.status === 200) {
 				navigate(-1);
 			}
 		}).catch((err) => {
-            if (err.status === 401) {
-                navigate('/')
-            }
-            setErrorMessage(err.message + ' ' + err.code)
-            if (err.response.data) {
-                setErrorMessage(err.response.data)
-            }
-        });
+			if (err.status === 401) {
+				navigate('/')
+			}
+			setErrorMessage(err.message + ' ' + err.code)
+			if (err.response.data) {
+				setErrorMessage(err.response.data)
+			}
+		});
 	}
 
 	return (

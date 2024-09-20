@@ -7,7 +7,7 @@ const EditProfile = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
-    const newUser = (location.pathname.split('/')[1] === 'register')
+    const isNewUser = (location.pathname.split('/')[1] === 'register')
 
     const loaderData = useLoaderData();
 
@@ -18,27 +18,18 @@ const EditProfile = () => {
 
     console.log(data);
 
-    const getImage = async () => {
-        await axios.get(
+    useEffect(() => {
+        axios.get(
             `/users/image/${data.id}`,
             { responseType: "blob" }
         ).then((res) => {
-            setImageURL(URL.createObjectURL(res.data));
-            setImage(imageURL)
+            let img = URL.createObjectURL(res.data)
+            setImageURL(img);
+            setImage(img)
         }).catch(() => {
             setImageURL(defaultProfileImage);
-            setImage(imageURL)
+            setImage(defaultProfileImage)
         });
-    }
-
-    useEffect(() => {
-        getImage();
-
-        return () => {
-            if (imageURL) {
-                URL.revokeObjectURL(imageURL);
-            }
-        };
     }, [data.id]);
 
     const handleClick = () => {
@@ -59,7 +50,7 @@ const EditProfile = () => {
             }
         })).catch((err) => {
             setErrorMessage(err.message + ' ' + err.code)
-            if (err.response.data) {
+            if (err.response && err.response.data) {
                 setErrorMessage(err.response.data)
             }
             if (err.status === 413) {
@@ -75,9 +66,9 @@ const EditProfile = () => {
         setData(val);
     }
     return (
-        <div className="main-area fl" style={{ flexDirection: "row", padding: 0, minHeight: "100%"}}>
+        <div className="main-area fl" style={{ flexDirection: "row", padding: 0, minHeight: "100%" }}>
             <div>
-                <img src={imageURL} alt="profile pic" style={{ width: "500px", borderRadius: "50%", boxShadow: "0 2px 4px 0 rgba(0, 0, 0, 0.2)" }} />
+                <img src={imageURL} alt="profile pic" style={{ width: "500px", height: "500px", objectFit: "cover", borderRadius: "50%", boxShadow: "0 2px 4px 0 rgba(0, 0, 0, 0.2)" }} />
 
                 <input style={{ display: "none" }} type="file" id="fileInput" onChange={(e) => setImage(e.target.files[0])} />
                 <md-filled-icon-button style={{ transform: "translateX(-100px)" }} onClick={handleClick}>
@@ -182,8 +173,8 @@ const EditProfile = () => {
 
                 <p style={{ color: "red", fontSize: "16px", margin: "5px", paddingLeft: "20px" }}>{errorMessage}</p>
 
-                {!newUser && <md-filled-button class="button-primary" id="edit-profile-btn" onClick={() => handleSubmit()}>Save</md-filled-button>}
-                {newUser &&
+                {!isNewUser && <md-filled-button class="button-primary" id="edit-profile-btn" onClick={() => handleSubmit()}>Save</md-filled-button>}
+                {isNewUser &&
                     <Link to={'setPassword'} state={{ 'data': data, 'image': image }}>
                         <md-filled-button class="button-primary" id="edit-profile-btn">Next</md-filled-button>
                     </Link>}
@@ -191,4 +182,36 @@ const EditProfile = () => {
         </div>);
 }
 
+export const newDetailsLoaderUser = () => {
+    return {
+        "id": 0,
+        "username": "",
+        "name": "",
+        "designation": "",
+        "email": "",
+        "phone": "",
+        "roles": "USER",
+        "facultyId": "",
+        "department": "",
+        "quartersNo": "",
+        "address": "",
+        "aadhar": ""
+    }
+}
+
+export const newDetailsLoaderHandler = () => {
+    return {
+        "id": 0,
+        "username": '',
+        "name": "",
+        "designation": "",
+        "email": "",
+        "phone": "",
+        "roles": "HANDLER",
+        "address": "",
+        "aadhar": "",
+        "category": ""
+
+    }
+}
 export default EditProfile;

@@ -1,4 +1,4 @@
-import usersImg from '../images/9614147.jpg' 
+import usersImg from '../images/9614147.jpg'
 import CardLayout from '../Components/CardLayout'
 
 import checkin from "../images/checkin.jpg"
@@ -17,9 +17,9 @@ const AdminFront = () => {
             justifyContent: "center",
         }}>
             <Link to="../users"><CardLayout head="Users" img={usersImg} /></Link>
-            <Link to="../compliants"><CardLayout head="Complaint registration" img={complaint}/></Link>
-            <Link to="../guest"><CardLayout head="Guest Check-in Check-out" img={checkin}/></Link>
-            <Link to="../innmates"><CardLayout head="Innmate Details" img={innmate}/></Link>
+            <Link to="../compliants"><CardLayout head="Complaint registration" img={complaint} /></Link>
+            <Link to="../guest"><CardLayout head="Guest Check-in Check-out" img={checkin} /></Link>
+            <Link to="../innmates"><CardLayout head="Innmate Details" img={innmate} /></Link>
 
 
         </div>
