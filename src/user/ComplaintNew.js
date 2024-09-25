@@ -14,10 +14,10 @@ const NewComplaint = () => {
     const [availableTime, setAvailableTime] = useState('');
     const [description, setDescription] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
-    
+
     const handleNewCompliant = async () => {
         const id = localStorage.getItem('id');
-        axios.post(`/compliants/${id}`, {
+        axios.post(`/compliants/user/${id}`, {
             "category": category,
             "title": title,
             "availableTime": availableTime,
@@ -34,8 +34,11 @@ const NewComplaint = () => {
                 navigate('/')
             }
             setErrorMessage(err.message + ' ' + err.code)
-            if (err.response.data) {
+            if (err.response && err.response.data && !err.response.data.message) {
                 setErrorMessage(err.response.data)
+            }
+            if (err.response && err.response.data && err.response.data.message) {
+                setErrorMessage(err.response.data.message)
             }
         });
     }

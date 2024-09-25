@@ -48,8 +48,8 @@ header {
 }
 
 .formId img {
-    width: 50%;
-    border-radius: 50%;
+    height: 250px;
+    border-radius: 150px;
     align-self: center;
 }
 
@@ -160,4 +160,29 @@ main {
     .summary {
         width: 90%;
     }
+    .img-view {
+        width: 85%;
+        height: 85%;
+        object-fit: cover;
+    }
+    .img-container{
+        width: 75vw;
+        height: 75vw;
+        position: relative;
+    }
+    .upload-btn{
+        position: absolute;
+        bottom: 10px;
+        right: 10%; 
+        padding: 10px 20px;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    th:nth-child(n):not(:nth-child(2)):not(:nth-child(3)):not(:nth-child(4)),
+    td:nth-child(n):not(:nth-child(2)):not(:nth-child(3)):not(:nth-child(4)) {
+        display: none;
+    }
+ 
 }

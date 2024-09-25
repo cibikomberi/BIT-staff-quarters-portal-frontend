@@ -61,10 +61,10 @@ const Complaints = () => {
                         <th>Compliant Id</th>
                         <th>Category</th>
                         <th>Compliant Title</th>
+                        <th>Status</th>
                         {isAdmin && <th>Raised By</th>}
                         <th>Raised On</th>
                         <th>Assigned To</th>
-                        <th>Status</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -74,10 +74,10 @@ const Complaints = () => {
                                 <td>{e.id}</td>
                                 <td>{e.category}</td>
                                 <td>{e.title}</td>
+                                <td>{e.status}</td>
                                 {isAdmin && <td>{e.issuedBy.name}</td>}
                                 <td>{e.issuedOn.split('T')[0]}</td>
                                 <td>{e.assignedTo.name}</td>
-                                <td>{e.status}</td>
                             </tr>
                         )
                     })}

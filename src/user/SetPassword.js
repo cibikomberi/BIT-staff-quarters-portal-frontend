@@ -36,8 +36,11 @@ const SetPassword = () => {
                         }
                     }).catch((err) => {
                         setErrorMessage(err.message + ' ' + err.code)
-                        if (err.response.data) {
+                        if (err.response && err.response.data && !err.response.data.message) {
                             setErrorMessage(err.response.data)
+                        }
+                        if (err.response && err.response.data && err.response.data.message) {
+                            setErrorMessage(err.response.data.message)
                         }
                         if (err.status === 413) {
                             setErrorMessage("Image is too  large");
@@ -56,8 +59,11 @@ const SetPassword = () => {
                         navigate('/')
                     }
                     setErrorMessage(err.message + ' ' + err.code)
-                    if (err.response.data) {
+                    if (err.response && err.response.data && !err.response.data.message) {
                         setErrorMessage(err.response.data)
+                    }
+                    if (err.response && err.response.data && err.response.data.message) {
+                        setErrorMessage(err.response.data.message)
                     }
                 });
             }
@@ -65,7 +71,7 @@ const SetPassword = () => {
             setErrorMessage("Passwords do not match");
         }
     }
-    
+
     return (
         <div className="login-div">
             <div className='login-main' style={{ flexDirection: 'column' }}>

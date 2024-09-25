@@ -1,9 +1,11 @@
 import axios from "axios";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const VerifyCheckout = () => {
 
-    const [PIN, setPin] = useState('')
+    const navigate = useNavigate();
+    const [PIN, setPin] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const [data, setData] = useState([]);
 
@@ -14,6 +16,10 @@ const VerifyCheckout = () => {
                 .then((res) => {
                     console.log(res.data);
                     setData(res.data)
+                }).catch((err) => {
+                    if (err.status === 401) {
+                        navigate('/')
+                    }
                 })
         }
     }
@@ -25,10 +31,16 @@ const VerifyCheckout = () => {
         }).then(() => {
             handlePIN(PIN);
         }).catch((err) => {
-            setErrorMessage(err.response.data)
+            setErrorMessage(err.message + ' ' + err.code)
+            if (err.response && err.response.data && !err.response.data.message) {
+                setErrorMessage(err.response.data)
+            }
+            if (err.response && err.response.data && err.response.data.message) {
+                setErrorMessage(err.response.data.message)
+            }
         })
     }
-    
+
     return (
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
 

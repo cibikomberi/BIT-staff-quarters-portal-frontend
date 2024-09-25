@@ -47,7 +47,7 @@ const Main = () => {
                         alt="profile pic"
                     />
                 </header>
-                <md-dialog id="profile-dialog">
+                <md-dialog id="profile-dialog" style={{width:"500px"}}>
                     <div slot="headline" style={{ fontWeight: "bold" }}>
                         Profile
                     </div>

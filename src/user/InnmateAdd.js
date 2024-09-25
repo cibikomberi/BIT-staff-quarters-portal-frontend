@@ -6,7 +6,7 @@ const InnmateAdd = () => {
 
     const navigate = useNavigate();
 
-    const [errorText, setErrorText] = useState('');
+    const [errorText, setErrorMessage] = useState('');
     const [innmateName, setInnmateName] = useState('');
     const [relation, setRelation] = useState('');
     const [age, setAge] = useState('');
@@ -16,7 +16,7 @@ const InnmateAdd = () => {
 
     const handleNewInnmate = async () => {
         const id = localStorage.getItem('id');;
-        await axios.post(`/innmates/${id}`, {
+        await axios.post(`/innmates/user/${id}`, {
             "name": innmateName,
             "relation": relation,
             "age": age,
@@ -32,9 +32,12 @@ const InnmateAdd = () => {
             if (err.status === 401) {
                 navigate('/')
             }
-            setErrorText(err.message + ' ' + err.code)
-            if (err.response.data) {
-                setErrorText(err.response.data)
+            setErrorMessage(err.message + ' ' + err.code)
+            if (err.response && err.response.data && !err.response.data.message) {
+                setErrorMessage(err.response.data)
+            }
+            if (err.response && err.response.data && err.response.data.message) {
+                setErrorMessage(err.response.data.message)
             }
         })
     }
@@ -119,7 +122,7 @@ const InnmateAdd = () => {
                     </md-select-option>
                 </md-outlined-select>
 
-                <p style={{ color: "red", alignSelf: "center", fontSize: "18px" }}>{errorText}</p>
+                <p style={{ color: "red", textAlign: "center", fontSize: "18px" }}>{errorText}</p>
             </div>
 
             <div className='guest-submit'>

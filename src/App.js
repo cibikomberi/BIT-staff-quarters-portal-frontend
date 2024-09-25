@@ -45,6 +45,7 @@ import HandlerFront from "./handlers/HandlerFront";
 import Checkouts, { getAllCheckouts, getAllCheckoutsByUser } from "./user/Checkouts";
 import VerifyCheckout from "./user/VerifyCheckout";
 import SecurityFront from "./security/SecurityFront";
+import NewUser from "./admin/NewUser";
 
 
 axios.defaults.baseURL = 'http://localhost:8080';
@@ -105,6 +106,7 @@ const router = createBrowserRouter(
 						<Route path="view" element={<ViewUser />} loader={(a) => userDetailLoader(a.params.userId)} />
 						<Route path="edit" element={<EditProfile />} loader={(a) => userDetailLoader(a.params.userId)} />
 					</Route>
+					<Route path="new" element={<NewUser />} />
 				</Route>
 				<Route path="compliants">
 					<Route index element={<Complaints />} loader={compliantsLoaderAdmin} />

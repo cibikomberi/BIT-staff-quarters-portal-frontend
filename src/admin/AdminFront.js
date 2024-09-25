@@ -20,6 +20,7 @@ const AdminFront = () => {
             <Link to="../compliants"><CardLayout head="Complaint registration" img={complaint} /></Link>
             <Link to="../guest"><CardLayout head="Guest Check-in Check-out" img={checkin} /></Link>
             <Link to="../innmates"><CardLayout head="Innmate Details" img={innmate} /></Link>
+            <Link to="../checkouts"><CardLayout head="Innmate Details" img={checkin} /></Link>
 
 
         </div>

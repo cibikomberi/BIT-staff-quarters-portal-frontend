@@ -50,8 +50,11 @@ const EditProfile = () => {
             }
         })).catch((err) => {
             setErrorMessage(err.message + ' ' + err.code)
-            if (err.response && err.response.data) {
+            if (err.response && err.response.data && !err.response.data.message) {
                 setErrorMessage(err.response.data)
+            }
+            if (err.response && err.response.data && err.response.data.message) {
+                setErrorMessage(err.response.data.message)
             }
             if (err.status === 413) {
                 setErrorMessage("Image is too  large")
@@ -66,12 +69,15 @@ const EditProfile = () => {
         setData(val);
     }
     return (
-        <div className="main-area fl" style={{ flexDirection: "row", padding: 0, minHeight: "100%" }}>
-            <div>
-                <img src={imageURL} alt="profile pic" style={{ width: "500px", height: "500px", objectFit: "cover", borderRadius: "50%", boxShadow: "0 2px 4px 0 rgba(0, 0, 0, 0.2)" }} />
+        <div className="main-area fl" style={{ flexDirection: "row", padding: 0, minHeight: "100%", maxWidth: "100vw" }}>
+            <div className="img-container">
+                <img src={imageURL} alt="profile pic" className="img-view" />
 
-                <input style={{ display: "none" }} type="file" id="fileInput" onChange={(e) => setImage(e.target.files[0])} />
-                <md-filled-icon-button style={{ transform: "translateX(-100px)" }} onClick={handleClick}>
+                <input style={{ display: "none" }} type="file" id="fileInput" onChange={(e) => {
+                    setImage(e.target.files[0]); 
+                    setImageURL(URL.createObjectURL(e.target.files[0]))
+                    }} />
+                <md-filled-icon-button class="upload-btn" onClick={handleClick}>
                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#555555"><path d="M440-160v-326L336-382l-56-58 200-200 200 200-56 58-104-104v326h-80ZM160-600v-120q0-33 23.5-56.5T240-800h480q33 0 56.5 23.5T800-720v120h-80v-120H240v120h-80Z" /></svg>
                 </md-filled-icon-button>
             </div>

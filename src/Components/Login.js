@@ -1,7 +1,7 @@
 import axios from 'axios'
 import './style/login.css'
 import { Link, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const Login = () => {
     axios.defaults.headers.common['Authorization'] = ``;
@@ -12,6 +12,18 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
 
+    useEffect(() => {
+        const listener = event => {
+            if (event.code === "Enter" || event.code === "NumpadEnter") {
+                event.preventDefault();
+                handleLogin();
+            }
+        };
+        document.addEventListener("keydown", listener);
+        return () => {
+            document.removeEventListener("keydown", listener);
+        };
+    });
 
     const handleLogin = async () => {
         setErrorMessage(null)

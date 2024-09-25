@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@material/material-color-utilities": "^0.3.0",
     "@material/web": "^1.5.1",
     "@testing-library/jest-dom": "^5.17.0",

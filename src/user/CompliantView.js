@@ -23,8 +23,11 @@ const ViewCompliant = () => {
                 navigate('/')
             }
             setErrorMessage(err.message + ' ' + err.code)
-            if (err.response.data) {
+            if (err.response && err.response.data && !err.response.data.message) {
                 setErrorMessage(err.response.data)
+            }
+            if (err.response && err.response.data && err.response.data.message) {
+                setErrorMessage(err.response.data.message)
             }
         });
     }

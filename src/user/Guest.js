@@ -9,8 +9,8 @@ const Guest = () => {
 
     const isUser = location.pathname.split('/')[1] === "user";
     const id = localStorage.getItem('id');
-    
-    const [errorText, setErrorText] = useState('');
+
+    const [errorText, setErrorMessage] = useState('');
     const [activeName, setActiveName] = useState('');
     const [activeId, setActiveId] = useState('');
 
@@ -20,9 +20,12 @@ const Guest = () => {
         }).then(() => {
             window.location.reload();
         }).catch((err) => {
-            setErrorText(err.message + ' ' + err.code)
-            if (err.response.data) {
-                setErrorText(err.response.data)
+            setErrorMessage(err.message + ' ' + err.code)
+            if (err.response && err.response.data && !err.response.data.message) {
+                setErrorMessage(err.response.data)
+            }
+            if (err.response && err.response.data && err.response.data.message) {
+                setErrorMessage(err.response.data.message)
             }
             document.getElementById('checkout-error').show();
         })
@@ -50,7 +53,7 @@ const Guest = () => {
                                 <td>{e.toDate.split('T')[0]}</td>
                                 <td>{e.faculty.name}</td>
                                 <td>{e.place}</td>
-                                {isUser && <td>
+                                {isUser && <td className='checkout-btn' style={{ display: 'unset'}}>
                                     <md-icon-button onClick={() => {
                                         setActiveId(e.id);
                                         setActiveName(e.name);
@@ -108,7 +111,7 @@ const Guest = () => {
 export const guestLoaderUser = async () => {
     const id = localStorage.getItem('id')
 
-    const res = await axios.get(`/guests/${id}`)
+    const res = await axios.get(`/guests/user/${id}`)
     return res.data;
 }
 

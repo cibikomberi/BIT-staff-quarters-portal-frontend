@@ -46,7 +46,7 @@ const Guest = () => {
 	const handleNewGuest = async () => {
 		const id = localStorage.getItem('id')
 
-		await axios.post(`/guests/${id}`,
+		await axios.post(`/guests/user/${id}`,
 			fields.map((name) => ({
 				'name': name,
 				'place': place,
@@ -62,8 +62,11 @@ const Guest = () => {
 				navigate('/')
 			}
 			setErrorMessage(err.message + ' ' + err.code)
-			if (err.response.data) {
+			if (err.response && err.response.data && !err.response.data.message) {
 				setErrorMessage(err.response.data)
+			}
+			if (err.response && err.response.data && err.response.data.message) {
+				setErrorMessage(err.response.data.message)
 			}
 		});
 	}
@@ -112,7 +115,7 @@ const Guest = () => {
 					</md-outlined-text-field>
 				)}
 			</div>
-			<p style={{ color: "red" }}>{errorMessage}</p>
+			<p style={{ color: "red",textAlign:"center" }}>{errorMessage}</p>
 
 			<div className='guest-submit'>
 				<md-filled-button onClick={() => handleNewGuest()}>Submit</md-filled-button>

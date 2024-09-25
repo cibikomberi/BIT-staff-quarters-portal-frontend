@@ -22,10 +22,12 @@ const ViewUser = () => {
             setImageURL(defaultProfileImage);
         });
     }, [data.id]);
-    
+
     return (
-        <div className="main-area fl" style={{ height: "100%", flexDirection: "row", padding: 0 }}>
-            <img src={imageURL} alt="profile pic" className="img-view" />
+        <div className="main-area fl " style={{ height: "100%", flexDirection: "row", padding: 0 }}>
+            <div className="img-container">
+                <img src={imageURL} alt="profile pic" className="img-view" />
+            </div>
             <div>
                 <table className="user-table">
                     <thead>

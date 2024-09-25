@@ -6,7 +6,7 @@ const Innmates = () => {
     const data = useLoaderData();
     const navigate = useNavigate();
 
-    const [errorText, setErrorText] = useState('');
+    const [errorText, setErrorMessage] = useState('');
     const [innmates, setInnmates] = useState(data);
 
     const handleInnmateChange = (index, field, event) => {
@@ -19,7 +19,7 @@ const Innmates = () => {
     const handleSubmit = () => {
         const id = localStorage.getItem('id')
 
-        axios.put(`/innmates/${id}`, innmates)
+        axios.put(`/innmates/user/${id}`, innmates)
             .then((res => {
                 if (res.status === 200) {
                     navigate(-1);
@@ -28,9 +28,12 @@ const Innmates = () => {
                 if (err.status === 401) {
                     navigate('/')
                 }
-                setErrorText(err.message + ' ' + err.code)
-                if (err.response.data) {
-                    setErrorText(err.response.data)
+                setErrorMessage(err.message + ' ' + err.code)
+                if (err.response && err.response.data && !err.response.data.message) {
+                    setErrorMessage(err.response.data)
+                }
+                if (err.response && err.response.data && err.response.data.message) {
+                    setErrorMessage(err.response.data.message)
                 }
             });
     }
@@ -124,7 +127,7 @@ const Innmates = () => {
                     </div>)
                 })}
 
-                <p style={{ color: "red", alignSelf: "center", fontSize: "18px" }}>{errorText}</p>
+                <p style={{ color: "red", textAlign: "center", fontSize: "18px" }}>{errorText}</p>
             </div>
             <div className='guest-submit'>
                 <md-filled-button onClick={handleSubmit}>Submit</md-filled-button>
