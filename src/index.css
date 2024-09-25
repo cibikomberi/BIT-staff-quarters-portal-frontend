@@ -58,7 +58,8 @@ abbr {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-
+  --md-filled-button-container-color: #c2e7ff;
+  --md-filled-icon-button-container-color: #c2e7ff;
 }
 
 .input-field {
